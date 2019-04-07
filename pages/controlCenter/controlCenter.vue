@@ -59,6 +59,9 @@
 		methods: {
 			mJifen: function(type) {
 				// 暂时跳转到列表
+				uni.navigateTo({
+					url:'../normaluser/mylistitem/mylistitem'
+				})
 				
 				
 			},

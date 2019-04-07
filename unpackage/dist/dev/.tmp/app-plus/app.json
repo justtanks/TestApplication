@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/normaluser/mylistitem/mylistitem",
     "pages/login/login",
     "pages/index/index",
     "pages/controlCenter/controlCenter",
@@ -14,7 +13,8 @@
     "pages/normaluser/faburenwu/faburenwu",
     "pages/normaluser/myshenpi/myshenpi",
     "pages/normaluser/seeShenqing/seeShenqing",
-    "pages/normaluser/jifenpaiming/jifenpaiming"
+    "pages/normaluser/jifenpaiming/jifenpaiming",
+    "pages/normaluser/mylistitem/mylistitem"
   ],
   "subPackages": [],
   "window": {
@@ -60,5 +60,6 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "配置"
+  "appname": "配置",
+  "compilerVersion": "1.8.2"
 }

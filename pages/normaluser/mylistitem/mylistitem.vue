@@ -1,12 +1,15 @@
 <!-- 展示 使用横向引导页面 -->
 <template>
 	<view>
-		<view class="uni-flex uni-row" style="position: fixed; z-index: 99;width: 100%;">
-			<view style="flex: 1;" class="topstle" :class="{border2text:isfirstbottom}" @click="firstclick">进行中</view>
-			<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">未开始</view>
-			<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已结束</view>
+		<view style="position: fixed; z-index: 99;width: 100%;">
+			<view class="uni-flex uni-row">
+				<view style="flex: 1;" class="topstle" :class="{border2text:isfirstbottom}" @click="firstclick">进行中</view>
+				<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">未开始</view>
+				<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已结束</view>
+			</view>
+			<mSearch :show='false' @search="search($event,0)"></mSearch>
 		</view>
-		<view style="height:80upx ;"></view>
+		<view style="height:170upx ;"></view>
 		<!-- <scroll-view scroll-y="true" scroll-left="0"> -->
 		<view class="content">
 			<view v-show="isfirstbottom" style="width: 100%;">
@@ -24,7 +27,7 @@
 							小明&nbsp;&nbsp;待审批</view>
 						<view class="daishenpi-tongguo" v-if="type==2">
 							小明&nbsp;&nbsp;通过</view>
-						<view class="daishenpi-bohui"  v-if="type==3">
+						<view class="daishenpi-bohui" v-if="type==3">
 							小明&nbsp;&nbsp;驳回</view>
 					</view>
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
@@ -33,7 +36,7 @@
 
 					<view class="buttoncontainer">
 						<view>
-							<button style="font-size: 25upx;" class="buttonstyle">去审批</button>
+							<button style="font-size: 25upx;" class="buttonstyle-gray">去审批</button>
 						</view>
 					</view>
 				</view>
@@ -308,8 +311,11 @@
 
 <script>
 	var _self;
+	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
 	export default {
-
+		components: {
+			mSearch
+		},
 		data() {
 			return {
 				isfirstbottom: true,
@@ -317,7 +323,7 @@
 				isthirdbottom: false,
 				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				type: 3,
-				
+
 			};
 		},
 		onLoad: function() {
@@ -341,6 +347,10 @@
 				_self.isfirstbottom = false;
 				_self.issecondbottom = false;
 				_self.isthirdbottom = true;
+			},
+			search(e, val) {
+				// 搜索的方法
+				console.log(e, val);
 			}
 		}
 	}
@@ -359,7 +369,9 @@
 		justify-content: center;
 		align-items: center;
 		background-color: #FFFFFF;
-
+		border-bottom-style: solid;
+		border-bottom-color: #F1F1F3;
+		border-bottom-width: 1upx;
 	}
 
 	.border2text {

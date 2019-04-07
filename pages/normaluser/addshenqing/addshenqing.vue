@@ -28,8 +28,9 @@
 		<!-- 上传图片的按钮和操作 -->
 		<view style="min-height: 200upx;display: flex;flex-direction: row; flex-wrap: wrap;margin-left: 25upx;margin-right: 25upx;">
 			<!-- image 的网格列表 -->
-			<view class="imagestyle" v-for="(image,index) in imageList" :key="index">
+			<view class="imagestyle-yulan" v-for="(image,index) in imageList" :key="index">
 				<image style="width: 100%;height: 100%;" :src="image" :data-src="image" @tap="showbigimage"></image>
+				 <view class="close-view" @click="close(index)">x</view>
 			</view>
 			 <view class="uni-uploader__input-box"  >
 				<view class="uni-uploader__input" @tap="addimage"></view>
@@ -198,6 +199,9 @@
 				
 				 this.shenpiperson=e.label;
 			},
+			 close(e){
+			    this.imageList.splice(e,1);
+			},
 			 
 		}
 	}
@@ -241,20 +245,9 @@
 	    margin:20upx 0upx ;
 		
 	}
-	.imagestyle{
-		width: 190upx;
-		height: 190upx;
-	   margin:20upx 20upx ;
-	}
+
 	.textnum{
 		display: flex;flex-direction: row; justify-content: flex-end;margin-right: 25upx;color: #CCCCCC;
 	}
-	.buttonstyle{
-		background-color: #007AFF;color: #FFFFFF;font-size: 36upx;
-	}
-	.buttonstyle:active{
-		background-color:#1E90FF;
-	}
 	
-
 </style>
