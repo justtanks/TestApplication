@@ -6,9 +6,10 @@
 			<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">未开始</view>
 			<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已结束</view>
 		</view>
+		<view style="height:80upx ;"></view>
 		<!-- <scroll-view scroll-y="true" scroll-left="0"> -->
 		<view class="content">
-			<view v-show="isfirstbottom" style="width: 100%;margin-top: 70upx;">
+			<view v-show="isfirstbottom" style="width: 100%;">
 				<!-- 第一个列表 积分录入 -->
 				<view class="cadlist-one">
 					<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
@@ -227,9 +228,9 @@
 				
 				<!-- 我的任务-->
 				<view class="cadlist-one">
-					<view class="toptext-one">我的任务的内容</view>
+					<view class="toptext-one">我发布的任务的内容</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">我的任务</view>
+						<view class="toptext-two">我发布的任务</view>
 						<view class="fenshustyle">40分</view>
 					</view>
 					
@@ -243,7 +244,29 @@
 				
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
-							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">删除</button>
+							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">修改</button>
+							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
+						</view>
+					</view>
+				</view>
+				<!-- 我领取的任务-->
+				<view class="cadlist-one">
+					<view class="toptext-one">我领取的任务的内容</view>
+					<view style="display: flex;flex-direction: row;justify-content: space-between;">
+						<view class="toptext-two">我领取的的任务</view>
+						<view class="fenshustyle">40分</view>
+					</view>
+					
+					<view class="toptext-two">备注:由于什么什么 </view>
+					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
+						<view class="shenpistyle-one "> 截止时间:1992-9-10</view>
+					</view>
+					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
+						<view shenpistyle-one>完成状态:未完成 &nbsp;&nbsp;发布人:小明吱吱  &nbsp;&nbsp;负责:小明吱吱</view>
+					</view>
+				
+					<view class="buttoncontainer">
+						<view style="display: flex;flex-direction: row;">
 							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
 						</view>
 					</view>
@@ -252,8 +275,26 @@
 				
 			</view>
 			<view v-show="isthirdbottom" style="width: 100%;">
-				选项卡3的内容
-				<!-- 做一个列表 -->
+				<!-- 积分事件的列表 -->
+			 
+				<view class="cadlist-one">
+					<view class="toptext-one">积分事件的列表，标识现在有哪些积分事件正在发生</view>
+					<view style="display: flex;flex-direction: row;justify-content: space-between;">
+						<view class="toptext-two">绩效分/技术部</view>
+						<view class="fenshustyle">40分</view>
+					</view>
+					
+					<!-- <view class="toptext-two">备注:由于什么什么 </view> -->
+					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
+						<view class="shenpistyle-one "> 时间:1992-9-10</view>
+					</view>
+					<view class="thingstyle">
+						<view class="shenpistyle-one ">对象：小明</view>
+						<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：小明</view>
+					</view>
+				</view>
+				
+				
 			</view>
 		</view>
 		<!-- </scroll-view> -->
@@ -450,6 +491,11 @@
 		font-size: 40upx;
 		margin-right: 30upx;
 	}
+	
 
-	/*  */
+	/*事件列表的样式  */
+	.thingstyle{
+		display: flex; flex-direction: row;align-items: center;margin-top:5upx;
+		justify-content: space-between;
+	}
 </style>

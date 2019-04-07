@@ -376,6 +376,47 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _self;var _default =
 {
 
@@ -481,6 +522,7 @@ var render = function() {
         )
       ]
     ),
+    _c("view", { staticStyle: { height: "80rpx" } }),
     _c("view", { staticClass: "content" }, [
       _c(
         "view",
@@ -493,7 +535,7 @@ var render = function() {
               expression: "isfirstbottom"
             }
           ],
-          staticStyle: { width: "100%", "margin-top": "70rpx" }
+          staticStyle: { width: "100%" }
         },
         [
           _c("view", { staticClass: "cadlist-one" }, [
@@ -773,7 +815,7 @@ var render = function() {
           ]),
           _c("view", { staticClass: "cadlist-one" }, [
             _c("view", { staticClass: "toptext-one" }, [
-              _vm._v("我的任务的内容")
+              _vm._v("我发布的任务的内容")
             ]),
             _vm._m(27),
             _c("view", { staticClass: "toptext-two" }, [
@@ -795,8 +837,36 @@ var render = function() {
                         "margin-right": "20rpx"
                       }
                     },
-                    [_vm._v("删除")]
+                    [_vm._v("修改")]
                   ),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "buttonstyle",
+                      staticStyle: { "font-size": "25rpx" }
+                    },
+                    [_vm._v("查看")]
+                  )
+                ],
+                1
+              )
+            ])
+          ]),
+          _c("view", { staticClass: "cadlist-one" }, [
+            _c("view", { staticClass: "toptext-one" }, [
+              _vm._v("我领取的任务的内容")
+            ]),
+            _vm._m(30),
+            _c("view", { staticClass: "toptext-two" }, [
+              _vm._v("备注:由于什么什么")
+            ]),
+            _vm._m(31),
+            _vm._m(32),
+            _c("view", { staticClass: "buttoncontainer" }, [
+              _c(
+                "view",
+                { staticStyle: { display: "flex", "flex-direction": "row" } },
+                [
                   _c(
                     "button",
                     {
@@ -825,7 +895,7 @@ var render = function() {
           ],
           staticStyle: { width: "100%" }
         },
-        [_vm._v("选项卡3的内容")]
+        [_vm._m(33)]
       )
     ])
   ])
@@ -1376,7 +1446,7 @@ var staticRenderFns = [
         }
       },
       [
-        _c("view", { staticClass: "toptext-two" }, [_vm._v("我的任务")]),
+        _c("view", { staticClass: "toptext-two" }, [_vm._v("我发布的任务")]),
         _c("view", { staticClass: "fenshustyle" }, [_vm._v("40分")])
       ]
     )
@@ -1421,6 +1491,117 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      {
+        staticStyle: {
+          display: "flex",
+          "flex-direction": "row",
+          "justify-content": "space-between"
+        }
+      },
+      [
+        _c("view", { staticClass: "toptext-two" }, [_vm._v("我领取的的任务")]),
+        _c("view", { staticClass: "fenshustyle" }, [_vm._v("40分")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      {
+        staticStyle: {
+          display: "flex",
+          "flex-direction": "row",
+          "align-items": "center",
+          "margin-top": "5rpx"
+        }
+      },
+      [
+        _c("view", { staticClass: "shenpistyle-one " }, [
+          _vm._v("截止时间:1992-9-10")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      {
+        staticStyle: {
+          display: "flex",
+          "margin-top": "15rpx",
+          "margin-left": "20rpx"
+        }
+      },
+      [
+        _c("view", { attrs: { "shenpistyle-one": "" } }, [
+          _vm._v("完成状态:未完成   发布人:小明吱吱    负责:小明吱吱")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "cadlist-one" }, [
+      _c("view", { staticClass: "toptext-one" }, [
+        _vm._v("积分事件的列表，标识现在有哪些积分事件正在发生")
+      ]),
+      _c(
+        "view",
+        {
+          staticStyle: {
+            display: "flex",
+            "flex-direction": "row",
+            "justify-content": "space-between"
+          }
+        },
+        [
+          _c("view", { staticClass: "toptext-two" }, [_vm._v("绩效分/技术部")]),
+          _c("view", { staticClass: "fenshustyle" }, [_vm._v("40分")])
+        ]
+      ),
+      _c(
+        "view",
+        {
+          staticStyle: {
+            display: "flex",
+            "flex-direction": "row",
+            "align-items": "center",
+            "margin-top": "5rpx"
+          }
+        },
+        [
+          _c("view", { staticClass: "shenpistyle-one " }, [
+            _vm._v("时间:1992-9-10")
+          ])
+        ]
+      ),
+      _c("view", { staticClass: "thingstyle" }, [
+        _c("view", { staticClass: "shenpistyle-one " }, [_vm._v("对象：小明")]),
+        _c(
+          "view",
+          {
+            staticClass: "shenpistyle-one",
+            staticStyle: { "margin-right": "20rpx" }
+          },
+          [_vm._v("操作人：小明")]
+        )
+      ])
+    ])
   }
 ]
 render._withStripped = true
