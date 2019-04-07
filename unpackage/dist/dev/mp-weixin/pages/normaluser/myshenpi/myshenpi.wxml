@@ -1,0 +1,2 @@
+<import src="./myshenpi.vue.wxml" />
+    <template is="4e8921b2" data="{{ ...$root['0'], $root }}"/>

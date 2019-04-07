@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///D:/test/TestApplication/main.js"],"names":["Page","App"],"mappings":";;;;;;;;;;AAAA;AACA;AACI,sM;AACAA,IAAI,CAAC,+BAAYC,YAAZ,CAAD,CAAJ,C","file":"pages/reg/reg.js","sourcesContent":["import 'uni-pages';\nimport pageFactory from 'mpvue-page-factory'\n    import App from './pages/reg/reg.vue'\n    Page(pageFactory(App))"],"sourceRoot":""}

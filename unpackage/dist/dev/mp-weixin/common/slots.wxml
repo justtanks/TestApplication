@@ -1,0 +1,4 @@
+<import src="/components/popup-layer/popup-layer.vue.wxml" />
+
+<template name="091b9b67-default-091b9b67-0"><view class="_view 091b9b67 pupustyle"><view class="_view 091b9b67 buttonstyle popubottonbutton" bindtap="handleProxy" data-eventid="{{'091b9b67-1'}}" data-comkey="{{$k}}">确定</view></view></template>
+

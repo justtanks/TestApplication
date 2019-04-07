@@ -1,0 +1,40 @@
+
+.text {
+	margin: 15rpx 10rpx;
+	padding: 0 20rpx;
+	background-color: #ebebeb;
+	height: 70rpx;
+	line-height: 70rpx;
+	text-align: center;
+	color: #777;
+	font-size: 26rpx;
+}
+.flex-item {
+	/* 宽度高度，文字对齐  */
+	width: 33.3%;
+	height: 200rpx;
+	text-align: center;
+	line-height: 200rpx;
+}
+.flex-item-V {
+	width: 100%;
+	height: 150rpx;
+	text-align: center;
+	line-height: 150rpx;
+}
+.showbottoms {
+	padding-bottom: 180rpx;
+}
+.notshow {
+	padding-bottom: 0rpx;
+}
+.newslist {
+	padding: 10px;
+	line-height: 60px;
+	font-size: 28px;
+}
+.loading {
+	text-align: center;
+	line-height: 80px;
+}
+

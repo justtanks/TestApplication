@@ -1,0 +1,1 @@
+<import src="/components/uni-load-more/uni-load-more.vue.wxml" /><template name="cfbd7300"><view class="_view cfbd7300 content"><image class="_image cfbd7300 logo" src="../../static/logo.png"></image><template status="loading" data="{{...$root['0'], ...$root[$kk+'cfbd7300-0'],$root}}" is="737917c0"></template></view></template>

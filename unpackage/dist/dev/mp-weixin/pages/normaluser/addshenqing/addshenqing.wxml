@@ -1,0 +1,2 @@
+<import src="./addshenqing.vue.wxml" />
+    <template is="1948dd2e" data="{{ ...$root['0'], $root }}"/>
