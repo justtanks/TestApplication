@@ -19,8 +19,13 @@
 					</view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 审批人:</view>
-						<view class="daishenpi">
+						<!-- 实现三种样式的方式 -->
+						<view class="daishenpi" v-if="type==1">
 							小明&nbsp;&nbsp;待审批</view>
+						<view class="daishenpi-tongguo" v-if="type==2">
+							小明&nbsp;&nbsp;通过</view>
+						<view class="daishenpi-bohui"  v-if="type==3">
+							小明&nbsp;&nbsp;驳回</view>
 					</view>
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
@@ -47,7 +52,7 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view>
 							<button style="font-size: 25upx;" class="buttonstyle">撤回</button>
@@ -69,7 +74,7 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view>
 							<button style="font-size: 25upx;" class="buttonstyle">撤回</button>
@@ -115,7 +120,7 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view>
 							<button style="font-size: 25upx;" class="buttonstyle">撤回</button>
@@ -129,7 +134,7 @@
 						<view class="toptext-two">积分申请</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					
+
 					<view class="toptext-two">申请事由：由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 审批人:</view>
@@ -139,7 +144,7 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view>
 							<button style="font-size: 25upx;" class="buttonstyle">撤回</button>
@@ -157,7 +162,7 @@
 						<view class="toptext-two">积分申请</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					
+
 					<view class="toptext-two">申请事由：由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 审批人:</view>
@@ -167,7 +172,7 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
 							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">删除</button>
@@ -182,7 +187,7 @@
 						<view class="toptext-two">积分申请</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					
+
 					<view class="toptext-two">申请事由：由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 审批人:</view>
@@ -192,14 +197,14 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
 							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
 						</view>
 					</view>
 				</view>
-				
+
 				<!-- 我的申请 申请驳回 -->
 				<view class="cadlist-one">
 					<view class="toptext-one">通过积分申请</view>
@@ -207,7 +212,7 @@
 						<view class="toptext-two">积分申请</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					
+
 					<view class="toptext-two">申请事由：由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 审批人:</view>
@@ -217,7 +222,7 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>申请时间: 04月06日</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
 							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">删除</button>
@@ -225,7 +230,7 @@
 						</view>
 					</view>
 				</view>
-				
+
 				<!-- 我的任务-->
 				<view class="cadlist-one">
 					<view class="toptext-one">我发布的任务的内容</view>
@@ -233,7 +238,7 @@
 						<view class="toptext-two">我发布的任务</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					
+
 					<view class="toptext-two">备注:由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 截止时间:1992-9-10</view>
@@ -241,7 +246,7 @@
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
 						<view shenpistyle-one>完成状态:未完成 &nbsp;&nbsp;负责人:小明 </view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
 							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">修改</button>
@@ -256,34 +261,34 @@
 						<view class="toptext-two">我领取的的任务</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					
+
 					<view class="toptext-two">备注:由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 截止时间:1992-9-10</view>
 					</view>
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>完成状态:未完成 &nbsp;&nbsp;发布人:小明吱吱  &nbsp;&nbsp;负责:小明吱吱</view>
+						<view shenpistyle-one>完成状态:未完成 &nbsp;&nbsp;发布人:小明吱吱 &nbsp;&nbsp;负责:小明吱吱</view>
 					</view>
-				
+
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
 							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
 						</view>
 					</view>
 				</view>
-				
-				
+
+
 			</view>
 			<view v-show="isthirdbottom" style="width: 100%;">
 				<!-- 积分事件的列表 -->
-			 
+
 				<view class="cadlist-one">
 					<view class="toptext-one">积分事件的列表，标识现在有哪些积分事件正在发生</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
 						<view class="toptext-two">绩效分/技术部</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					
+
 					<!-- <view class="toptext-two">备注:由于什么什么 </view> -->
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 时间:1992-9-10</view>
@@ -293,8 +298,8 @@
 						<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：小明</view>
 					</view>
 				</view>
-				
-				
+
+
 			</view>
 		</view>
 		<!-- </scroll-view> -->
@@ -310,7 +315,9 @@
 				isfirstbottom: true,
 				issecondbottom: false,
 				isthirdbottom: false,
-				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+				type: 3,
+				
 			};
 		},
 		onLoad: function() {
@@ -455,6 +462,7 @@
 		margin-left: 40upx;
 		line-height: 1.8;
 	}
+
 	/* 审批驳回 */
 	.daishenpi-bohui {
 		border: #CD0000 1upx solid;
@@ -463,9 +471,10 @@
 		padding: 0upx 5upx 0upx 5upx;
 		margin-left: 40upx;
 		line-height: 1.8;
-		color:#CD0000;
-		 
+		color: #CD0000;
+
 	}
+
 	/* 审批通过 */
 	.daishenpi-tongguo {
 		border: #008B00 1upx solid;
@@ -474,7 +483,7 @@
 		padding: 0upx 5upx 0upx 5upx;
 		margin-left: 40upx;
 		line-height: 1.8;
-		color:#008B00;
+		color: #008B00;
 	}
 
 	.buttoncontainer {
@@ -491,11 +500,14 @@
 		font-size: 40upx;
 		margin-right: 30upx;
 	}
-	
+
 
 	/*事件列表的样式  */
-	.thingstyle{
-		display: flex; flex-direction: row;align-items: center;margin-top:5upx;
+	.thingstyle {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 5upx;
 		justify-content: space-between;
 	}
 </style>
