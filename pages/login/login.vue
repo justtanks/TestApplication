@@ -92,7 +92,7 @@
 	.inputstyle {
 		width: 90%;
 		height: 80%;
-		line-height: 1;
+		font-size: 35upx;
 	}
 
 	.loginbtn button {

@@ -2,7 +2,7 @@
 <template>
 	<view>
 		<view style="background-color: #FFFFFF;">
-			<view class="timechoise uni-list-cell-navigate uni-navigate-right">
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="showpup">
 				<view style="font-size: 35upx;">选择人员</view>
 			</view>
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisetime('date')">
@@ -22,6 +22,14 @@
 				<button class="buttonstyle" hover-class="muhovercolor" @click="addshenqing">提交</button>
 			</view>
 		</view>
+		<!-- 弹出层使用 -->
+		<popup-layer ref="popup" :direction="direction">
+			<view class="pupustyle">
+				<view class="buttonstyle popubottonbutton" @tap="popudown">
+					确定
+				</view>
+			</view>
+		</popup-layer>
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 	</view>
 </template>
@@ -30,13 +38,15 @@
 	// 选择时间的选择
 	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../../common/util.js'
+	import popupLayer from '../../../components/popup-layer/popup-layer.vue';
 	export default {
 		components: {
-			MxDatePicker
+			MxDatePicker,
+			popupLayer
 		},
 		data() {
 			return {
-
+				direction: 'left',
 				// 时间选择器需要的数据
 				showPicker: false,
 				date: '2019/01/01',
@@ -60,6 +70,13 @@
 					this[this.type] = e.value;
 				}
 			},
+			showpup: function() {
+				// 弹出弹窗
+				this.$refs.popup.show() // 弹出
+			},
+			popudown:function(){
+				this.$refs.popup.close()
+			}
 		},
 	}
 </script>
@@ -67,6 +84,11 @@
 <style>
 	page {
 		background-color: #F1F1F3;
+	}
+	.pupustyle {
+		width: 750upx;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.timechoise {
@@ -80,4 +102,15 @@
 		align-items: center;
 		border-bottom: #EBEBEB solid 1upx;
 	}
+	.popubottonbutton {
+		position: fixed;
+		bottom: 1upx;
+		width: 100%;
+		height: 80upx;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 </style>
+ 

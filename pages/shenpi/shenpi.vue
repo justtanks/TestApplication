@@ -34,8 +34,8 @@
 							<view class="daishenpi-bohui" v-if="type==3">
 								小明&nbsp;&nbsp;驳回</view>
 						</view>
-						<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-							<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+						<view style="display: flex;margin-top: 15upx;">
+							<view class="shenpistyle-one">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 						</view>
 
 						<view class="buttoncontainer">
@@ -61,13 +61,13 @@
 							<view class="daishenpi">
 								小明&nbsp;&nbsp;待审批</view>
 						</view>
-						<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-							<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+						<view style="display: flex;margin-top: 15upx;">
+							<view class="shenpistyle-one ">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 						</view>
 
 						<view class="buttoncontainer">
 							<view>
-								<button style="font-size: 25upx;" class="buttonstyle">去审批</button>
+								<button style="font-size: 25upx;" class="buttonstyle" @click="toshenpi()">去审批</button>
 							</view>
 						</view>
 					</view>
@@ -89,8 +89,8 @@
 								小明&nbsp;&nbsp;通过</view>
 
 						</view>
-						<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-							<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+						<view style="display: flex;margin-top: 15upx;">
+							<view class="shenpistyle-one ">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 						</view>
 
 						<view class="buttoncontainer">
@@ -115,8 +115,8 @@
 							<view class="daishenpi-bohui">
 								小明&nbsp;&nbsp;驳回</view>
 						</view>
-						<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-							<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+						<view style="display: flex;margin-top: 15upx;">
+							<view class="shenpistyle-one ">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 						</view>
 
 						<view class="buttoncontainer">
@@ -287,6 +287,11 @@
 			           _self.isnormal=res.data
 					}
 				})
+			},
+			toshenpi:function(e){
+				uni.navigateTo({
+					url:'../normaluser/myshenpi/myshenpi'
+				})
 			}
 		}
 	}
@@ -297,16 +302,6 @@
 		background-color: #EBEBEB;
 		/* 	height: 100%; */
 		line-height: 1.5;
-	}
-
-	.topstle {
-		display: flex;
-		font-size: 30upx;
-		height: 75upx;
-		justify-content: center;
-		align-items: center;
-		background-color: #FFFFFF;
-
 	}
 
 	.border2text {

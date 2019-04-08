@@ -31,7 +31,7 @@
 				
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
-							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
+							<button style="font-size: 25upx;" class="buttonstyle" @click="chakan()">查看</button>
 						</view>
 					</view>
 				</view>
@@ -187,6 +187,11 @@
 			search(e, val) {
 				// 搜索的方法
 				console.log(e, val);
+			},
+			chakan:function(e){
+				uni.navigateTo({
+					url:'../../normaluser/myrenwu/myrenwu'
+				})
 			}
 		}
 	}
@@ -197,16 +202,6 @@
 		background-color: #EBEBEB;
 		/* 	height: 100%; */
 		line-height: 1.5;
-	}
-
-	.topstle {
-		display: flex;
-		font-size: 30upx;
-		height: 75upx;
-		justify-content: center;
-		align-items: center;
-		background-color: #FFFFFF;
-
 	}
 
 	.border2text {

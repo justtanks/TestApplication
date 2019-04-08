@@ -28,17 +28,7 @@
 		, {
 			"path": "pages/controlCenter/controlCenter",
 			"style": {
-				"navigationBarTitleText": "管理中心",
-				"enablePullDownRefresh":false,
-				"app-plus":{
-					"pullToRefresh":{
-						"support":true,
-						"scrollIndicator":"none",
-						"height":"10%",
-						"range":"10%",
-						"color":"#007AFF"
-					}
-				}
+				"navigationBarTitleText": "管理中心"
 			}
 		}, {
 			"path": "pages/shenpi/shenpi",

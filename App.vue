@@ -132,4 +132,16 @@
 		margin-top: 5upx;
 		justify-content: space-between;
 	}
+	/* 顶部的导航条文字样式 */
+	.topstle {
+		display: flex;
+		font-size: 35upx;
+		height: 80upx;
+		justify-content: center;
+		align-items: center;
+		background-color: #FFFFFF;
+		border-bottom-style: solid;
+		border-bottom-color: #F1F1F3;
+		border-bottom-width: 1upx;
+	}
 </style>

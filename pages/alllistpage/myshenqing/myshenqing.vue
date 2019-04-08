@@ -34,7 +34,7 @@
 					<view class="buttoncontainer">
 						<view style="display: flex;flex-direction: row;">
 							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">删除</button>
-							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
+							<button style="font-size: 25upx;" class="buttonstyle" @click="seeshenqing()">查看</button>
 						</view>
 					</view>
 				</view>
@@ -194,6 +194,11 @@
 			search(e, val) {
 				// 搜索的方法
 				console.log(e, val);
+			},
+			seeshenqing:function(e){
+				uni.navigateTo({
+					url:'../../normaluser/seeShenqing/seeShenqing'
+				})
 			}
 		}
 	}
@@ -206,16 +211,7 @@
 		line-height: 1.5;
 	}
 
-	.topstle {
-		display: flex;
-		font-size: 30upx;
-		height: 75upx;
-		justify-content: center;
-		align-items: center;
-		background-color: #FFFFFF;
-
-	}
-
+	
 	.border2text {
 		color: #007AFF;
 		border-bottom-style: solid;

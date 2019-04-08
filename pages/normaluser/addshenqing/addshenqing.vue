@@ -2,7 +2,7 @@
 <template>
 	<view>
 		<view style="background-color: #FFFFFF;">
-			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 30upx;"
+			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 35upx;"
 			 show-confirm-bar="true" auto-height="true" placeholder="申请理由" maxlength="30" v-model="inputresean" @input="inputholder" />
 			<view class="textnum">{{textnum}}</view>
 		<!-- 选择时间 -->
