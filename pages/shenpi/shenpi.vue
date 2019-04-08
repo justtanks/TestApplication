@@ -170,6 +170,12 @@
 		onBackPress: function() {
 			// 覆盖之前的方法 return true
 		},
+		onPullDownRefresh: function() {
+			// 执行下拉刷新的方法
+			setTimeout(function() {
+				uni.stopPullDownRefresh()
+			}, 1000)
+		},
 		onReachBottom: function() {
 			//触底的时候请求数据，即为上拉加载更多
 			//为了更加清楚的看到效果，添加了定时器

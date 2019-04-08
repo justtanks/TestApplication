@@ -49,7 +49,13 @@
 			popudown:function(){
 				this.$refs.popup.close()
 			}
-		}
+		},
+		onPullDownRefresh: function() {
+			// 执行下拉刷新的方法
+			setTimeout(function() {
+				uni.stopPullDownRefresh()
+			}, 1000)
+		},
 	}
 </script>
 

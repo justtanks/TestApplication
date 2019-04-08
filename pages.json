@@ -20,16 +20,6 @@
 						"height":"10%",
 						"range":"10%",
 						"color":"#007AFF"
-						// "type":"default"
-// 						"contentdown": {
-//                             "caption": "下拉刷新"
-//                         },
-//                         "contentover": {
-//                             "caption": "松开刷新"
-//                         },
-//                         "contentrefresh": {
-//                             "caption": "正在刷新"
-//                         }
 					}
 				}
 			}
@@ -39,13 +29,31 @@
 			"path": "pages/controlCenter/controlCenter",
 			"style": {
 				"navigationBarTitleText": "管理中心",
-				"enablePullDownRefresh":false
+				"enablePullDownRefresh":false,
+				"app-plus":{
+					"pullToRefresh":{
+						"support":true,
+						"scrollIndicator":"none",
+						"height":"10%",
+						"range":"10%",
+						"color":"#007AFF"
+					}
+				}
 			}
 		}, {
 			"path": "pages/shenpi/shenpi",
 			"style": {
 				"navigationBarTitleText": "审批",
-				 "enablePullDownRefresh":true
+				 "enablePullDownRefresh":true,
+				 "app-plus":{
+				 	"pullToRefresh":{
+				 		"support":true,
+				 		"scrollIndicator":"none",
+				 		"height":"10%",
+				 		"range":"10%",
+				 		"color":"#007AFF"
+				 	}
+				 }
 			}
 		}, {
 			"path": "pages/mine/mine",
@@ -103,7 +111,17 @@
         ,{
             "path" : "pages/normaluser/jifenpaiming/jifenpaiming",
             "style" : {
-				"navigationBarTitleText":"积分排名"
+				"navigationBarTitleText":"积分排名",
+				"enablePullDownRefresh":true,
+				"app-plus":{
+					"pullToRefresh":{
+						"support":true,
+						"scrollIndicator":"none",
+						"height":"10%",
+						"range":"10%",
+						"color":"#007AFF"
+					}
+				}
 			}
         },{
 		    "path" : "pages/normaluser/mylistitem/mylistitem",
@@ -113,19 +131,49 @@
         ,{
             "path" : "pages/alllistpage/myrenwu/myrenwu",
             "style" : {
-				"navigationBarTitleText":"我的任务"
+				"navigationBarTitleText":"我的任务",
+				"enablePullDownRefresh":true,
+				"app-plus":{
+					"pullToRefresh":{
+						"support":true,
+						"scrollIndicator":"none",
+						"height":"10%",
+						"range":"10%",
+						"color":"#007AFF"
+					}
+				}
 			}
         }
         ,{
             "path" : "pages/alllistpage/myshenqing/myshenqing",
             "style" : {
-				"navigationBarTitleText":"我的申请"
+				"navigationBarTitleText":"我的申请",
+				"enablePullDownRefresh":true,
+				"app-plus":{
+					"pullToRefresh":{
+						"support":true,
+						"scrollIndicator":"none",
+						"height":"10%",
+						"range":"10%",
+						"color":"#007AFF"
+					}
+				}
 			}
         }
         ,{
             "path" : "pages/alllistpage/jifenshijian/jifenshijian",
             "style" : {
-				"navigationBarTitleText":"积分事件"
+				"navigationBarTitleText":"积分事件",
+				"enablePullDownRefresh":true,
+				"app-plus":{
+					"pullToRefresh":{
+						"support":true,
+						"scrollIndicator":"none",
+						"height":"10%",
+						"range":"10%",
+						"color":"#007AFF"
+					}
+				}
 			}
         }
     ],
