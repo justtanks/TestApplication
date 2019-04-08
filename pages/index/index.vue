@@ -59,7 +59,7 @@
 		</view>
 		<!-- 公告栏 -->
 		<view class="gonggao uni-list-cell-navigate uni-navigate-right">
-            <image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
+			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
 		</view>
 		<view class="qiun-charts">
 			<!--#ifdef H5-->
@@ -69,10 +69,10 @@
 			<canvas canvasId="canvasPie" class="charts"></canvas>
 			<!--#endif-->
 		</view>
-		<view style="height: 60upx;width: auto;margin: 20upx 45upx 120upx 45upx;" >
-			<button class="buttonstyle" @click="addshenqing" >申请积分</button>
+		<view style="height: 60upx;width: auto;margin: 20upx 45upx 120upx 45upx;">
+			<button class="buttonstyle" @click="addshenqing">申请积分</button>
 		</view>
-		 
+
 	</view>
 </template>
 
@@ -95,7 +95,7 @@
 				data: [70, 40, 65, 90, 44, 68, 20]
 			}]
 		},
-		
+
 		Pie: {
 			series: [{
 				name: '绩效',
@@ -142,6 +142,7 @@
 			//#endif
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
+            this.changeTab()
 
 		},
 		onReady() {
@@ -231,9 +232,28 @@
 					}
 				});
 			},
-			addshenqing:function(){
+			addshenqing: function() {
 				uni.navigateTo({
-					url:'../normaluser/addshenqing/addshenqing'
+					url: '../normaluser/addshenqing/addshenqing'
+				})
+			},
+			changeTab() {
+				console.log(1)
+				uni.getStorage({
+					key: "isnomaluser",
+					success: function(res) {
+						if (res.data == 1) {
+							uni.setTabBarItem({
+								index: 2,
+								text: '审批',
+							})
+						} else {
+							uni.setTabBarItem({
+								index: 2,
+								text: '积分事件'
+							})
+						}
+					}
 				})
 			}
 
@@ -307,8 +327,8 @@
 		justify-content: flex-start;
 		align-items: center;
 	}
-	.muhovercolor{
+
+	.muhovercolor {
 		background-color: #0A98D5;
 	}
-	
 </style>

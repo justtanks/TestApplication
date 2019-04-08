@@ -63,6 +63,7 @@
 		},
 		onLoad: function() {
 			_self = this;
+			
 		},
 		onBackPress: function() {
 			// 覆盖之前的方法 return true
