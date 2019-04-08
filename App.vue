@@ -38,4 +38,98 @@
 	   margin:20upx 20upx ;
 	   position:relative;
 	}
+	/* 第一个列表 待审批-积分录入 */
+	.cadlist-one {
+		min-height: 350upx;
+		background-color: #FFFFFF;
+		margin-left: 10upx;
+		margin-top: 10upx;
+		margin-bottom: 10upx;
+		margin-right: 10upx;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.toptext-one {
+		display: flex;
+		min-height: 50upx;
+		font-size: 35upx;
+		margin: 20upx 20upx 20upx 20upx;
+		text-align: left;
+	}
+	
+	.toptext-two {
+		font-size: 29upx;
+		margin-left: 20upx;
+		margin-top: 0upx;
+		text-align: left;
+		color: #666666;
+		line-height: 1.5;
+	}
+	
+	.shenpistyle-one {
+		font-size: 30upx;
+		display: flex;
+		margin-left: 20upx;
+		justify-content: center;
+		align-items: center;
+		line-height: 1.8;
+	}
+	
+	.daishenpi {
+		border: #CCCCCC 1upx solid;
+		border-radius: 3upx;
+		font-size: 30upx;
+		padding: 0upx 5upx 0upx 5upx;
+		margin-left: 40upx;
+		line-height: 1.8;
+	}
+	
+	/* 审批驳回 */
+	.daishenpi-bohui {
+		border: #CD0000 1upx solid;
+		border-radius: 3upx;
+		font-size: 30upx;
+		padding: 0upx 5upx 0upx 5upx;
+		margin-left: 40upx;
+		line-height: 1.8;
+		color: #CD0000;
+	
+	}
+	
+	/* 审批通过 */
+	.daishenpi-tongguo {
+		border: #008B00 1upx solid;
+		border-radius: 3upx;
+		font-size: 30upx;
+		padding: 0upx 5upx 0upx 5upx;
+		margin-left: 40upx;
+		line-height: 1.8;
+		color: #008B00;
+	}
+	
+	.buttoncontainer {
+		display: flex;
+		width: auto;
+		height: 100%;
+		margin: 20upx 20upx 20upx 20upx;
+		flex-direction: row;
+		justify-content: flex-end;
+	}
+	
+	.fenshustyle {
+		color: #007AFF;
+		font-size: 40upx;
+		margin-right: 30upx;
+	}
+	
+	
+	/*事件列表的样式  */
+	.thingstyle {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 5upx;
+		justify-content: space-between;
+	}
 </style>

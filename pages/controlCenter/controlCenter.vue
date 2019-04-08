@@ -80,10 +80,9 @@
 				  });
 			},
 			mJifenshijian: function(e) {
-				uni.showToast({
-					duration: 500,
-					title: '事件'
-				})
+				 uni.navigateTo({
+				 	url:'../alllistpage/jifenshijian/jifenshijian'
+				 })
 			},
 			mFaburenwu: function(e) {
 				  uni.navigateTo({
@@ -102,9 +101,8 @@
 				 });
 			},
 			mWodeshenqing: function(e) {
-				uni.showToast({
-					duration: 500,
-					title: '我的申请'
+				uni.navigateTo({
+					url:'../alllistpage/myshenqing/myshenqing'
 				})
 			},
 			mPaiming: function(e) {
@@ -113,10 +111,9 @@
 				})
 			},
 			mRenwu: function(e) {
-				uni.showToast({
-					duration: 500,
-					title: '任务'
-				})
+				 uni.navigateTo({
+				 	url:'../alllistpage/myrenwu/myrenwu'
+				 })
 			}
 		}
 	}

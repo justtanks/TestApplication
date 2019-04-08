@@ -1,12 +1,11 @@
-<!-- 审批界面 -->
+<!-- 我的任务界面 -->
 <template>
 	<view>
 		<view style="position: fixed; z-index: 99;width: 100%;">
 			<view class="uni-flex uni-row">
-				<view style="flex: 1;" class="topstle" :class="{border2text:isfirstbottom}" @click="firstclick">全部</view>
-				<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">待审批</view>
-				<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已通过</view>
-				<view style="flex: 1;" class="topstle" :class="{border2text:isfourbottom}" @click="fourclick">未通过</view>
+				<view style="flex: 1;" class="topstle" :class="{border2text:isfirstbottom}" @click="firstclick">任务大厅</view>
+				<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">我发布的</view>
+				<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">我领取的</view>
 			</view>
 			<mSearch :show='false' @search="search($event,0)"></mSearch>
 		</view>
@@ -14,116 +13,80 @@
 		<view class="content">
 			<view v-show="isfirstbottom" style="width: 100%;">
 				<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
-				<!-- 全部的审批 -->
-				<view class="cadlist-one" v-for="(item,index) in 7" :key="index">
-					<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
+				<!-- 所有的任务 -->
+				<view class="cadlist-one">
+					<view class="toptext-one">广场发布的任务的内容</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
+						<view class="toptext-two">我发布的任务</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
+				
+					<view class="toptext-two">备注:由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 审批人:</view>
-						<!-- 实现三种样式的方式 -->
-						<view class="daishenpi" v-if="type==1">
-							小明&nbsp;&nbsp;待审批</view>
-						<view class="daishenpi-tongguo" v-if="type==2">
-							小明&nbsp;&nbsp;通过</view>
-						<view class="daishenpi-bohui" v-if="type==3">
-							小明&nbsp;&nbsp;驳回</view>
+						<view class="shenpistyle-one "> 截止时间:1992-9-10</view>
 					</view>
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+						<view shenpistyle-one>完成状态:未完成 &nbsp;&nbsp;负责人:小明 </view>
 					</view>
-
+				
 					<view class="buttoncontainer">
-						<view>
-							<button style="font-size: 25upx;" class="buttonstyle">{{type==1?'去审批':'撤销'}}</button>
+						<view style="display: flex;flex-direction: row;">
+							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
 						</view>
 					</view>
 				</view>
 				<uni-load-more :status="status1" :contentText="contentText"></uni-load-more>
 			</view>
 			<view v-show="issecondbottom" style="width: 100%;">
-				<!-- 申请待通过的界面 -->
+				<!-- 我发布的任务 -->
 				<view class="cadlist-one">
-					<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
+					<view class="toptext-one">我发布的任务的内容</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
+						<view class="toptext-two">我发布的任务</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
+				
+					<view class="toptext-two">备注:由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 审批人:</view>
-						<!-- 实现三种样式的方式 -->
-						<view class="daishenpi">
-							小明&nbsp;&nbsp;待审批</view>
+						<view class="shenpistyle-one "> 截止时间:1992-9-10</view>
 					</view>
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+						<view shenpistyle-one>完成状态:未完成 &nbsp;&nbsp;负责人:小明 </view>
 					</view>
-
+				
 					<view class="buttoncontainer">
-						<view>
-							<button style="font-size: 25upx;" class="buttonstyle">去审批</button>
+						<view style="display: flex;flex-direction: row;">
+							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">修改</button>
+							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
 						</view>
 					</view>
 				</view>
 				<uni-load-more :status="status2" :contentText="contentText"></uni-load-more>
 			</view>
 			<view v-show="isthirdbottom" style="width: 100%;">
-				<!-- 已经通过的界面 -->
+				<!-- 我领取的任务 -->
 				<view class="cadlist-one">
-					<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
+					<view class="toptext-one">我领取的任务的内容</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
+						<view class="toptext-two">我领取的的任务</view>
 						<view class="fenshustyle">40分</view>
 					</view>
-					<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
+				
+					<view class="toptext-two">备注:由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 审批人:</view>
-						<!-- 实现三种样式的方式 -->
-						<view class="daishenpi-tongguo">
-							小明&nbsp;&nbsp;通过</view>
-
+						<view class="shenpistyle-one "> 截止时间:1992-9-10</view>
 					</view>
 					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+						<view shenpistyle-one>完成状态:未完成 &nbsp;&nbsp;发布人:小明吱吱 &nbsp;&nbsp;负责:小明吱吱</view>
 					</view>
-
+				
 					<view class="buttoncontainer">
-						<view>
-							<button style="font-size: 25upx;" class="buttonstyle">撤销</button>
+						<view style="display: flex;flex-direction: row;">
+							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
 						</view>
 					</view>
 				</view>
 				<uni-load-more :status="status3" :contentText="contentText"></uni-load-more>
-			</view>
-			<view v-show="isfourbottom" style="width: 100%;">
-				<!-- 未通过的界面 -->
-				<view class="cadlist-one">
-					<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
-					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
-						<view class="fenshustyle">40分</view>
-					</view>
-					<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
-					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 审批人:</view>
-						<view class="daishenpi-bohui">
-							小明&nbsp;&nbsp;驳回</view>
-					</view>
-					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
-					</view>
-
-					<view class="buttoncontainer">
-						<view>
-							<button style="font-size: 25upx;" class="buttonstyle">撤销</button>
-						</view>
-					</view>
-				</view>
-				<uni-load-more :status="status4" :contentText="contentText"></uni-load-more>
 			</view>
 		</view>
 		<!-- </scroll-view> -->
@@ -132,7 +95,7 @@
 
 <script>
 	var _self;
-	import mSearch from '../../components/mehaotian-search/mehaotian-search.vue'
+	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	export default {
 		components: {
@@ -144,7 +107,6 @@
 				isfirstbottom: true,
 				issecondbottom: false,
 				isthirdbottom: false,
-				isfourbottom: false,
 				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				// 显示当前界面
 				jiemiannum: 1,
@@ -187,9 +149,7 @@
 				case 3:
 					_self.status3 = 'loading'
 					break;
-				case 4:
-					_self.status4 = 'loading'
-					break;
+		
 				default:
 					break;
 			}
@@ -201,29 +161,22 @@
 				_self.isfirstbottom = true;
 				_self.issecondbottom = false;
 				_self.isthirdbottom = false;
-				_self.isfourbottom = false;
+			
 				_self.jiemiannum = 1;
 			},
 			secondlick: function(e) {
 				_self.isfirstbottom = false;
 				_self.issecondbottom = true;
 				_self.isthirdbottom = false;
-				_self.isfourbottom = false;
+				
 				_self.jiemiannum = 2;
 			},
 			thirdclick: function(e) {
 				_self.isfirstbottom = false;
 				_self.issecondbottom = false;
 				_self.isthirdbottom = true;
-				_self.isfourbottom = false;
+			
 				_self.jiemiannum = 3;
-			},
-			fourclick: function(e) {
-				_self.isfirstbottom = false;
-				_self.issecondbottom = false;
-				_self.isthirdbottom = false;
-				_self.isfourbottom = true;
-				_self.jiemiannum = 4;
 			},
 			search(e, val) {
 				// 搜索的方法
