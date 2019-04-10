@@ -203,7 +203,18 @@
 			    this.imageList.splice(e,1);
 			},
 			 
-		}
+		},
+		 onBackPress() {
+		  if (this.$refs.mpvuePicker.showPicker) {
+		  	this.$refs.mpvuePicker.pickerCancel();
+		    return true;
+		  }
+		},
+		onUnload() {
+				if (this.$refs.mpvuePicker.showPicker) {
+					this.$refs.mpvuePicker.pickerCancel()
+				}
+			}
 	}
 </script>
 

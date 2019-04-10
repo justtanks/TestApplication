@@ -81,7 +81,7 @@
 		width: 100%;
 		top: 0px;
 		left: 0px;
-		// overflow: auto;
+		overflow: auto;
 	}
 
 	.popup-content {
@@ -89,6 +89,6 @@
 		z-index: 1000000;
 		background: #FFFFFF;
 		transition: all .3s ease;
-		// overflow: auto;
+		overflow: auto;
 	}
 </style>

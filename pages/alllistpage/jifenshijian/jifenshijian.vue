@@ -12,7 +12,7 @@
 			<mSearch :show='false' @search="search($event,0)"></mSearch>
 		</view>
 		<view style="height:160upx ;"></view>
-		<view class="content">
+		<view>
 			<view style="width: 100%;">
 				<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
 				<!-- 所有的任务 -->
@@ -93,17 +93,6 @@
 		/* 	height: 100%; */
 		line-height: 1.5;
 	}
-
-	.content {
-		/* 最外层的被scroll-veiw 包裹起来的，如果要实现外面的不一起滚动，就必须设置一个合适的固定高度 */
-		/* 	height: 1100upx; */
-		display: flex;
-		justify-content: center;
-		align-items: flex-start;
-		text-align: center;
-
-	}
-
 	.cadlist {
 		min-height: 250upx;
 		background-color: #FFFFFF;
