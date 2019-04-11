@@ -21,7 +21,7 @@
 		</view>
          
 		<view style="height: 150upx;width: 100%; position:fixed; bottom:0; display: flex; justify-content: center;align-items: center;">
-			<view style="height: 50upx;width: 85%;">
+			<view style="height: 45upx;width: 90%;">
 				<button class="buttonstyle" hover-class="muhovercolor" @click="addshenqing">提交</button>
 			</view>
 		</view>
@@ -40,7 +40,7 @@
 				</view>
 
 				<view style="height: 180upx;"></view>
-				<scroll-view style="height: 920upx;" scroll-y="true">
+				<scroll-view style="height: 1020upx;" scroll-y="true">
 					<checkbox-group @change="checkboxChange">
 						<label class="listitem" v-for="(item,index) in 30" :key='index'>
 							<view>
@@ -54,9 +54,9 @@
 
 					</checkbox-group>
 				</scroll-view>
-				<view class="buttonstyle popubottonbutton" @tap="popudown">
+			<!-- 	<view class="buttonstyle popubottonbutton" @tap="popudown">
 					确定
-				</view>
+				</view> -->
 			</view>
 
 		</uni-drawer>
@@ -182,7 +182,7 @@
 		onBackPress() {
 			if (this.showRigth || this.showLeft) {
 				this.closeDrawer(this.drawmode)
-				return true
+				return true  //return true 会把返回事件覆盖掉
 			}
 		},
 		onUnload() {
@@ -200,7 +200,7 @@
 	}
 
 	.pupustyle {
-		width: 600upx;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 	}

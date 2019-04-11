@@ -69,7 +69,7 @@
 			<canvas canvasId="canvasPie" class="charts"></canvas>
 			<!--#endif-->
 		</view>
-		<view style="height: 60upx;width: auto;margin: 20upx 45upx 120upx 45upx;">
+		<view style="height: 50upx;width: auto;margin: 100upx 25upx 120upx 25upx;">
 			<button class="buttonstyle" @click="addshenqing">申请积分</button>
 		</view>
 

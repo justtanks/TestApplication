@@ -22,32 +22,169 @@
 		<!-- 弹出层使用 -->
 		<popup-layer ref="popup" :direction="direction">
 			<view class="pupustyle">
+				<view style="margin: 30upx 30upx;font-size: 28upx;">
+					技术类型（单选）
+				</view>
+				<view style="display: flex;flex-direction: row;justify-content: flex-start;">
+					<button class="popbutton" :class="{popbutton_choise:allpeople}" @click="quanyuanpaiming">全员排名</button>
+					<button class="popbutton" :class="{popbutton_choise:!allpeople}" @click="zhiweipaiming">职位排名</button>
+				</view>
+				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 30upx;"></view>
+				<view style="margin: 30upx 30upx;font-size: 28upx;">
+					人员范围
+				</view>
+				<view style="display: flex;flex-direction: row;justify-content: flex-start;">
+					<button class="popbutton" :class="{popbutton_choise:containcontrol}" @click="contain">包含管理者</button>
+					<button class="popbutton" :class="{popbutton_choise:!containcontrol}" @click="containnot">不包含管理者</button>
+				</view>
+				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 30upx;"></view>
+				<view style="display: flex;flex-direction: row; justify-content: space-between;">
+					<view style="margin: 30upx 30upx;">
+						时间
+					</view>
+					<view style="margin: 30upx;font-size: 28upx;">
+						重置
+					</view>
+				</view>
+				<view style="display: flex;flex-direction: row;margin-left: 40upx;margin-right: 40upx;" @click="choisetime('date')">
+					<view style="flex: 1;display: flex; justify-content: center;align-items: center;font-size: 32upx;">{{date}}</view>
+					<view style="flex: 1;display: flex;justify-content: center;align-items: center;">至</view>
+					<view style="flex: 1;display: flex;justify-content: center;align-items: center;font-size: 32upx;">2019-2-1</view>
+				</view>
+				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 50upx;"></view>
+				<view style="margin: 30upx 30upx;font-size: 28upx;">
+					积分分类 (多选)
+				</view>
+				<view style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap;margin-left: 25upx;margin-right: 25upx;">
+					<button class="popbutton1" :class="{popbutton_choise:gonggong}" @click="gonggong1()">公共部分</button>
+					<button class="popbutton1" :class="{popbutton_choise:wenhua}" @click="qiyewenhua1()">企业文化</button>
+					<button class="popbutton1" :class="{popbutton_choise:jixiao}" @click="jixiao1()">绩效</button>
+					<button class="popbutton1" :class="{popbutton_choise:guizhang}" @click="guizhang1()">规章制度</button>
+					<button class="popbutton1" :class="{popbutton_choise:nengli}" @click="nengli1()">能力</button>
+					<button class="popbutton1" :class="{popbutton_choise:kaoqin}" @click="kaoqin1()">考勤</button>
+				</view>
+
+				<!-- 最后的确定按钮 -->
 				<view class="buttonstyle popubottonbutton" @tap="popudown">
 					确定
 				</view>
 			</view>
 		</popup-layer>
+		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected1" @cancel="onSelected1" />
 	</view>
 </template>
 
 <script>
 	import popupLayer from '../../../components/popup-layer/popup-layer.vue';
+	// 选择时间的选择
+	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
+	import dateutll from '../../../common/util.js'
+	var _self;
 	export default {
 		components: {
-			popupLayer
+			popupLayer,
+			MxDatePicker
 		},
 		data() {
 			return {
-				direction: 'left'
+				direction: 'left',
+				allpeople: true, //选择筛选所有人
+				containcontrol: true, //包含管理者的筛选
+				gonggong: false,
+				wenhua: false,
+				jixiao: false,
+				guizhang: false,
+				nengli: false,
+				kaoqin: false,
+
+				// 时间控件
+				date: '2019/01/01',
+				type: 'date',
+				value: '',
+				showPicker: false,
+
+				showpop: false
+
 			};
 		},
+		onLoad() {
+			_self = this
+		},
+		onReady() {
+			this.date = dateutll.dateUtils.getNowFormatDate()
+		},
 		methods: {
+
 			showpup: function() {
 				// 弹出弹窗
 				this.$refs.popup.show() // 弹出
+				this.showpop = true
 			},
-			popudown:function(){
+			popudown: function() {
 				this.$refs.popup.close()
+				this.showpop = false
+			},
+			quanyuanpaiming: function() {
+				_self.allpeople = true;
+				_self.zhiwei = false
+			},
+			zhiweipaiming: function() {
+				_self.allpeople = false;
+				_self.zhiwei = true
+			},
+			contain: function() {
+				_self.containcontrol = true
+			},
+			containnot: function() {
+				_self.containcontrol = false
+			},
+			gonggong1() {
+				if (this.gonggong)
+					this.gonggong = false
+				else
+					this.gonggong = true
+			},
+			qiyewenhua1() {
+				if (this.wenhua)
+					this.wenhua = false
+				else
+					this.wenhua = true
+			},
+			jixiao1() {
+				if (this.jixiao)
+					this.jixiao = false
+				else
+					this.jixiao = true
+			},
+			guizhang1() {
+				if (this.guizhang)
+					this.guizhang = false
+				else
+					this.guizhang = true
+			},
+			nengli1() {
+				if (this.nengli)
+					this.nengli = false
+				else
+					this.nengli = true
+			},
+			kaoqin1() {
+				if (this.kaoqin)
+					this.kaoqin = false
+				else
+					this.kaoqin = true
+			},
+			choisetime(type) {
+				//弹出时间的选择框
+				this.type = type;
+				this.showPicker = true;
+				this.value = this[type];
+			},
+			onSelected1(e) { //选择时间后
+				this.showPicker = false;
+				if (e) {
+					this[this.type] = e.value;
+				}
 			}
 		},
 		onPullDownRefresh: function() {
@@ -56,6 +193,18 @@
 				uni.stopPullDownRefresh()
 			}, 1000)
 		},
+		onBackPress: function() {
+			if (this.showPicker) {
+				this.showPicker = false;
+				return true
+			}
+			if (this.showpop) {
+				this.$refs.popup.close()
+				this.showpop = false
+				return true
+			}
+		}
+
 	}
 </script>
 
@@ -63,7 +212,7 @@
 	.topstyle {
 		position: fixed;
 		width: 100%;
-		z-index: 99;
+		z-index: 7;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -117,10 +266,12 @@
 		color: #007AFF;
 	}
 
+	/* pop 上的控件的样式 */
 	.pupustyle {
 		width: 580upx;
 		display: flex;
 		flex-direction: column;
+		overflow: auto;
 	}
 
 	.popubottonbutton {
@@ -132,5 +283,28 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.popbutton {
+		font-size: 25upx;
+		color: #666666;
+		display: flex;
+		margin-left: 30upx;
+		margin-right: 15upx;
+	}
+
+	.popbutton1 {
+		font-size: 25upx;
+		color: #666666;
+		display: flex;
+		margin-left: 15upx;
+		margin-right: 15upx;
+		margin-top: 15upx;
+
+	}
+
+	.popbutton_choise {
+		background: #007AFF;
+		color: #FFFFFF;
 	}
 </style>

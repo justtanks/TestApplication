@@ -5,7 +5,20 @@
     "pages/controlCenter/controlCenter",
     "pages/shenpi/shenpi",
     "pages/mine/mine",
-    "pages/segment_control/segment_control"
+    "pages/segment_control/segment_control",
+    "pages/popwindow/popwindow",
+    "pages/normaluser/addshenqing/addshenqing",
+    "pages/normaluser/myrenwu/myrenwu",
+    "pages/normaluser/jifenluru/jifenluru",
+    "pages/normaluser/faburenwu/faburenwu",
+    "pages/normaluser/myshenpi/myshenpi",
+    "pages/normaluser/seeShenqing/seeShenqing",
+    "pages/normaluser/jifenpaiming/jifenpaiming",
+    "pages/normaluser/mylistitem/mylistitem",
+    "pages/alllistpage/myrenwu/myrenwu",
+    "pages/alllistpage/myshenqing/myshenqing",
+    "pages/alllistpage/jifenshijian/jifenshijian",
+    "pages/alllistpage/changelist/changelist"
   ],
   "subPackages": [],
   "window": {
@@ -48,8 +61,9 @@
     ]
   },
   "splashscreen": {
-    "alwaysShowBeforeRender": true,
-    "autoclose": false
+    "alwaysShowBeforeRender": false,
+    "autoclose": true
   },
-  "appname": "配置"
+  "appname": "配置",
+  "compilerVersion": "1.8.2"
 }

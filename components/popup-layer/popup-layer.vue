@@ -75,7 +75,7 @@
 <style lang="scss">
 	.popup-layer {
 		position: fixed;
-		z-index: 999999;
+		z-index: 9;
 		background: rgba(0, 0, 0, .3);
 		height: 100%;
 		width: 100%;
@@ -89,6 +89,6 @@
 		z-index: 1000000;
 		background: #FFFFFF;
 		transition: all .3s ease;
-		// overflow: auto;
+		overflow: auto;
 	}
 </style>

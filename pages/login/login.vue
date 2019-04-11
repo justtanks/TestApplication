@@ -1,8 +1,9 @@
 <template>
 	<view>
 		<view class="uni-flex uni-row">
-			<view class="uni-flex atcenter" style="width: 100%; height: 300upx;">
-				<image style="width: 180upx; height: 200upx;" src="../../static/wel_icon.png"></image>
+			<view class="uni-flex atcenter" style="width: 100%; height: 130upx;">
+				<!-- <image style="width: 180upx; height: 200upx;" src="../../static/wel_icon.png"></image> -->
+				 
 			</view>
 		</view>
 		<view class="uni-flex atcenter haveborder outstyle">
@@ -108,6 +109,7 @@
 		font-family: inherit;
 		background: #007AFF;
 		opacity: 0.8;
+		margin-top: 120upx;
 	}
 
 	button:after {

@@ -185,7 +185,7 @@
 					urls: this.imageList
 				})
 			},
-			onSelected(e) {//选择
+			onSelected(e) {//选择时间后
 				this.showPicker = false;
 				if(e) {
 					this[this.type] = e.value; 
@@ -196,7 +196,6 @@
 				console.log(e)
 			},
 			onConfirm(e) {
-				
 				 this.shenpiperson=e.label;
 			},
 			 close(e){
