@@ -3,11 +3,25 @@
 	<view>
 		<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;">
 			<view class="topbar">
-				<view class="toptext1 uni-list-cell-navigate uni-navigate-bottom">分类</view>
-				<view class="toptext1 uni-list-cell-navigate uni-navigate-bottom">部门</view>
-				<view class="toptext1 uni-list-cell-navigate uni-navigate-bottom">时间</view>
-				<view style="flex: 1;"></view>
-				<view style="flex: 1;"></view>
+				<view class="topbaritem">
+					<view class="toptext1 ">分类</view>
+					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+				</view>
+				<view class="topbaritem">
+					<view class="toptext1 ">部门</view>
+					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+				</view>
+				<view class="topbaritem">
+					<view class="toptext1 ">时间</view>
+					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+				</view>
+
+				<!-- 	<view class="toptext1  ">部门</view>
+				<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+				<view class="toptext1 ">时间</view>
+				<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+			 -->
+
 			</view>
 			<mSearch :show='false' @search="search($event,0)"></mSearch>
 		</view>
@@ -63,7 +77,7 @@
 		},
 		onLoad: function() {
 			_self = this;
-			
+
 		},
 		onBackPress: function() {
 			// 覆盖之前的方法 return true
@@ -93,6 +107,7 @@
 		/* 	height: 100%; */
 		line-height: 1.5;
 	}
+
 	.cadlist {
 		min-height: 250upx;
 		background-color: #FFFFFF;
@@ -131,11 +146,8 @@
 	}
 
 	.toptext1 {
-		display: flex;
-		width: 15%;
-		justify-content: center;
-		align-items: center;
 		font-size: 30upx;
+		margin-right: 10upx;
 	}
 
 	.topbar {
@@ -144,5 +156,12 @@
 		flex-direction: row;
 		align-items: center;
 		margin-top: 10upx;
+	}
+
+	.topbaritem {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-left: 25upx;
 	}
 </style>

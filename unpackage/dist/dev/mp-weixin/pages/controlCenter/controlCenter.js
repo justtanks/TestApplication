@@ -174,6 +174,9 @@ var _mxDatepicker = _interopRequireDefault(__webpack_require__(/*! ../../compone
   methods: {
     mJifen: function mJifen(type) {
       // 暂时跳转到列表
+      uni.navigateTo({
+        url: '../normaluser/mylistitem/mylistitem' });
+
 
 
     },
@@ -192,9 +195,8 @@ var _mxDatepicker = _interopRequireDefault(__webpack_require__(/*! ../../compone
 
     },
     mJifenshijian: function mJifenshijian(e) {
-      uni.showToast({
-        duration: 500,
-        title: '事件' });
+      uni.navigateTo({
+        url: '../alllistpage/jifenshijian/jifenshijian' });
 
     },
     mFaburenwu: function mFaburenwu(e) {
@@ -214,9 +216,8 @@ var _mxDatepicker = _interopRequireDefault(__webpack_require__(/*! ../../compone
 
     },
     mWodeshenqing: function mWodeshenqing(e) {
-      uni.showToast({
-        duration: 500,
-        title: '我的申请' });
+      uni.navigateTo({
+        url: '../alllistpage/myshenqing/myshenqing' });
 
     },
     mPaiming: function mPaiming(e) {
@@ -225,9 +226,8 @@ var _mxDatepicker = _interopRequireDefault(__webpack_require__(/*! ../../compone
 
     },
     mRenwu: function mRenwu(e) {
-      uni.showToast({
-        duration: 500,
-        title: '任务' });
+      uni.navigateTo({
+        url: '../alllistpage/myrenwu/myrenwu' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))

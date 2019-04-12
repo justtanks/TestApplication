@@ -58,8 +58,13 @@
 			</view>
 		</view>
 		<!-- 公告栏 -->
-		<view class="gonggao uni-list-cell-navigate uni-navigate-right">
+		<!-- <view class="gonggao uni-list-cell-navigate uni-navigate-right">
 			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
+		</view> -->
+		
+		<view class="gonggao">
+			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
+			<image class="tonextstyle" src="../../static/tonext.png"></image>
 		</view>
 		<view class="qiun-charts">
 			<!--#ifdef H5-->
@@ -324,7 +329,7 @@
 		display: flex;
 		height: 90upx;
 		flex-direction: row;
-		justify-content: flex-start;
+		justify-content: space-between;
 		align-items: center;
 	}
 

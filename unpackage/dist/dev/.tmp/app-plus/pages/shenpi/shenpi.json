@@ -1,4 +1,12 @@
 {
+  "usingComponents": {},
   "navigationBarTitleText": "审批",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "pullToRefresh": {
+    "support": true,
+    "scrollIndicator": "none",
+    "height": "10%",
+    "range": "10%",
+    "color": "#007AFF"
+  }
 }

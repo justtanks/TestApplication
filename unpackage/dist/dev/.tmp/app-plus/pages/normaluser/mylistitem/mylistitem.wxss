@@ -1,226 +1,174 @@
 
-page {
-	background-color: #EBEBEB;
-	/* 	height: 100%; */
-}
-.topstle {
+.topstyle {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	font-size: 30rpx;
-	height: 75rpx;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-	background-color: #FFFFFF;
-}
-.border2text {
-	color: #007AFF;
-	border-bottom-style: solid;
-	border-bottom-color: #007AFF;
-	border-bottom-width: 1rpx;
-}
-.content {
-	/* 最外层的被scroll-veiw 包裹起来的，如果要实现外面的不一起滚动，就必须设置一个合适的固定高度 */
-	/* 	height: 1100upx; */
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
-	-webkit-box-align: start;
-	-webkit-align-items: flex-start;
-	    -ms-flex-align: start;
-	        align-items: flex-start;
-	text-align: center;
-}
-.cadlist {
-	min-height: 250rpx;
-	background-color: #FFFFFF;
-	margin-left: 10rpx;
-	margin-top: 10rpx;
-	margin-bottom: 10rpx;
-	margin-right: 10rpx;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
-	        flex-direction: column;
-}
-.toptext {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	min-height: 30rpx;
-	font-size: 28rpx;
-	margin: 20rpx 20rpx 20rpx 20rpx;
-	text-align: left;
-}
-.shenpistyle {
-	font-size: 25rpx;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	margin-left: 20rpx;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-}
-.border3text {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	border: #777777 1rpx solid;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-	padding-left: 30rpx;
-	padding-right: 30rpx;
-	margin-top: 20rpx;
-}
-
-/* 第一个列表 待审批-积分录入 */
-.cadlist-one {
-	min-height: 350rpx;
-	background-color: #FFFFFF;
-	margin-left: 10rpx;
-	margin-top: 10rpx;
-	margin-bottom: 10rpx;
-	margin-right: 10rpx;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	    -ms-flex-direction: column;
-	        flex-direction: column;
-}
-.toptext-one {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	min-height: 50rpx;
-	font-size: 35rpx;
-	margin: 20rpx 20rpx 20rpx 20rpx;
-	text-align: left;
-}
-.toptext-two {
-	font-size: 29rpx;
-	margin-left: 20rpx;
-	margin-top: 0rpx;
-	text-align: left;
-	color: #666666;
-	line-height: 1.5;
-}
-.shenpistyle-one {
-	font-size: 30rpx;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	margin-left: 20rpx;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-	line-height: 1.8;
-}
-.daishenpi {
-	border: #CCCCCC 1rpx solid;
-	border-radius: 3rpx;
-	font-size: 30rpx;
-	padding: 0rpx 5rpx 0rpx 5rpx;
-	margin-left: 40rpx;
-	line-height: 1.8;
-}
-
-/* 审批驳回 */
-.daishenpi-bohui {
-	border: #CD0000 1rpx solid;
-	border-radius: 3rpx;
-	font-size: 30rpx;
-	padding: 0rpx 5rpx 0rpx 5rpx;
-	margin-left: 40rpx;
-	line-height: 1.8;
-	color:#CD0000;
-}
-
-/* 审批通过 */
-.daishenpi-tongguo {
-	border: #008B00 1rpx solid;
-	border-radius: 3rpx;
-	font-size: 30rpx;
-	padding: 0rpx 5rpx 0rpx 5rpx;
-	margin-left: 40rpx;
-	line-height: 1.8;
-	color:#008B00;
-}
-.buttoncontainer {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	width: auto;
-	height: 100%;
-	margin: 20rpx 20rpx 20rpx 20rpx;
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: row;
 	    -ms-flex-direction: row;
 	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	min-height: 80rpx;
+}
+.topstyle_choise {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.listitem {
+	height: 100rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	margin-left: 25rpx;
+	margin-right: 25rpx;
+	border-bottom: #EBEBEB solid 0.5rpx;
+}
+.paimingnum {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	font-size: 32rpx;
+}
+.paiminimg {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	-webkit-align-content: center;
+	    -ms-flex-line-pack: center;
+	        align-content: center;
 	-webkit-box-pack: end;
 	-webkit-justify-content: flex-end;
 	    -ms-flex-pack: end;
 	        justify-content: flex-end;
 }
-.fenshustyle {
-	color: #007AFF;
-	font-size: 40rpx;
-	margin-right: 30rpx;
+.paimingname {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	    -ms-flex-pack: start;
+	        justify-content: flex-start;
+	margin-left: 20rpx;
+	font-size: 32rpx;
 }
-
-/*事件列表的样式  */
-.thingstyle{
+.paimingfenshu {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
-	display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row;-webkit-box-align: center;-webkit-align-items: center;-ms-flex-align: center;align-items: center;margin-top:5rpx;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	    -ms-flex-pack: justify;
-	        justify-content: space-between;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-align-content: center;
+	    -ms-flex-line-pack: center;
+	        align-content: center;
+	-webkit-box-pack: end;
+	-webkit-justify-content: flex-end;
+	    -ms-flex-pack: end;
+	        justify-content: flex-end;
+	margin-right: 20rpx;
+	font-size: 36rpx;
+	color: #007AFF;
+}
+.pupustyle {
+	width: 580rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+}
+.popubottonbutton {
+	position: fixed;
+	bottom: 1rpx;
+	width: 100%;
+	height: 80rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }
 

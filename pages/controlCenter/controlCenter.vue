@@ -94,7 +94,7 @@
 			},
 			mGonggao: function(e) {
 				 uni.navigateTo({
-				 	url: '../normaluser/seeShenqing/seeShenqing',
+				 	url: '../alllistpage/messageList/messageList',
 				 	success: res => {},
 				 	fail: () => {},
 				 	complete: () => {}

@@ -1,40 +1,124 @@
 
-.text {
-	margin: 15rpx 10rpx;
-	padding: 0 20rpx;
-	background-color: #ebebeb;
-	height: 70rpx;
-	line-height: 70rpx;
+page {
+	background-color: #EBEBEB;
+	/* 	height: 100%; */
+	line-height: 1.5;
+}
+.border2text {
+	color: #007AFF;
+	border-bottom-style: solid;
+	border-bottom-color: #007AFF;
+	border-bottom-width: 1rpx;
+}
+.content {
+	/* 最外层的被scroll-veiw 包裹起来的，如果要实现外面的不一起滚动，就必须设置一个合适的固定高度 */
+	/* 	height: 1100upx; */
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: start;
+	-webkit-align-items: flex-start;
+	    -ms-flex-align: start;
+	        align-items: flex-start;
 	text-align: center;
-	color: #777;
-	font-size: 26rpx;
 }
-.flex-item {
-	/* 宽度高度，文字对齐  */
-	width: 33.3%;
-	height: 200rpx;
-	text-align: center;
-	line-height: 200rpx;
+.cadlist {
+	min-height: 250rpx;
+	background-color: #FFFFFF;
+	margin-left: 10rpx;
+	margin-top: 10rpx;
+	margin-bottom: 10rpx;
+	margin-right: 10rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 }
-.flex-item-V {
-	width: 100%;
-	height: 150rpx;
-	text-align: center;
-	line-height: 150rpx;
+.toptext {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 30rpx;
+	font-size: 28rpx;
+	margin: 20rpx 20rpx 20rpx 20rpx;
+	text-align: left;
 }
-.showbottoms {
-	padding-bottom: 180rpx;
+.shenpistyle {
+	font-size: 25rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin-left: 20rpx;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }
-.notshow {
-	padding-bottom: 0rpx;
+.border3text {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	border: #777777 1rpx solid;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+	margin-top: 20rpx;
 }
-.newslist {
-	padding: 10px;
-	line-height: 60px;
-	font-size: 28px;
+.toptext1 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	width: 15%;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	font-size: 30rpx;
 }
-.loading {
-	text-align: center;
-	line-height: 80px;
+.topbar {
+	height: 60rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	margin-top: 10rpx;
 }
 

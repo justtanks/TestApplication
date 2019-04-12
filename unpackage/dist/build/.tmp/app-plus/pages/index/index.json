@@ -1,8 +1,10 @@
 {
+  "usingComponents": {},
   "navigationBarTitleText": "首页",
   "enablePullDownRefresh": true,
   "pullToRefresh": {
     "support": true,
+    "scrollIndicator": "none",
     "height": "10%",
     "range": "10%",
     "color": "#007AFF"

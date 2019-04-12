@@ -184,6 +184,10 @@
 				this.closeDrawer(this.drawmode)
 				return true  //return true 会把返回事件覆盖掉
 			}
+			if(this.showPicker){
+				this.showPicker=false
+				return true
+			}
 		},
 		onUnload() {
 			if (this.$refs.mpvuePicker.showPicker) {

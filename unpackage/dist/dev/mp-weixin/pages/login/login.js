@@ -136,6 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   data: function data() {
     return {
@@ -154,6 +155,24 @@ __webpack_require__.r(__webpack_exports__);
         // 					 uni.navigateTo({
         // 					 	url:"../normaluser/myrenwu/myrenwu"
         // 					 })
+        // 默认的通过之后 不同的人有不同的值
+        if (_this.login.phone == 1) {
+          uni.setStorage({
+            key: 'isnomaluser',
+            data: 1,
+            success: function success() {
+              console.log('1success');
+            } });
+
+        } else {
+          uni.setStorage({
+            key: 'isnomaluser',
+            data: 2,
+            success: function success() {
+              console.log('2success');
+            } });
+
+        }
         uni.switchTab({
           url: '../index/index',
 
@@ -277,19 +296,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("view", { staticClass: "uni-flex uni-row" }, [
-      _c(
-        "view",
-        {
-          staticClass: "uni-flex atcenter",
-          staticStyle: { width: "100%", height: "300rpx" }
-        },
-        [
-          _c("image", {
-            staticStyle: { width: "180rpx", height: "200rpx" },
-            attrs: { src: "../../static/wel_icon.png" }
-          })
-        ]
-      )
+      _c("view", {
+        staticClass: "uni-flex atcenter",
+        staticStyle: { width: "100%", height: "130rpx" }
+      })
     ])
   },
   function() {

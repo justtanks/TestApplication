@@ -133,11 +133,18 @@
 		<view v-else="">
 			<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;">
 				<view class="topbar">
-					<view class="toptext1 uni-list-cell-navigate uni-navigate-bottom">分类</view>
-					<view class="toptext1 uni-list-cell-navigate uni-navigate-bottom">部门</view>
-					<view class="toptext1 uni-list-cell-navigate uni-navigate-bottom">时间</view>
-					<view style="flex: 1;"></view>
-					<view style="flex: 1;"></view>
+					<view class="topbaritem">
+						<view class="toptext1 ">分类</view>
+						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+					</view>
+					<view class="topbaritem">
+						<view class="toptext1 ">部门</view>
+						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+					</view>
+					<view class="topbaritem">
+						<view class="toptext1 ">时间</view>
+						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
+					</view>
 				</view>
 				<mSearch :show='false' @search="search2($event,0)"></mSearch>
 			</view>
@@ -284,13 +291,25 @@
 				uni.getStorage({
 					key: "isnomaluser",
 					success: function(res) {
-			           _self.isnormal=res.data
+						_self.isnormal = res.data
+						//改变tab在index界面
+						//改变navitor 的文字
+						if(_self.isnormal==1){
+							uni.setNavigationBarTitle({
+								title: '审批'
+							});
+						}else{
+							uni.setNavigationBarTitle({
+								title: '积分事件'
+							});
+						}
+						
 					}
 				})
 			},
-			toshenpi:function(e){
+			toshenpi: function(e) {
 				uni.navigateTo({
-					url:'../normaluser/myshenpi/myshenpi'
+					url: '../normaluser/myshenpi/myshenpi'
 				})
 			}
 		}
@@ -359,18 +378,22 @@
 	}
 
 	.toptext1 {
-		display: flex;
-		width: 15%;
-		justify-content: center;
-		align-items: center;
 		font-size: 30upx;
+		margin-right: 10upx;
 	}
-
+	
 	.topbar {
 		height: 60upx;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		margin-top: 10upx;
+	}
+	
+	.topbaritem {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-left: 25upx;
 	}
 </style>

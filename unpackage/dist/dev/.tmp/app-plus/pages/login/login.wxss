@@ -1,5 +1,5 @@
 
-.atcenter{
+.atcenter {
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	    -ms-flex-pack: center;
@@ -9,20 +9,20 @@
 	    -ms-flex-align: center;
 	        align-items: center;
 }
-.haveborder{
+.haveborder {
 	border: #B6B6B6 solid 1rpx;
 	border-radius: 20rpx;
 }
-.outstyle{
+.outstyle {
 	margin: 30rpx 50rpx 30rpx 50rpx;
 	height: 90rpx;
 }
-.inputstyle{
+.inputstyle {
 	width: 90%;
 	height: 80%;
-	line-height: 1;
+	font-size: 35rpx;
 }
-.loginbtn ._button {
+.loginbtn button {
 	height: 88rpx;
 	width: 95%;
 	line-height: 88rpx;
@@ -35,8 +35,9 @@
 	font-family: inherit;
 	background: #007AFF;
 	opacity: 0.8;
+	margin-top: 120rpx;
 }
-._button:after {
+button:after {
 	border: 2rpx solid #f2f2f2;
 }
 .logoimg {
@@ -68,5 +69,4 @@
 	background: #fff;
 	resize: none;
 }
-
 

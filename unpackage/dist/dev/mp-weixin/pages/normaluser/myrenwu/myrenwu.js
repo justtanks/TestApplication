@@ -113,7 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 
 
 
@@ -132,36 +132,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _mxDatepicker = _interopRequireDefault(__webpack_require__(/*! ../../../components/mx-datepicker/mx-datepicker.vue */ "../../../../test/TestApplication/components/mx-datepicker/mx-datepicker.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+
+
+
+
+
 {
-  components: {
-    MxDatePicker: _mxDatepicker.default },
+  components: {},
+
 
   data: function data() {
-    return {
-      showPicker: false,
-      date: '2019/01/01',
-      time: '15:00:12',
-      datetime: '2019/01/01 15:00:12',
-      range: ['2019/01/01', '2019/01/06'],
-      rangetime: ['2019/01/08 14:00', '2019/01/16 13:59'],
-      type: 'date',
-      value: '' };
+    return {};
+
 
   },
   methods: {
-    onShowDatePicker: function onShowDatePicker(type) {//显示
-      this.type = type;
-      this.showPicker = true;
-      this.value = this[type];
-    },
-    onSelected: function onSelected(e) {//选择
-      this.showPicker = false;
-      if (e) {
-        this[this.type] = e.value;
-        console.log(e);
-      }
+    showbigimage: function showbigimage(e) {
+      // 展示大图
+      var current = e.target.dataset.src;
+      uni.previewImage({
+        current: current,
+        urls: this.imageList });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 
@@ -191,98 +186,86 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "view",
-    [
-      _c(
-        "view",
-        { staticClass: "test" },
-        [
-          _c("view", [_vm._v("日期选择 - 示例")]),
-          _vm._v(_vm._s(_vm.date)),
-          _c(
-            "button",
-            {
-              attrs: { type: "primary", eventid: "b3ea8cba-0" },
-              on: {
-                click: function($event) {
-                  _vm.onShowDatePicker("date")
-                }
-              }
-            },
-            [_vm._v("选择日期")]
-          ),
-          _vm._v(_vm._s(_vm.time)),
-          _c(
-            "button",
-            {
-              attrs: { type: "primary", eventid: "b3ea8cba-1" },
-              on: {
-                click: function($event) {
-                  _vm.onShowDatePicker("time")
-                }
-              }
-            },
-            [_vm._v("选择时间")]
-          ),
-          _vm._v(_vm._s(_vm.datetime)),
-          _c(
-            "button",
-            {
-              attrs: { type: "primary", eventid: "b3ea8cba-2" },
-              on: {
-                click: function($event) {
-                  _vm.onShowDatePicker("datetime")
-                }
-              }
-            },
-            [_vm._v("选择日期时间")]
-          ),
-          _vm._v(_vm._s(_vm.range)),
-          _c(
-            "button",
-            {
-              attrs: { type: "primary", eventid: "b3ea8cba-3" },
-              on: {
-                click: function($event) {
-                  _vm.onShowDatePicker("range")
-                }
-              }
-            },
-            [_vm._v("选择日期范围")]
-          ),
-          _vm._v(_vm._s(_vm.rangetime)),
-          _c(
-            "button",
-            {
-              attrs: { type: "primary", eventid: "b3ea8cba-4" },
-              on: {
-                click: function($event) {
-                  _vm.onShowDatePicker("rangetime")
-                }
-              }
-            },
-            [_vm._v("选择日期时间范围")]
-          )
-        ],
-        1
-      ),
-      _c("mx-date-picker", {
-        attrs: {
-          show: _vm.showPicker,
-          type: _vm.type,
-          value: _vm.value,
-          "show-seconds": true,
-          eventid: "b3ea8cba-5",
-          mpcomid: "b3ea8cba-0"
-        },
-        on: { confirm: _vm.onSelected, cancel: _vm.onSelected }
-      })
-    ],
-    1
-  )
+  return _c("view", [
+    _c(
+      "view",
+      { staticClass: "cadstyle", staticStyle: { "margin-top": "0rpx" } },
+      [
+        _c("view", { staticClass: "toptext1" }, [
+          _vm._v("这是第一个列表的改善 待审批积分录入")
+        ]),
+        _c("view", { staticClass: "toptext3" }, [
+          _vm._v("这是第一个列表的改善 待审批积分录入")
+        ]),
+        _c("view", { staticClass: "toptext3" }, [
+          _vm._v("截至时间：      是否完成：")
+        ]),
+        _c("view", { staticClass: "toptext3" }, [_vm._v("奖分：1")]),
+        _vm._m(0),
+        _vm._m(1),
+        _c(
+          "view",
+          {
+            staticStyle: {
+              display: "flex",
+              "flex-direction": "row",
+              "flex-wrap": "wrap",
+              "margin-left": "25rpx",
+              "margin-right": "25rpx"
+            }
+          },
+          _vm._l(_vm.imageList, function(image, index) {
+            return _c("view", { key: index, staticClass: "imagestyle-yulan" }, [
+              _c("image", {
+                staticStyle: { width: "100%", height: "100%" },
+                attrs: {
+                  src: image,
+                  "data-src": image,
+                  eventid: "b3ea8cba-0-" + index
+                },
+                on: { tap: _vm.showbigimage }
+              })
+            ])
+          })
+        )
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      { staticStyle: { display: "flex", "margin-top": "15rpx" } },
+      [
+        _c(
+          "view",
+          { staticClass: "shenpistyle-one", staticStyle: { color: "#666666" } },
+          [_vm._v("发布时间: 04月06日     发布人:张小孔")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      { staticStyle: { display: "flex", "margin-top": "15rpx" } },
+      [
+        _c(
+          "view",
+          { staticClass: "shenpistyle-one", staticStyle: { color: "#666666" } },
+          [_vm._v("领取人:张小孔")]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

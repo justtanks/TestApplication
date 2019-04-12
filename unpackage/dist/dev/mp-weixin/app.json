@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/normaluser/mylistitem/mylistitem",
     "pages/login/login",
     "pages/index/index",
     "pages/controlCenter/controlCenter",
@@ -14,7 +13,12 @@
     "pages/normaluser/faburenwu/faburenwu",
     "pages/normaluser/myshenpi/myshenpi",
     "pages/normaluser/seeShenqing/seeShenqing",
-    "pages/normaluser/jifenpaiming/jifenpaiming"
+    "pages/normaluser/jifenpaiming/jifenpaiming",
+    "pages/normaluser/mylistitem/mylistitem",
+    "pages/alllistpage/myrenwu/myrenwu",
+    "pages/alllistpage/myshenqing/myshenqing",
+    "pages/alllistpage/jifenshijian/jifenshijian",
+    "pages/alllistpage/changelist/changelist"
   ],
   "subPackages": [],
   "window": {

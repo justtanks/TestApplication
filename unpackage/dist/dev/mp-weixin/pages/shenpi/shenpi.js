@@ -113,7 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -155,39 +155,260 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _self;var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _mehaotianSearch = _interopRequireDefault(__webpack_require__(/*! ../../components/mehaotian-search/mehaotian-search.vue */ "../../../../test/TestApplication/components/mehaotian-search/mehaotian-search.vue"));
+var _uniLoadMore = _interopRequireDefault(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ "../../../../test/TestApplication/components/uni-load-more/uni-load-more.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _self;var _default =
 {
+  components: {
+    mSearch: _mehaotianSearch.default,
+    uniLoadMore: _uniLoadMore.default },
 
   data: function data() {
     return {
+      isnormal: 1, //是否是普通用户界面 1，不是
       isfirstbottom: true,
       issecondbottom: false,
       isthirdbottom: false,
-      items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] };
+      isfourbottom: false,
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      // 显示当前界面
+      jiemiannum: 1,
+      type: 3,
+      isluru: false,
+      // 上推加载更多的
+      status1: 'more',
+      status2: 'loading',
+      status3: 'noMore',
+      status4: 'noMore',
+      loadingText: '加载中...',
+      // loadingType: 0, //定义加载方式 0---contentdown  1---contentrefresh 2---contentnomore
+      contentText: {
+        contentdown: '上拉显示更多',
+        contentrefresh: '正在加载...',
+        contentnomore: '没有更多数据了' } };
+
 
   },
   onLoad: function onLoad() {
     _self = this;
+    this.changeTab();
   },
   onBackPress: function onBackPress() {
     // 覆盖之前的方法 return true
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    // 执行下拉刷新的方法
+    setTimeout(function () {
+      uni.stopPullDownRefresh();
+    }, 1000);
+  },
+  onReachBottom: function onReachBottom() {
+    //触底的时候请求数据，即为上拉加载更多
+    //为了更加清楚的看到效果，添加了定时器
+    console.log(_self.jiemiannum);
+    console.log(_self.status1);
+
+    switch (_self.jiemiannum) {
+      case 1:
+        _self.status1 = 'loading';
+        console.log(_self.status1);
+        break;
+      case 2:
+        _self.status2 = 'loading';
+        break;
+      case 3:
+        _self.status3 = 'loading';
+        break;
+      case 4:
+        _self.status4 = 'loading';
+        break;
+      default:
+        break;}
+
+
+
   },
   methods: {
     firstclick: function firstclick(e) {
       _self.isfirstbottom = true;
       _self.issecondbottom = false;
       _self.isthirdbottom = false;
+      _self.isfourbottom = false;
+      _self.jiemiannum = 1;
     },
     secondlick: function secondlick(e) {
       _self.isfirstbottom = false;
       _self.issecondbottom = true;
       _self.isthirdbottom = false;
+      _self.isfourbottom = false;
+      _self.jiemiannum = 2;
     },
     thirdclick: function thirdclick(e) {
       _self.isfirstbottom = false;
       _self.issecondbottom = false;
       _self.isthirdbottom = true;
+      _self.isfourbottom = false;
+      _self.jiemiannum = 3;
+    },
+    fourclick: function fourclick(e) {
+      _self.isfirstbottom = false;
+      _self.issecondbottom = false;
+      _self.isthirdbottom = false;
+      _self.isfourbottom = true;
+      _self.jiemiannum = 4;
+    },
+    search1: function search1(e, val) {
+      // 搜索的方法
+      console.log(e, val);
+    },
+    search2: function search2(e, val) {
+      // 搜索的方法
+      console.log(e, val);
+    },
+    changeTab: function changeTab() {
+      uni.getStorage({
+        key: "isnomaluser",
+        success: function success(res) {
+          _self.isnormal = res.data;
+        } });
+
+    },
+    toshenpi: function toshenpi(e) {
+      uni.navigateTo({
+        url: '../normaluser/myshenpi/myshenpi' });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 
@@ -218,117 +439,452 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("view", [
-    _c(
-      "view",
-      {
-        staticClass: "uni-flex uni-row",
-        staticStyle: { position: "fixed", "z-index": "99", width: "100%" }
-      },
-      [
-        _c(
-          "view",
-          {
-            staticClass: "topstle",
-            class: { border2text: _vm.isfirstbottom },
-            staticStyle: { flex: "1" },
-            attrs: { eventid: "56cf7b7a-0" },
-            on: { click: _vm.firstclick }
-          },
-          [_vm._v("进行中")]
-        ),
-        _c(
-          "view",
-          {
-            staticClass: "topstle",
-            class: { border2text: _vm.issecondbottom },
-            staticStyle: { flex: "1" },
-            attrs: { eventid: "56cf7b7a-1" },
-            on: { click: _vm.secondlick }
-          },
-          [_vm._v("未开始")]
-        ),
-        _c(
-          "view",
-          {
-            staticClass: "topstle",
-            class: { border2text: _vm.isthirdbottom },
-            staticStyle: { flex: "1" },
-            attrs: { eventid: "56cf7b7a-2" },
-            on: { click: _vm.thirdclick }
-          },
-          [_vm._v("已结束")]
-        )
-      ]
-    ),
-    _c("view", { staticClass: "content" }, [
-      _c(
-        "view",
-        {
-          directives: [
+    _vm.isnormal == 1
+      ? _c("view", [
+          _c(
+            "view",
             {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isfirstbottom,
-              expression: "isfirstbottom"
-            }
-          ],
-          staticStyle: { width: "100%", "margin-top": "70rpx" }
-        },
-        _vm._l(_vm.items, function(item, index) {
-          return _c("view", { key: item, staticClass: "cadlist" }, [
-            _c("view", { staticClass: "toptext" }, [
-              _vm._v(
-                "公共部分临时分，提升学历，支撑，每sssss次加分加到了什么地方呢"
-              )
-            ]),
+              staticStyle: { position: "fixed", "z-index": "99", width: "100%" }
+            },
+            [
+              _c("view", { staticClass: "uni-flex uni-row" }, [
+                _c(
+                  "view",
+                  {
+                    staticClass: "topstle",
+                    class: { border2text: _vm.isfirstbottom },
+                    staticStyle: { flex: "1" },
+                    attrs: { eventid: "56cf7b7a-0" },
+                    on: { click: _vm.firstclick }
+                  },
+                  [_vm._v("全部")]
+                ),
+                _c(
+                  "view",
+                  {
+                    staticClass: "topstle",
+                    class: { border2text: _vm.issecondbottom },
+                    staticStyle: { flex: "1" },
+                    attrs: { eventid: "56cf7b7a-1" },
+                    on: { click: _vm.secondlick }
+                  },
+                  [_vm._v("待审批")]
+                ),
+                _c(
+                  "view",
+                  {
+                    staticClass: "topstle",
+                    class: { border2text: _vm.isthirdbottom },
+                    staticStyle: { flex: "1" },
+                    attrs: { eventid: "56cf7b7a-2" },
+                    on: { click: _vm.thirdclick }
+                  },
+                  [_vm._v("已通过")]
+                ),
+                _c(
+                  "view",
+                  {
+                    staticClass: "topstle",
+                    class: { border2text: _vm.isfourbottom },
+                    staticStyle: { flex: "1" },
+                    attrs: { eventid: "56cf7b7a-3" },
+                    on: { click: _vm.fourclick }
+                  },
+                  [_vm._v("未通过")]
+                )
+              ]),
+              _c("mSearch", {
+                attrs: {
+                  show: false,
+                  eventid: "56cf7b7a-4",
+                  mpcomid: "56cf7b7a-0"
+                },
+                on: {
+                  search: function($event) {
+                    _vm.search1($event, 0)
+                  }
+                }
+              })
+            ],
+            1
+          ),
+          _c("view", { staticStyle: { height: "170rpx" } }),
+          _c("view", { staticClass: "content" }, [
             _c(
               "view",
               {
-                staticStyle: {
-                  "font-size": "20rpx",
-                  "margin-left": "20rpx",
-                  "margin-top": "0rpx",
-                  "text-align": "left"
-                }
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isfirstbottom,
+                    expression: "isfirstbottom"
+                  }
+                ],
+                staticStyle: { width: "100%" }
               },
-              [_vm._v("积分录入")]
+              [
+                _vm._l(7, function(item, index) {
+                  return _c(
+                    "view",
+                    { key: index, staticClass: "cadlist-one" },
+                    [
+                      _c("view", { staticClass: "toptext-one" }, [
+                        _vm._v("这是第一个列表的改善 待审批积分录入")
+                      ]),
+                      _c(
+                        "view",
+                        {
+                          staticStyle: {
+                            display: "flex",
+                            "flex-direction": "row",
+                            "justify-content": "space-between"
+                          }
+                        },
+                        [
+                          _c("view", { staticClass: "toptext-two" }, [
+                            _vm._v(_vm._s(_vm.isluru ? "积分录入" : "积分申请"))
+                          ]),
+                          _c("view", { staticClass: "fenshustyle" }, [
+                            _vm._v("40分")
+                          ])
+                        ]
+                      ),
+                      !_vm.isluru
+                        ? _c("view", { staticClass: "toptext-two" }, [
+                            _vm._v("申请事由：由于什么什么")
+                          ])
+                        : _vm._e(),
+                      _c(
+                        "view",
+                        {
+                          staticStyle: {
+                            display: "flex",
+                            "flex-direction": "row",
+                            "align-items": "center",
+                            "margin-top": "5rpx"
+                          }
+                        },
+                        [
+                          _c("view", { staticClass: "shenpistyle-one " }, [
+                            _vm._v("审批人:")
+                          ]),
+                          _vm.type == 1
+                            ? _c("view", { staticClass: "daishenpi" }, [
+                                _vm._v("小明  待审批")
+                              ])
+                            : _vm._e(),
+                          _vm.type == 2
+                            ? _c("view", { staticClass: "daishenpi-tongguo" }, [
+                                _vm._v("小明  通过")
+                              ])
+                            : _vm._e(),
+                          _vm.type == 3
+                            ? _c("view", { staticClass: "daishenpi-bohui" }, [
+                                _vm._v("小明  驳回")
+                              ])
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._m(0, true),
+                      _c("view", { staticClass: "buttoncontainer" }, [
+                        _c(
+                          "view",
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "buttonstyle",
+                                staticStyle: { "font-size": "25rpx" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.type == 1 ? "去审批" : "撤销")
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  )
+                }),
+                _c("uni-load-more", {
+                  attrs: {
+                    status: _vm.status1,
+                    contentText: _vm.contentText,
+                    mpcomid: "56cf7b7a-1"
+                  }
+                })
+              ],
+              2
             ),
-            _vm._m(0, true),
-            _vm._m(1, true)
+            _c(
+              "view",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.issecondbottom,
+                    expression: "issecondbottom"
+                  }
+                ],
+                staticStyle: { width: "100%" }
+              },
+              [
+                _c("view", { staticClass: "cadlist-one" }, [
+                  _c("view", { staticClass: "toptext-one" }, [
+                    _vm._v("这是第一个列表的改善 待审批积分录入")
+                  ]),
+                  _c(
+                    "view",
+                    {
+                      staticStyle: {
+                        display: "flex",
+                        "flex-direction": "row",
+                        "justify-content": "space-between"
+                      }
+                    },
+                    [
+                      _c("view", { staticClass: "toptext-two" }, [
+                        _vm._v(_vm._s(_vm.isluru ? "积分录入" : "积分申请"))
+                      ]),
+                      _c("view", { staticClass: "fenshustyle" }, [
+                        _vm._v("40分")
+                      ])
+                    ]
+                  ),
+                  !_vm.isluru
+                    ? _c("view", { staticClass: "toptext-two" }, [
+                        _vm._v("申请事由：由于什么什么")
+                      ])
+                    : _vm._e(),
+                  _vm._m(1),
+                  _vm._m(2),
+                  _c("view", { staticClass: "buttoncontainer" }, [
+                    _c(
+                      "view",
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "buttonstyle",
+                            staticStyle: { "font-size": "25rpx" },
+                            attrs: { eventid: "56cf7b7a-5" },
+                            on: {
+                              click: function($event) {
+                                _vm.toshenpi()
+                              }
+                            }
+                          },
+                          [_vm._v("去审批")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _c("uni-load-more", {
+                  attrs: {
+                    status: _vm.status2,
+                    contentText: _vm.contentText,
+                    mpcomid: "56cf7b7a-2"
+                  }
+                })
+              ],
+              1
+            ),
+            _c(
+              "view",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isthirdbottom,
+                    expression: "isthirdbottom"
+                  }
+                ],
+                staticStyle: { width: "100%" }
+              },
+              [
+                _c("view", { staticClass: "cadlist-one" }, [
+                  _c("view", { staticClass: "toptext-one" }, [
+                    _vm._v("这是第一个列表的改善 待审批积分录入")
+                  ]),
+                  _c(
+                    "view",
+                    {
+                      staticStyle: {
+                        display: "flex",
+                        "flex-direction": "row",
+                        "justify-content": "space-between"
+                      }
+                    },
+                    [
+                      _c("view", { staticClass: "toptext-two" }, [
+                        _vm._v(_vm._s(_vm.isluru ? "积分录入" : "积分申请"))
+                      ]),
+                      _c("view", { staticClass: "fenshustyle" }, [
+                        _vm._v("40分")
+                      ])
+                    ]
+                  ),
+                  !_vm.isluru
+                    ? _c("view", { staticClass: "toptext-two" }, [
+                        _vm._v("申请事由：由于什么什么")
+                      ])
+                    : _vm._e(),
+                  _vm._m(3),
+                  _vm._m(4),
+                  _c("view", { staticClass: "buttoncontainer" }, [
+                    _c(
+                      "view",
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "buttonstyle",
+                            staticStyle: { "font-size": "25rpx" }
+                          },
+                          [_vm._v("撤销")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _c("uni-load-more", {
+                  attrs: {
+                    status: _vm.status3,
+                    contentText: _vm.contentText,
+                    mpcomid: "56cf7b7a-3"
+                  }
+                })
+              ],
+              1
+            ),
+            _c(
+              "view",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isfourbottom,
+                    expression: "isfourbottom"
+                  }
+                ],
+                staticStyle: { width: "100%" }
+              },
+              [
+                _c("view", { staticClass: "cadlist-one" }, [
+                  _c("view", { staticClass: "toptext-one" }, [
+                    _vm._v("这是第一个列表的改善 待审批积分录入")
+                  ]),
+                  _c(
+                    "view",
+                    {
+                      staticStyle: {
+                        display: "flex",
+                        "flex-direction": "row",
+                        "justify-content": "space-between"
+                      }
+                    },
+                    [
+                      _c("view", { staticClass: "toptext-two" }, [
+                        _vm._v(_vm._s(_vm.isluru ? "积分录入" : "积分申请"))
+                      ]),
+                      _c("view", { staticClass: "fenshustyle" }, [
+                        _vm._v("40分")
+                      ])
+                    ]
+                  ),
+                  !_vm.isluru
+                    ? _c("view", { staticClass: "toptext-two" }, [
+                        _vm._v("申请事由：由于什么什么")
+                      ])
+                    : _vm._e(),
+                  _vm._m(5),
+                  _vm._m(6),
+                  _c("view", { staticClass: "buttoncontainer" }, [
+                    _c(
+                      "view",
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "buttonstyle",
+                            staticStyle: { "font-size": "25rpx" }
+                          },
+                          [_vm._v("撤销")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _c("uni-load-more", {
+                  attrs: {
+                    status: _vm.status4,
+                    contentText: _vm.contentText,
+                    mpcomid: "56cf7b7a-4"
+                  }
+                })
+              ],
+              1
+            )
           ])
-        })
-      ),
-      _c(
-        "view",
-        {
-          directives: [
+        ])
+      : _c("view", [
+          _c(
+            "view",
             {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.issecondbottom,
-              expression: "issecondbottom"
-            }
-          ],
-          staticStyle: { width: "100%" }
-        },
-        [_vm._v("选项卡2的内容")]
-      ),
-      _c(
-        "view",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isthirdbottom,
-              expression: "isthirdbottom"
-            }
-          ],
-          staticStyle: { width: "100%" }
-        },
-        [_vm._v("选项卡3的内容")]
-      )
-    ])
+              staticStyle: {
+                position: "fixed",
+                "z-index": "99",
+                width: "100%",
+                "background-color": "#FFFFFF"
+              }
+            },
+            [
+              _vm._m(7),
+              _c("mSearch", {
+                attrs: {
+                  show: false,
+                  eventid: "56cf7b7a-6",
+                  mpcomid: "56cf7b7a-5"
+                },
+                on: {
+                  search: function($event) {
+                    _vm.search2($event, 0)
+                  }
+                }
+              })
+            ],
+            1
+          ),
+          _c("view", { staticStyle: { height: "160rpx" } }),
+          _c("view", { staticClass: "content" }, [
+            _c(
+              "view",
+              { staticStyle: { width: "100%" } },
+              [
+                _vm._m(8),
+                _c("uni-load-more", {
+                  attrs: {
+                    status: _vm.status,
+                    contentText: _vm.contentText,
+                    mpcomid: "56cf7b7a-6"
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ])
   ])
 }
 var staticRenderFns = [
@@ -338,27 +894,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "view",
-      {
-        staticStyle: {
-          display: "flex",
-          "flex-direction": "row",
-          "align-items": "center"
-        }
-      },
+      { staticStyle: { display: "flex", "margin-top": "15rpx" } },
       [
-        _c("view", { staticClass: "shenpistyle" }, [_vm._v("审批人:")]),
-        _c(
-          "view",
-          {
-            staticStyle: {
-              border: "#CCCCCC 1rpx solid",
-              "font-size": "25rpx",
-              padding: "0rpx 5rpx 0rpx 5rpx",
-              "margin-left": "20rpx"
-            }
-          },
-          [_vm._v("小明待审批")]
-        )
+        _c("view", { staticClass: "shenpistyle-one" }, [
+          _vm._v("申请时间: 04月06日     申请人:张小孔")
+        ])
       ]
     )
   },
@@ -371,14 +911,173 @@ var staticRenderFns = [
       {
         staticStyle: {
           display: "flex",
-          "border-top": "#D9D9D9 solid 0.5rpx",
-          margin: "20rpx 20rpx 20rpx 20rpx",
-          "justify-content": "flex-end",
-          "align-items": "center"
+          "flex-direction": "row",
+          "align-items": "center",
+          "margin-top": "5rpx"
         }
       },
-      [_c("view", { staticClass: "border3text" }, [_vm._v("去审批")])]
+      [
+        _c("view", { staticClass: "shenpistyle-one " }, [_vm._v("审批人:")]),
+        _c("view", { staticClass: "daishenpi" }, [_vm._v("小明  待审批")])
+      ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      { staticStyle: { display: "flex", "margin-top": "15rpx" } },
+      [
+        _c("view", { staticClass: "shenpistyle-one " }, [
+          _vm._v("申请时间: 04月06日     申请人:张小孔")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      {
+        staticStyle: {
+          display: "flex",
+          "flex-direction": "row",
+          "align-items": "center",
+          "margin-top": "5rpx"
+        }
+      },
+      [
+        _c("view", { staticClass: "shenpistyle-one " }, [_vm._v("审批人:")]),
+        _c("view", { staticClass: "daishenpi-tongguo" }, [_vm._v("小明  通过")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      { staticStyle: { display: "flex", "margin-top": "15rpx" } },
+      [
+        _c("view", { staticClass: "shenpistyle-one " }, [
+          _vm._v("申请时间: 04月06日     申请人:张小孔")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      {
+        staticStyle: {
+          display: "flex",
+          "flex-direction": "row",
+          "align-items": "center",
+          "margin-top": "5rpx"
+        }
+      },
+      [
+        _c("view", { staticClass: "shenpistyle-one " }, [_vm._v("审批人:")]),
+        _c("view", { staticClass: "daishenpi-bohui" }, [_vm._v("小明  驳回")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "view",
+      { staticStyle: { display: "flex", "margin-top": "15rpx" } },
+      [
+        _c("view", { staticClass: "shenpistyle-one " }, [
+          _vm._v("申请时间: 04月06日     申请人:张小孔")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "topbar" }, [
+      _c(
+        "view",
+        { staticClass: "toptext1 uni-list-cell-navigate uni-navigate-bottom" },
+        [_vm._v("分类")]
+      ),
+      _c(
+        "view",
+        { staticClass: "toptext1 uni-list-cell-navigate uni-navigate-bottom" },
+        [_vm._v("部门")]
+      ),
+      _c(
+        "view",
+        { staticClass: "toptext1 uni-list-cell-navigate uni-navigate-bottom" },
+        [_vm._v("时间")]
+      ),
+      _c("view", { staticStyle: { flex: "1" } }),
+      _c("view", { staticStyle: { flex: "1" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "cadlist-one" }, [
+      _c("view", { staticClass: "toptext-one" }, [
+        _vm._v("积分事件的列表，标识现在有哪些积分事件正在发生")
+      ]),
+      _c(
+        "view",
+        {
+          staticStyle: {
+            display: "flex",
+            "flex-direction": "row",
+            "justify-content": "space-between"
+          }
+        },
+        [
+          _c("view", { staticClass: "toptext-two" }, [_vm._v("绩效分/技术部")]),
+          _c("view", { staticClass: "fenshustyle" }, [_vm._v("40分")])
+        ]
+      ),
+      _c(
+        "view",
+        {
+          staticStyle: {
+            display: "flex",
+            "flex-direction": "row",
+            "align-items": "center",
+            "margin-top": "5rpx"
+          }
+        },
+        [
+          _c("view", { staticClass: "shenpistyle-one " }, [
+            _vm._v("时间:1992-9-10")
+          ])
+        ]
+      ),
+      _c("view", { staticClass: "thingstyle" }, [
+        _c("view", { staticClass: "shenpistyle-one " }, [_vm._v("对象：小明")]),
+        _c(
+          "view",
+          {
+            staticClass: "shenpistyle-one",
+            staticStyle: { "margin-right": "20rpx" }
+          },
+          [_vm._v("操作人：小明")]
+        )
+      ])
+    ])
   }
 ]
 render._withStripped = true

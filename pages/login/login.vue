@@ -42,6 +42,7 @@
 					// 					 })
 					// 默认的通过之后 不同的人有不同的值
 					if (this.login.phone == 1) {
+	
 						uni.setStorage({
 							key: 'isnomaluser',
 							data: 1,

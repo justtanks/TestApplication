@@ -24,6 +24,7 @@
 		</view>
 		<view class="timechoise uni-list-cell-navigate uni-navigate-right" v-if="haverull" >
 			<view style="font-size: 35upx;">积分规则</view>
+			
 		</view>
 		<!-- 上传图片的按钮和操作 -->
 		<view style="min-height: 200upx;display: flex;flex-direction: row; flex-wrap: wrap;margin-left: 25upx;margin-right: 25upx;">

@@ -1,13 +1,2 @@
-
-      !(function(){
-        var uniAppViewReadyCallback = function(){
-          setCssToHead([".",[1],"content { text-align: center; height: ",[0,400],"; }\n.",[1],"logo { height: ",[0,200],"; width: ",[0,200],"; margin-top: ",[0,200],"; }\n.",[1],"title { font-size: ",[0,36],"; color: #8f8f94; }\n",],undefined,{path:"./pages/index/index.wxss"})();
+setCssToHead([".",[1],"seondrow { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; }\n.",[1],"bigfount { font-size: ",[0,50],"; font-weight: bold; line-height: 1.2; }\n.",[1],"bottomfount { color: #666666; font-size: ",[0,26],"; }\n.",[1],"secondrow-contain { margin: ",[0,20]," ",[0,25]," ",[0,0]," ",[0,25],"; border-bottom: #EBEBEB solid ",[0,1],"; padding-bottom: ",[0,20],"; }\n.",[1],"contantmargin { margin-left: ",[0,25],"; margin-right: ",[0,25],"; }\n.",[1],"chartmate { width: ",[0,50],"; height: ",[0,50],"; margin-left: ",[0,10],"; margin-right: ",[0,10],"; }\n.",[1],"qiun-charts { width: ",[0,750],"; height: ",[0,500],"; background-color: #FFFFFF; }\n.",[1],"charts { width: ",[0,750],"; height: ",[0,500],"; background-color: #FFFFFF; }\n.",[1],"gonggao { width: auto; margin: ",[0,10]," ",[0,25]," ",[0,10]," ",[0,25],"; border-top: #EBEBEB solid ",[0,1],"; border-bottom: #EBEBEB solid ",[0,1],"; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; height: ",[0,90],"; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: start; -webkit-justify-content: flex-start; -ms-flex-pack: start; justify-content: flex-start; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; }\n.",[1],"muhovercolor { background-color: #0A98D5; }\n",],undefined,{path:"./pages/index/index.wxss"})();
 document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/index/index.wxml') } }));
-        }
-        if(window.__uniAppViewReady__){
-          uniAppViewReadyCallback()
-        }else{
-          document.addEventListener('uniAppViewReady',uniAppViewReadyCallback)
-        }
-      })();
-      

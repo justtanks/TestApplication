@@ -24,8 +24,7 @@
       "concatenate": true
     },
     "splashscreen": {
-      "target": "id:1",
-      "autoclose": true,
+      "autoclose": false,
       "waiting": true,
       "delay": 0
     },
@@ -41,7 +40,7 @@
     "distribute": {
       "icons": {
         "ios": {
-          "appstore": "static/logo.png",
+          "appstore": "C:/Users/Administrator/Desktop/列表样式/icon3.png",
           "ipad": {
             "app": "unpackage/res/icons/76x76.png",
             "app@2x": "unpackage/res/icons/152x152.png",
@@ -75,9 +74,9 @@
       },
       "splashscreen": {
         "android": {
-          "hdpi": "C:/Users/Administrator/Desktop/com.android.intesys.zip/res/drawable-hdpi-v4/splash.png",
-          "xhdpi": "C:/Users/Administrator/Desktop/com.android.intesys.zip/res/drawable-xhdpi-v4/splash.png",
-          "xxhdpi": "C:/Users/Administrator/Desktop/com.android.intesys.zip/res/drawable-xxhdpi-v4/splash.png"
+          "hdpi": "",
+          "xhdpi": "",
+          "xxhdpi": ""
         }
       },
       "google": {
@@ -115,7 +114,6 @@
         }
       }
     },
-    "arguments": "{\"name\":\"\",\"path\":\"\",\"query\":\"\"}",
     "allowsInlineMediaPlayback": true,
     "safearea": {
       "background": "#ffffff",
@@ -124,7 +122,8 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "1.7.0"
+      "compilerVersion": "1.8.2",
+      "control": "webview"
     }
   }
 }

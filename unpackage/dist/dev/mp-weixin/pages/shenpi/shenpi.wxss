@@ -1,25 +1,8 @@
 
 page {
 	background-color: #EBEBEB;
-/* 	height: 100%; */
-line-height: 1.5;
-}
-.topstle {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	font-size: 30rpx;
-	height: 75rpx;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-	background-color: #FFFFFF;
+	/* 	height: 100%; */
+	line-height: 1.5;
 }
 .border2text {
 	color: #007AFF;
@@ -29,7 +12,7 @@ line-height: 1.5;
 }
 .content {
 	/* 最外层的被scroll-veiw 包裹起来的，如果要实现外面的不一起滚动，就必须设置一个合适的固定高度 */
-/* 	height: 1100upx; */
+	/* 	height: 1100upx; */
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -104,5 +87,38 @@ line-height: 1.5;
 	padding-left: 30rpx;
 	padding-right: 30rpx;
 	margin-top: 20rpx;
+}
+.toptext1 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	width: 15%;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	font-size: 30rpx;
+}
+.topbar {
+	height: 60rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	margin-top: 10rpx;
 }
 

@@ -171,4 +171,9 @@
 		height: 0;
 		color: transparent;
 	}
+	/* 导航条右指的大小 */
+	.tonextstyle{
+		width: 25upx;
+		height: 25upx;
+	}
 </style>

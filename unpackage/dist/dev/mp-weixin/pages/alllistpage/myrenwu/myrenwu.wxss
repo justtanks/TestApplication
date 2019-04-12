@@ -1,0 +1,74 @@
+
+page {
+	background-color: #EBEBEB;
+	/* 	height: 100%; */
+	line-height: 1.5;
+}
+.border2text {
+	color: #007AFF;
+	border-bottom-style: solid;
+	border-bottom-color: #007AFF;
+	border-bottom-width: 1rpx;
+}
+.cadlist {
+	min-height: 250rpx;
+	background-color: #FFFFFF;
+	margin-left: 10rpx;
+	margin-top: 10rpx;
+	margin-bottom: 10rpx;
+	margin-right: 10rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+}
+.toptext {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 30rpx;
+	font-size: 28rpx;
+	margin: 20rpx 20rpx 20rpx 20rpx;
+	text-align: left;
+}
+.shenpistyle {
+	font-size: 25rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin-left: 20rpx;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.border3text {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	border: #777777 1rpx solid;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+	margin-top: 20rpx;
+}
+

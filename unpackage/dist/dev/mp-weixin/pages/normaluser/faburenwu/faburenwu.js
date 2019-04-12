@@ -187,6 +187,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _mxDatepicker = _interopRequireDefault(__webpack_require__(/*! ../../../components/mx-datepicker/mx-datepicker.vue */ "../../../../test/TestApplication/components/mx-datepicker/mx-datepicker.vue"));
 var _util = _interopRequireDefault(__webpack_require__(/*! ../../../common/util.js */ "../../../../test/TestApplication/common/util.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 选择时间的选择
 var _default = {
@@ -304,6 +305,9 @@ var _default = {
     },
     addshenqing: function addshenqing(e) {
       // 提交任务按钮
+    },
+    close: function close(e) {
+      this.imageList.splice(e, 1);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
@@ -541,22 +545,39 @@ var render = function() {
           },
           [
             _vm._l(_vm.imageList, function(image, index) {
-              return _c("view", { key: index, staticClass: "imagestyle" }, [
-                _c("image", {
-                  staticStyle: { width: "100%", height: "100%" },
-                  attrs: {
-                    src: image,
-                    "data-src": image,
-                    eventid: "253c1c42-6-" + index
-                  },
-                  on: { tap: _vm.showbigimage }
-                })
-              ])
+              return _c(
+                "view",
+                { key: index, staticClass: "imagestyle-yulan" },
+                [
+                  _c("image", {
+                    staticStyle: { width: "100%", height: "100%" },
+                    attrs: {
+                      src: image,
+                      "data-src": image,
+                      eventid: "253c1c42-6-" + index
+                    },
+                    on: { tap: _vm.showbigimage }
+                  }),
+                  _c(
+                    "view",
+                    {
+                      staticClass: "close-view",
+                      attrs: { eventid: "253c1c42-7-" + index },
+                      on: {
+                        click: function($event) {
+                          _vm.close(index)
+                        }
+                      }
+                    },
+                    [_vm._v("x")]
+                  )
+                ]
+              )
             }),
             _c("view", { staticClass: "uni-uploader__input-box" }, [
               _c("view", {
                 staticClass: "uni-uploader__input",
-                attrs: { eventid: "253c1c42-7" },
+                attrs: { eventid: "253c1c42-8" },
                 on: { tap: _vm.addimage }
               })
             ])
@@ -578,7 +599,7 @@ var render = function() {
             "button",
             {
               staticClass: "buttonstyle",
-              attrs: { "hover-class": "muhovercolor", eventid: "253c1c42-8" },
+              attrs: { "hover-class": "muhovercolor", eventid: "253c1c42-9" },
               on: { tap: _vm.addshenqing }
             },
             [_vm._v("提交任务")]
@@ -592,7 +613,7 @@ var render = function() {
           type: _vm.type,
           value: _vm.value,
           "show-seconds": true,
-          eventid: "253c1c42-9",
+          eventid: "253c1c42-10",
           mpcomid: "253c1c42-0"
         },
         on: { confirm: _vm.onSelected, cancel: _vm.onSelected }

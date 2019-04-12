@@ -1,0 +1,12 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "积分事件",
+  "enablePullDownRefresh": true,
+  "pullToRefresh": {
+    "support": true,
+    "scrollIndicator": "none",
+    "height": "10%",
+    "range": "10%",
+    "color": "#007AFF"
+  }
+}

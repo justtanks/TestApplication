@@ -64,23 +64,11 @@ page{
 	        align-items: center;
     margin:20rpx 0rpx;
 }
-.imagestyle{
-	width: 190rpx;
-	height: 190rpx;
-   margin:20rpx 20rpx;
-}
 .textnum{
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;-webkit-box-orient: horizontal;-webkit-box-direction: normal;-webkit-flex-direction: row;-ms-flex-direction: row;flex-direction: row; -webkit-box-pack: end; -webkit-justify-content: flex-end; -ms-flex-pack: end; justify-content: flex-end;margin-right: 25rpx;color: #CCCCCC;
 }
-.buttonstyle{
-	background-color: #007AFF;color: #FFFFFF;font-size: 36rpx;
-}
-.buttonstyle:active{
-	background-color:#1E90FF;
-}
-
 
 

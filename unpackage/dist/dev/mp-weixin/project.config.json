@@ -9,7 +9,7 @@
   "compileType": "miniprogram",
   "libVersion": "",
   "appid": "touristappid",
-  "projectname": "配置",
+  "projectname": "积分管理",
   "condition": {
     "search": {
       "current": -1,
