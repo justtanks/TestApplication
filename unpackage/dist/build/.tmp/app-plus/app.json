@@ -18,7 +18,8 @@
     "pages/alllistpage/myrenwu/myrenwu",
     "pages/alllistpage/myshenqing/myshenqing",
     "pages/alllistpage/jifenshijian/jifenshijian",
-    "pages/alllistpage/changelist/changelist"
+    "pages/alllistpage/changelist/changelist",
+    "pages/alllistpage/messageList/messageList"
   ],
   "subPackages": [],
   "window": {
@@ -64,6 +65,6 @@
     "alwaysShowBeforeRender": false,
     "autoclose": true
   },
-  "appname": "配置",
+  "appname": "积分管理",
   "compilerVersion": "1.8.2"
 }
