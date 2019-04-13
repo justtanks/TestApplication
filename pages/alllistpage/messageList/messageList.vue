@@ -7,28 +7,16 @@
 		<view style="height:100upx ;"></view>
 		<view>
 			<view style="width: 100%;">
-				<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
-				<!-- 所有的任务 -->
-				<view class="cadlist-one">
-					<view class="toptext-one">积分事件的列表，标识现在有哪些积分事件正在发生</view>
-					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">绩效分/技术部</view>
-						<view class="fenshustyle">40分</view>
-					</view>
-
-					<!-- <view class="toptext-two">备注:由于什么什么 </view> -->
+				<view class="cadlist">
+					<view class="toptext-one">公告的列表，标识现在有哪些积分事件正在发生</view>
+					<view class="toptext-two">由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 时间:1992-9-10</view>
-					</view>
-					<view class="thingstyle">
-						<view class="shenpistyle-one ">对象：小明</view>
-						<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：小明</view>
+						<view class="shenpistyle-one "> 发布时间:1992-9-10</view>
 					</view>
 				</view>
 				<uni-load-more :status="status" :contentText="contentText"></uni-load-more>
 			</view>
 		</view>
-		<!-- </scroll-view> -->
 	</view>
 </template>
 
@@ -48,7 +36,7 @@
 				status: 'nomore',
 				loadingText: '加载中...',
 				contentText: {
-					contentdown: '上拉显示更多',
+					contentdown: '↑上拉显示更多',
 					contentrefresh: '正在加载...',
 					contentnomore: '没有更多数据了'
 				}
@@ -56,7 +44,7 @@
 		},
 		onLoad: function() {
 			_self = this;
-			
+
 		},
 		onBackPress: function() {
 			// 覆盖之前的方法 return true
@@ -86,15 +74,16 @@
 		/* 	height: 100%; */
 		line-height: 1.5;
 	}
+
 	.cadlist {
 		min-height: 250upx;
 		background-color: #FFFFFF;
-		margin-left: 10upx;
 		margin-top: 10upx;
 		margin-bottom: 10upx;
-		margin-right: 10upx;
 		display: flex;
 		flex-direction: column;
+		padding-left: 40upx;
+		padding-right: 40upx;
 	}
 
 	.toptext {

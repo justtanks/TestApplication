@@ -66,9 +66,8 @@
 				
 			},
 			mJifenguize: function(e) {
-				uni.showToast({
-					duration: 500,
-					title: '规则'
+				uni.navigateTo({
+					url:'../alllistpage/changelist/changelist'
 				})
 			},
 			mJifenluru: function(e) {

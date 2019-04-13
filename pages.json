@@ -169,7 +169,19 @@
         }
         ,{
             "path" : "pages/alllistpage/changelist/changelist",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"积分规则",
+				"enablePullDownRefresh":true,
+				"app-plus":{
+					"pullToRefresh":{
+						"support":true,
+						"scrollIndicator":"none",
+						"height":"10%",
+						"range":"10%",
+						"color":"#007AFF"
+					}
+				}
+			}
         }
         ,{
             "path" : "pages/alllistpage/messageList/messageList",

@@ -69,7 +69,7 @@
 				status: 'more',
 				loadingText: '加载中...',
 				contentText: {
-					contentdown: '上拉显示更多',
+					contentdown: '↑上拉显示更多',
 					contentrefresh: '正在加载...',
 					contentnomore: '没有更多数据了'
 				}

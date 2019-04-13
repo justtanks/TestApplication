@@ -120,7 +120,7 @@
 				loadingText: '加载中...',
 				// loadingType: 0, //定义加载方式 0---contentdown  1---contentrefresh 2---contentnomore
 				contentText: {
-					contentdown: '上拉显示更多',
+					contentdown: '↑上拉显示更多',
 					contentrefresh: '正在加载...',
 					contentnomore: '没有更多数据了'
 				}
