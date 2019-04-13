@@ -1,7 +1,7 @@
 <!-- 管理中心 -->
 <template>
 	<view>
-		<view class="uni-flex uni-row controlcenter-row" style="margin-top: 70upx; flex-wrap: wrap;">
+		<view class="uni-flex uni-row controlcenter-row" style="margin-top: 60upx; flex-wrap: wrap;">
 			<view class="controlbox" @click="mJifen()" hover-class="uni-list-cell-hover">
 				<image src="../../static/jifenlogo.png" class="controlimage"></image>
 				<view class="control-text">我的列表</view>
@@ -120,8 +120,8 @@
 
 <style>
 	.controlimage {
-		width: 80upx;
-		height: 80upx;
+		width: 85upx;
+		height: 85upx;
 		padding-top: 20upx;
 	}
 
@@ -134,7 +134,7 @@
 	}
 
 	.control-text {
-		font-size: 27upx;
+		font-size: 30upx;
 		padding-bottom: 20upx;
 		line-height: 1.8;
 	}
