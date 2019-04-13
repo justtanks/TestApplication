@@ -89,12 +89,6 @@
 			},
 			baritemclick: function(e) {
 				//点击导航条之后跳转到相应的目录
-				// 				if (e === this.barlist.length - 1) {
-				// 					return
-				// 				}
-				// 				this.formdata = this.huanchong[e]
-				// 				this.barlist = this.barlist.slice(0, e + 1)
-				// 				this.formdata = this.formdata.slice(0, e + 1)
 			},
 
 		},

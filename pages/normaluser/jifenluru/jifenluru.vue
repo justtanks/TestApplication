@@ -91,11 +91,8 @@
 			</view>
 
 		</uni-drawer>
-
-
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
-		<mpvue-picker :themeColor="themeColor" ref="mpvuePicker" :mode="mode" :deepLength="deepLength" :pickerValueDefault="pickerValueDefault"
-		 @onConfirm="onConfirm" @onCancel="onCancel" :pickerValueArray="pickerValueArray"></mpvue-picker>
+		
 	</view>
 </template>
 
@@ -104,11 +101,8 @@
 	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../../common/util.js'
 	// 添加上推的列表选择
-	import mpvuePicker from '../../../components/mpvue-picker/mpvuePicker.vue';
 	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
 	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
-	import cityData from '../../../common/city.data.js';
-
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import mydata from "../../../common/mydata.js"
 
@@ -116,7 +110,6 @@
 	export default {
 		components: {
 			MxDatePicker,
-			mpvuePicker,
 			mSearch,
 			uniDrawer,
 			uniLoadMore
@@ -134,15 +127,7 @@
 				date: '2019/01/01',
 				type: 'date',
 				value: '',
-				// 选择规则需要的列表 上推列表使用的
-				pickerSingleArray: [],
-				mulLinkageTwoPicker: cityData,
-				cityPickerValueDefault: [0, 0, 1],
-				themeColor: '#007AFF',
-				pickerText: '',
-				mode: '',
-				deepLength: 1,
-				pickerValueDefault: [0],
+				
 
 
 				// 模仿的数据
@@ -174,7 +159,7 @@
 				this.showPicker = true;
 				this.value = this[type];
 			},
-			onSelected(e) { //选择picker 也就是选择city之后
+			onSelected(e) { //选择时间的picker
 				this.showPicker = false;
 				if (e) {
 					this[this.type] = e.value;
@@ -193,16 +178,7 @@
 
 				}
 			},
-			onCancel(e) {
-				// picker点击取消键
-				console.log(e.name)
-			},
-			onConfirm(e) {
-				// picker 点击确定键
-				this.pickerText = JSON.stringify(e)
-				console.log(JSON.stringify(e))
-			},
-
+			
 			search(e, val) {
 				// 搜索的方法
 				console.log(e, val);
@@ -265,10 +241,7 @@
 			
 		},
 		onUnload() {
-			if (this.$refs.mpvuePicker.showPicker) {
-				this.$refs.mpvuePicker.pickerCancel()
-			}
-
+		
 		},
 		onShow:function(){
 			// 初始将缓冲的规则里面添加最初的一个
