@@ -11,14 +11,14 @@
 				</view>
 			</view>
 			<!-- 任务标题 -->
-			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 30upx;"
+			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 35upx;"
 			 show-confirm-bar="true" auto-height="true" placeholder="任务标题" placeholder-style="color:#CCCCCC" maxlength="30"
 			 v-model="inputresean" @input="inputholder" />
 			<view style="border-bottom: #F1F1F3 solid 0.5upx;">
 			<view class="textnum">{{textnum}}</view>
 			</view>
 			<!-- 任务备注 -->
-			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 30upx;"
+			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 35upx;"
 			 show-confirm-bar="true" auto-height="true" placeholder="任务备注(选填)" placeholder-style="color:#CCCCCC" maxlength="30" v-model="beizhusean" @input="inputholder2" />
 			 <view style="border-bottom: #F1F1F3 solid 0.5upx;">
 			<view class="textnum">{{beizhunum}}</view>
@@ -216,7 +216,7 @@
 	}
 	.placeholdderclass
 	{
-		font-size: 30upx;
+		font-size: 35upx;
 		align-items: center;
 		 line-height: 1;
 	}
