@@ -209,6 +209,10 @@
 		  	this.$refs.mpvuePicker.pickerCancel();
 		    return true;
 		  }
+		  if (this.showPicker) {
+		  	this.showPicker = false
+		  	return true
+		  }
 		},
 		onUnload() {
 				if (this.$refs.mpvuePicker.showPicker) {

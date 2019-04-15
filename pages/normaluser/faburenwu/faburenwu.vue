@@ -194,6 +194,12 @@
 			 close(e){
 			    this.imageList.splice(e,1);
 			},
+		},
+		onBackPress:function(){
+			if (this.showPicker) {
+				this.showPicker = false
+				return true
+			}
 		}
 	}
 </script>
