@@ -27,11 +27,11 @@
 						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 							<view class="shenpistyle-one "> 审批人:</view>
 							<!-- 实现三种样式的方式 -->
-							<view class="daishenpi" v-if="type==1">
+							<view class="daishenpi" v-if="loadtype==1">
 								小明&nbsp;&nbsp;待审批</view>
-							<view class="daishenpi-tongguo" v-if="type==2">
+							<view class="daishenpi-tongguo" v-if="loadtype==2">
 								小明&nbsp;&nbsp;通过</view>
-							<view class="daishenpi-bohui" v-if="type==3">
+							<view class="daishenpi-bohui" v-if="loadtype==3">
 								小明&nbsp;&nbsp;驳回</view>
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
@@ -40,7 +40,7 @@
 
 						<view class="buttoncontainer">
 							<view>
-								<button style="font-size: 25upx;" class="buttonstyle">{{type==1?'去审批':'撤销'}}</button>
+								<button style="font-size: 25upx;" class="buttonstyle">{{loadtype==1?'去审批':'撤销'}}</button>
 							</view>
 						</view>
 					</view>
@@ -133,15 +133,15 @@
 		<view v-else="">
 			<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;">
 				<view class="topbar">
-					<view class="topbaritem">
+					<view class="topbaritem" @click="fenlei">
 						<view class="toptext1 ">分类</view>
 						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 					</view>
-					<view class="topbaritem">
+					<view class="topbaritem" @click="bumen">
 						<view class="toptext1 ">部门</view>
 						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 					</view>
-					<view class="topbaritem">
+					<view class="topbaritem" @click="shijian('date')">
 						<view class="toptext1 ">时间</view>
 						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 					</view>
@@ -173,6 +173,8 @@
 				</view>
 			</view>
 		</view>
+		
+		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 	</view>
 </template>
 
@@ -180,10 +182,14 @@
 	var _self;
 	import mSearch from '../../components/mehaotian-search/mehaotian-search.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
+	import MxDatePicker from '../../components/mx-datepicker/mx-datepicker.vue'
+	import dateutll from '../../common/util.js'
+	
 	export default {
 		components: {
 			mSearch,
-			uniLoadMore
+			uniLoadMore,
+			MxDatePicker
 		},
 		data() {
 			return {
@@ -195,7 +201,7 @@
 				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				// 显示当前界面
 				jiemiannum: 1,
-				type: 3,
+				loadtype: 3,
 				isluru: false,
 				// 上推加载更多的
 				status1: 'more',
@@ -208,15 +214,28 @@
 					contentdown: '上拉显示更多',
 					contentrefresh: '正在加载...',
 					contentnomore: '没有更多数据了'
-				}
+				},
+				// 时间控件的加载
+				showPicker: false,
+				date: '2019/01/01',
+				type: 'date',
+				value: '',
+				
 			};
 		},
 		onLoad: function() {
 			_self = this;
 			this.changeTab()
 		},
+		onReady() {
+			this.date = dateutll.dateUtils.getNowFormatDate()
+		},
 		onBackPress: function() {
-			// 覆盖之前的方法 return true
+		// 覆盖之前的方法 return true
+		if (this.showPicker) {
+			this.showPicker = false
+			return true
+		}
 		},
 		onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
@@ -311,7 +330,36 @@
 				uni.navigateTo({
 					url: '../normaluser/myshenpi/myshenpi'
 				})
+			},
+			fenlei: function(e) {
+				uni.showActionSheet({
+					itemList: ['列表1', '列表2', '列表3'],
+					success: function(res) {
+			
+					}
+				})
+			},
+			shijian: function(type) {
+				//弹出时间的选择框
+				this.type = type;
+				this.showPicker = true;
+				this.value = this[type];
+			},
+			onSelected(e) { //选择时间的picker
+				this.showPicker = false;
+				if (e) {
+					this[this.type] = e.value;
+				}
+			},
+			bumen: function(e) {
+				uni.showActionSheet({
+					itemList: ['部门1', '部门2', '部门3'],
+					success: function(res) {
+			
+					}
+				})
 			}
+			
 		}
 	}
 </script>

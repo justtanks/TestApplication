@@ -3,15 +3,15 @@
 	<view>
 		<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;">
 			<view class="topbar">
-				<view class="topbaritem">
+				<view class="topbaritem" @click="fenlei">
 					<view class="toptext1 ">分类</view>
 					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 				</view>
-				<view class="topbaritem">
+				<view class="topbaritem" @click="bumen">
 					<view class="toptext1 ">部门</view>
 					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 				</view>
-				<view class="topbaritem">
+				<view class="topbaritem" @click="shijian('date')">
 					<view class="toptext1 ">时间</view>
 					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 				</view>
@@ -50,6 +50,7 @@
 			</view>
 		</view>
 		<!-- </scroll-view> -->
+		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 	</view>
 </template>
 
@@ -57,10 +58,13 @@
 	var _self;
 	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
+	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
+	import dateutll from '../../../common/util.js'
 	export default {
 		components: {
 			mSearch,
-			uniLoadMore
+			uniLoadMore,
+			MxDatePicker
 		},
 		data() {
 			return {
@@ -72,15 +76,27 @@
 					contentdown: '↑上拉显示更多',
 					contentrefresh: '正在加载...',
 					contentnomore: '没有更多数据了'
-				}
+				},
+				// 时间选择器需要的数据
+				showPicker: false,
+				date: '2019/01/01',
+				type: 'date',
+				value: '',
 			};
 		},
 		onLoad: function() {
 			_self = this;
 
 		},
+		onReady() {
+			this.date = dateutll.dateUtils.getNowFormatDate()
+		},
 		onBackPress: function() {
 			// 覆盖之前的方法 return true
+			if (this.showPicker) {
+				this.showPicker = false
+				return true
+			}
 		},
 		onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
@@ -96,7 +112,36 @@
 			search(e, val) {
 				// 搜索的方法
 				console.log(e, val);
+			},
+			fenlei: function(e) {
+				uni.showActionSheet({
+					itemList: ['列表1', '列表2', '列表3'],
+					success: function(res) {
+
+					}
+				})
+			},
+			shijian: function(type) {
+				//弹出时间的选择框
+				this.type = type;
+				this.showPicker = true;
+				this.value = this[type];
+			},
+			onSelected(e) { //选择时间的picker
+				this.showPicker = false;
+				if (e) {
+					this[this.type] = e.value;
+				}
+			},
+			bumen: function(e) {
+				uni.showActionSheet({
+					itemList: ['部门1', '部门2', '部门3'],
+					success: function(res) {
+
+					}
+				})
 			}
+
 		}
 	}
 </script>
