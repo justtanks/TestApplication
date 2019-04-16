@@ -14,7 +14,7 @@
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choiseRull('left')">
 				<view style="font-size: 35upx;">选择规则</view>
 			</view>
-			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choiseperson">
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="dijiaoshenpi('left')">
 				<view style="font-size: 35upx;">递交审批</view>
 				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">选填</view>
 			</view>
@@ -60,8 +60,44 @@
 			</view>
 
 		</uni-drawer>
+		
+		<!-- 递交审批选择人员的drawer -->
+		<uni-drawer :visible="showLeft3" :mode="drawmode" @close="closeDrawer('left')">
+			<!--  -->
+			<view class="pupustyle">
+				<view class="topcontent">
+					<view class="topstyle">
+						<view class="topstyle_choise" style="justify-content: flex-start;margin-left: 25upx;">取消</view>
+						<view class="topstyle_choise" style="font-size: 33upx;">选择员工</view>
+						<view class="topstyle_choise" style="justify-content: flex-end;margin-right: 25upx;" @click="showpup">完成</view>
+					</view>
+					<mSearch :show='false' @search="search($event,0)"></mSearch>
+				</view>
+		
+				<view style="height: 180upx;"></view>
+				<scroll-view style="height: 1020upx;" scroll-y="true">
+					<checkbox-group @change="checkboxChange">
+						<label class="listitem" v-for="(item,index) in 30" :key='index'>
+							<view>
+								<checkbox :value="helo" :checked="false" color="#007AFF" />
+							</view>
+							<view style="margin-left: 25upx;">
+								<image src="../../../static/head_default.png" style="width: 75upx;height: 75upx;margin-right: 20upx;"></image>
+							</view>
+							<view style="margin-left: 30upx;">小明</view>
+						</label>
+		
+					</checkbox-group>
+				</scroll-view>
+				<!-- 	<view class="buttonstyle popubottonbutton" @tap="popudown">
+					确定
+				</view> -->
+			</view>
+		
+		</uni-drawer>
+		
 
-		<!-- 选择人员的drawer -->
+		<!-- 选择规则的drawer -->
 		<uni-drawer :visible="showLeft1" :mode="drawmode" @close="closeDrawer2('left')">
 			<!--  -->
 			<view class="pupustyle_two">
@@ -136,6 +172,9 @@
 				itemdata: {},
 				huanchong: [], // 建立缓冲的一个规则数组，通过数组最后一个来实现返回
 				barlist: [], //建立一个导航条的文字的缓冲的数组
+				
+				// 递交审批
+				showLeft3:false
 			};
 		},
 		onReady() {
@@ -151,6 +190,15 @@
 				} else {
 					this.showRigth = true
 					this.drawmode = 'right'
+				}
+			},
+			dijiaoshenpi:function(e){
+				if (e === 'left') {
+					this.showLeft3 = true
+					this.drawmode = 'left'
+				
+				} else {
+					 
 				}
 			},
 			choisetime: function(type) {
@@ -224,6 +272,14 @@
 			}
 			if (this.showPicker) {
 				this.showPicker = false
+				return true
+			}
+			if(this.showLeft){
+				this.showLeft=false
+				return true
+			}
+			if(this.showLeft3){
+				this.showLeft3=false
 				return true
 			}
 			// 关闭第二个抽屉，也就是规则的抽屉
@@ -319,62 +375,4 @@
 		border-bottom: #EBEBEB solid 0.5upx;
 	}
 
-	/* 选择规则的样式 */
-	.cadlist {
-		min-height: 90upx;
-		background-color: #FFFFFF;
-		margin-top: 1upx;
-		display: flex;
-		flex-direction: row;
-		padding-left: 40upx;
-		padding-right: 35upx;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.cadlist:active {
-		background-color: #EBEBEB;
-	}
-
-	.toptext {
-		display: flex;
-		min-height: 30upx;
-		font-size: 28upx;
-		margin: 20upx 20upx 20upx 20upx;
-		text-align: left;
-	}
-
-	.shenpistyle {
-		font-size: 25upx;
-		display: flex;
-		margin-left: 20upx;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.border3text {
-		display: flex;
-		border: #777777 1upx solid;
-		justify-content: center;
-		align-items: center;
-		padding-left: 30upx;
-		padding-right: 30upx;
-		margin-top: 20upx;
-	}
-
-	.navtextstyle {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		margin-left: 10upx;
-		flex-wrap: nowrap;
-	}
-	.pupustyle_two{
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		background-color:#EBEBEB ;
-		
-	}
 </style>

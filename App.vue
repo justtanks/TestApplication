@@ -176,4 +176,62 @@
 		width: 25upx;
 		height: 25upx;
 	}
+	/* 选择规则的样式  所有选择规则的界面样式都是这个*/
+	.cadlist {
+		min-height: 90upx;
+		background-color: #FFFFFF;
+		margin-top: 1upx;
+		display: flex;
+		flex-direction: row;
+		padding-left: 40upx;
+		padding-right: 35upx;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.cadlist:active {
+		background-color: #EBEBEB;
+	}
+	
+	.toptext {
+		display: flex;
+		min-height: 30upx;
+		font-size: 28upx;
+		margin: 20upx 20upx 20upx 20upx;
+		text-align: left;
+	}
+	
+	.shenpistyle {
+		font-size: 25upx;
+		display: flex;
+		margin-left: 20upx;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.border3text {
+		display: flex;
+		border: #777777 1upx solid;
+		justify-content: center;
+		align-items: center;
+		padding-left: 30upx;
+		padding-right: 30upx;
+		margin-top: 20upx;
+	}
+	
+	.navtextstyle {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin-left: 10upx;
+		flex-wrap: nowrap;
+	}
+	.pupustyle_two{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		background-color:#EBEBEB ;
+		
+	}
 </style>

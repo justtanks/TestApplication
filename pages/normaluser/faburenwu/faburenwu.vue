@@ -44,7 +44,7 @@
 		 	    </view>
 			
 			<!-- 选择负责人 -->
-			<view class="timechoise uni-list-cell-navigate uni-navigate-right">
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="show1('left')" >
 				<view style="font-size: 35upx;">负责人</view>
 			</view>
 			<!-- 添加图片 -->
@@ -67,6 +67,39 @@
 		<view style="height: 60upx;width: auto;margin: 20upx 45upx 120upx 45upx;" >
 			<button class="buttonstyle" hover-class="muhovercolor" @tap="addshenqing" >提交任务</button>
 		</view>
+		<!-- 选择人员的drawer -->
+		<uni-drawer :visible="showLeft" :mode="drawmode" @close="closeDrawer('left')">
+			<!--  -->
+			<view class="pupustyle">
+				<view class="topcontent">
+					<view class="topstyle">
+						<view class="topstyle_choise" style="justify-content: flex-start;margin-left: 25upx;">取消</view>
+						<view class="topstyle_choise" style="font-size: 33upx;">选择员工</view>
+						<view class="topstyle_choise" style="justify-content: flex-end;margin-right: 25upx;" @click="showpup">完成</view>
+					</view>
+					<mSearch :show='false' @search="search($event,0)"></mSearch>
+				</view>
+		
+				<view style="height: 180upx;"></view>
+				<scroll-view style="height: 1020upx;" scroll-y="true">
+					<checkbox-group @change="checkboxChange">
+						<label class="listitem" v-for="(item,index) in 30" :key='index'>
+							<view>
+								<checkbox :value="helo" :checked="false" color="#007AFF" />
+							</view>
+							<view style="margin-left: 25upx;">
+								<image src="../../../static/head_default.png" style="width: 75upx;height: 75upx;margin-right: 20upx;"></image>
+							</view>
+							<view style="margin-left: 30upx;">小明</view>
+						</label>
+		
+					</checkbox-group>
+				</scroll-view>
+				<!-- 	<view class="buttonstyle popubottonbutton" @tap="popudown">
+					确定
+				</view> -->
+			</view>
+		</uni-drawer>
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 	</view>
 </template>
@@ -75,10 +108,17 @@
 // 选择时间的选择
 	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
     import dateutll from '../../../common/util.js'
+	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
+	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
+	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	export default {
 		
 	components: {
-		MxDatePicker
+		MxDatePicker,
+			mSearch,
+		uniDrawer,
+		uniLoadMore
+		
 	},
 	data() {
 			return {
@@ -103,7 +143,12 @@
 				count: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 				base64:'',
 				// 分配周期
-				renwuzhouqi:'每天'
+				renwuzhouqi:'每天',
+				
+				// 选择负责人
+				showLeft: false,
+				showRigth: false,
+				drawmode: 'right',
 				
 			};
 		},
@@ -194,10 +239,38 @@
 			 close(e){
 			    this.imageList.splice(e,1);
 			},
+			// 选择人员的弹层的方法
+			show1(e) {
+				//展示第三个弹窗  选择人员
+				if (e === 'left') {
+					this.showLeft = true
+					this.drawmode = 'left'
+			
+				} else {
+					this.showRigth = true
+					this.drawmode = 'right'
+				}
+			},
+			search(e, val) {
+				// 搜索的方法
+				console.log(e, val);
+			},
+			closeDrawer(e) {  //关闭第一个drawer
+				if (e === 'left') {
+					this.showLeft = false
+				} else {
+					this.showRigth = false
+				}
+			},
+			
 		},
 		onBackPress:function(){
 			if (this.showPicker) {
 				this.showPicker = false
+				return true
+			}
+			if(this.showLeft){
+				this.showLeft=false
 				return true
 			}
 		}
@@ -244,5 +317,44 @@
 	}
 	.textnum{
 		display: flex;flex-direction: row; justify-content: flex-end;margin-right: 25upx;color: #CCCCCC;
+	}
+	/* 选择人员的pop的样式 */
+	.pupustyle {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.topcontent {
+		width: 100%;
+		position: fixed;
+		z-index: 999999;
+		min-height: 180;
+		display: flex;
+		flex-direction: column;
+		background-color: #FFFFFF;
+		border-bottom: #EBEBEB solid 1upx;
+	}
+	.topstyle {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		min-height: 80upx;
+	}
+	
+	.topstyle_choise {
+		flex: 1;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.listitem {
+		height: 100upx;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-left: 25upx;
+		margin-right: 25upx;
+		border-bottom: #EBEBEB solid 0.5upx;
 	}
 </style>
