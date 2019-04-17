@@ -10,7 +10,12 @@
 		<view style="height: 100upx;"></view>
 		<!-- 列表 -->
 		<view class="listitem" v-for="(item,index) in 30" :key='index'>
-			<view class="paimingnum">1</view>
+			<view class="paimingcontain">
+				<image class="paimingimage" v-if="index==0" src="../../../static/first.png"></image>
+				<image class="paimingimage" v-else-if="index==1" src="../../../static/second.png"></image>
+				<image class="paimingimage" v-else-if="index==2" src="../../../static/third.png"></image>
+				<view class="paimingnum" v-else="">{{index+1}}</view>
+			</view>
 			<view class='paiminimg'>
 				<image src="../../../static/head_default.png" style="width: 75upx;height: 75upx;margin-right: 20upx;"></image>
 			</view>
@@ -233,10 +238,6 @@
 	}
 
 	.paimingnum {
-		flex: 1;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
 		font-size: 32upx;
 	}
 
@@ -306,5 +307,17 @@
 	.popbutton_choise {
 		background: #007AFF;
 		color: #FFFFFF;
+	}
+
+	.paimingimage {
+		width: 40upx;
+		height: 40upx;
+		
+	}
+	.paimingcontain{
+	    flex: 1;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
 	}
 </style>
