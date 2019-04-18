@@ -81,6 +81,9 @@
 			},
 			changepass:function(){
 				//修改密码
+				uni.navigateTo({
+					url:"../normaluser/changepassword/changepassword"
+				})
 			},
 			quit:function(){
 				//退出账号
@@ -141,4 +144,5 @@
 		justify-content: space-between;
 		align-items: center;
 	}
+	
 </style>

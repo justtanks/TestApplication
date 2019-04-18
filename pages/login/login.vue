@@ -3,7 +3,7 @@
 		<view class="uni-flex uni-row">
 			<view class="uni-flex atcenter" style="width: 100%; height: 130upx;">
 				<!-- <image style="width: 180upx; height: 200upx;" src="../../static/wel_icon.png"></image> -->
-				 
+
 			</view>
 		</view>
 		<view class="uni-flex atcenter haveborder outstyle">
@@ -12,10 +12,10 @@
 		<view class="uni-flex atcenter haveborder outstyle">
 			<input class="inputstyle" placeholder="请输入密码" adjust-position="true" password="true" v-model="login.password" />
 		</view>
-		<view class="loginbtn atcenter uni-flex ">
-			<button :loading="login.loading" @tap="defaultHandlerLogin">{{login.loading?'登陆中..':'登录'}}</button>
+		<view class="atcenter uni-flex ">
+			<button :loading="login.loading" @tap="defaultHandlerLogin" class="buttonstyle buttonstylelogin">{{login.loading?'登陆中..':'登录'}}</button>
 		</view>
-		<view class="uni-flex" style="justify-content: flex-end;">
+		<view class="uni-flex" style="justify-content: flex-end;margin-top: 50upx;">
 			<text style="color: #666666;margin-right: 60upx;font-size: 30upx;">忘记密码</text>
 		</view>
 	</view>
@@ -42,7 +42,7 @@
 					// 					 })
 					// 默认的通过之后 不同的人有不同的值
 					if (this.login.phone == 1) {
-	
+
 						uni.setStorage({
 							key: 'isnomaluser',
 							data: 1,
@@ -91,13 +91,19 @@
 		height: 90upx;
 	}
 
+	.buttonstylelogin {
+		font-size: 35upx;
+		width: 89%;
+		margin-top: 130upx;
+	}
+
 	.inputstyle {
 		width: 90%;
 		height: 80%;
 		font-size: 35upx;
 	}
 
-	.loginbtn button {
+	/* .loginbtn button {
 		height: 88rpx;
 		width: 95%;
 		line-height: 88rpx;
@@ -116,31 +122,10 @@
 	button:after {
 		border: 2rpx solid #f2f2f2;
 	}
-
-	.logoimg {
+ */
+/* 	.logoimg {
 		width: 200rpx;
 		height: 200rpx;
 		border-radius: 50%;
-	}
-
-	.is-input1 {
-		height: 88rpx;
-		width: 100%;
-		line-height: 88rpx;
-		padding: 12rpx;
-		color: #353535;
-		font-size: 32rpx;
-		box-sizing: border-box;
-		appearance: none;
-		border: 2rpx solid #e5e5e5;
-		box-shadow: none;
-		border-radius: 44rpx;
-		outline: 0;
-		display: block;
-		padding-left: 30rpx;
-		margin: 0;
-		font-family: inherit;
-		background: #fff;
-		resize: none;
-	}
+	} */
 </style>
