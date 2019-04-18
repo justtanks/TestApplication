@@ -37,12 +37,12 @@
 		<!-- 展示图标 标识 -->
 		<view class="uni-flex uni-row contantmargin" style="justify-content: space-between;align-items: center; height: 70upx;">
 			<view style="font-weight: bold;font-size: 25upx;margin-left: 20upx;">积分趋势</view>
-			<view class="uni-flex uni-row" style="align-items: center;">
+			<!-- <view class="uni-flex uni-row" style="align-items: center;">
 				<image src="../../static/lanse.png" class="chartmate"></image>
 				<view class="bottomfount">奖分</view>
 				<image src="../../static/huangse.png" class="chartmate"></image>
 				<view class="bottomfount">扣分</view>
-			</view>
+			</view> -->
 		</view>
 		<!-- 展示折线图 -->
 		<view style="display: flex; flex-direction: column;">

@@ -7,8 +7,8 @@
 		<view style="height:100upx ;"></view>
 		<view>
 			<view style="width: 100%;">
-				<view class="cadlist">
-					<view class="toptext-one">公告的列表，标识现在有哪些积分事件正在发生</view>
+				<view class="cadlist_1">
+					<view class="toptext-one"> 事件正在发生</view>
 					<view class="toptext-two">由于什么什么 </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 发布时间:1992-9-10</view>
@@ -75,15 +75,17 @@
 		line-height: 1.5;
 	}
 
-	.cadlist {
-		min-height: 250upx;
+	.cadlist_1 {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		min-height: 180upx;
 		background-color: #FFFFFF;
 		margin-top: 10upx;
 		margin-bottom: 10upx;
-		display: flex;
-		flex-direction: column;
-		padding-left: 40upx;
-		padding-right: 40upx;
+		padding-left: 25upx;
+		padding-right: 25upx;
 	}
 
 	.toptext {

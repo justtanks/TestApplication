@@ -70,7 +70,7 @@
 			return {
 				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				// 上推加载更多的
-				status: 'more',
+				status: 'nomore',
 				loadingText: '加载中...',
 				contentText: {
 					contentdown: '↑上拉显示更多',

@@ -204,8 +204,8 @@
 				loadtype: 3,
 				isluru: false,
 				// 上推加载更多的
-				status1: 'more',
-				status2: 'loading',
+				status1: 'nomore',
+				status2: 'nomore',
 				status3: 'noMore',
 				status4: 'noMore',
 				loadingText: '加载中...',

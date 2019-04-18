@@ -4,7 +4,7 @@
 		<view class="uni-flex uni-row controlcenter-row" style="margin-top: 60upx; flex-wrap: wrap;">
 			<view class="controlbox" @click="mJifen()" hover-class="uni-list-cell-hover">
 				<image src="../../static/jifenlogo.png" class="controlimage"></image>
-				<view class="control-text">我的列表</view>
+				<view class="control-text">测试界面</view>
 			</view>
 			<view class="controlbox" @click="mPaiming" hover-class="uni-list-cell-hover">
 				<image src="../../static/paiminglogo.png" class="controlimage"></image>
@@ -39,7 +39,6 @@
 				<view class="control-text">公告</view>
 			</view>
 		</view>
-		
 	</view>
 
 
