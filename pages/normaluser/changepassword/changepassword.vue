@@ -15,7 +15,8 @@
 			<input class="passwordstyle" placeholder="请再次输入新密码" :focus=thirdfocus @focus="get3()" :class="{passwordstyle2:thirdfocus}"
 			 password=true @blur="lost3()" v-model="newword2" />
 		</view>
-		<button class="buttonstyle" style="width: 81%;margin-top: 120upx;font-size: 32upx;" :loading="changeing" @click="changepass">{{changeing?'修改中':'确认修改'}}</button>
+		<button class="buttonstyle" style="width: 81%;margin-top: 120upx;font-size: 32upx;" 
+		:loading="changeing" @click="changepass">{{changeing?'修改中':'确认修改'}}</button>
 
 	</view>
 </template>

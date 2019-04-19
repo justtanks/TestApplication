@@ -208,6 +208,7 @@
 				status2: 'nomore',
 				status3: 'noMore',
 				status4: 'noMore',
+				status:"nomore",
 				loadingText: '加载中...',
 				// loadingType: 0, //定义加载方式 0---contentdown  1---contentrefresh 2---contentnomore
 				contentText: {
