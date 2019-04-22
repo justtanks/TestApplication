@@ -24,6 +24,8 @@
 	</view>
 </template>
 
+
+
 <script>
 	var _self;
 	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'

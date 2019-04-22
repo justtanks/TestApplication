@@ -27,16 +27,16 @@
 			</view>
 			<view class="seondrow" style="align-items: center;">
 				<view class="bigfount">0</view>
-				<view class="bottomfount">部分排名</view>
+				<view class="bottomfount">月度积分</view>
 			</view>
 			<view class="seondrow" style="align-items: center;">
 				<view class="bigfount">0</view>
-				<view class="bottomfount">公司排名</view>
+				<view class="bottomfount">累计积分</view>
 			</view>
 		</view>
 		<!-- 展示图标 标识 -->
 		<view class="uni-flex uni-row contantmargin" style="justify-content: space-between;align-items: center; height: 70upx;">
-			<view style="font-weight: bold;font-size: 25upx;margin-left: 20upx;">积分趋势</view>
+			<view style="font-weight: bold;font-size: 25upx;margin-left: 20upx;">月度积分趋势</view>
 			<!-- <view class="uni-flex uni-row" style="align-items: center;">
 				<image src="../../static/lanse.png" class="chartmate"></image>
 				<view class="bottomfount">奖分</view>
@@ -61,9 +61,14 @@
 		<!-- <view class="gonggao uni-list-cell-navigate uni-navigate-right">
 			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
 		</view> -->
-		
-		<view class="gonggao">
-			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
+	
+		<view class="gonggao uni-swiper-msg" @click="togonggao">
+			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
+			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
+				<swiper-item v-for="(item, index) in msg" :key="index">
+					<navigator style="color: #666666;">{{item}}</navigator>
+				</swiper-item>
+			</swiper>
 			<image class="tonextstyle" src="../../static/tonext.png"></image>
 		</view>
 		<view class="qiun-charts">
@@ -75,9 +80,8 @@
 			<!--#endif-->
 		</view>
 		<view style="height: 50upx;width: auto;margin: 100upx 25upx 120upx 25upx;">
-			<button class="buttonstyle" @click="addshenqing">申请积分</button>
+			<button class="buttonstyle" @click="addshenqing">{{isnormal?'申请积分':'积分录入'}}</button>
 		</view>
-
 	</view>
 </template>
 
@@ -91,31 +95,34 @@
 	var canvaArea = null;
 	var Data = {
 		LineA: {
-			categories: ['2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+			categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
 			series: [{
 				name: '奖分',
-				data: [35, 20, 25, 37, 4, 20, 10]
+				data: [35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 6, 7]
 			}, {
 				name: '扣分',
-				data: [70, 40, 65, 90, 44, 68, 20]
+				data: [70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 6, 7]
 			}]
 		},
 
 		Pie: {
 			series: [{
-				name: '绩效',
+				name: '职务积分',
 				data: 50
 			}, {
-				name: '公共部分',
+				name: '能力部分',
 				data: 30
 			}, {
-				name: '规章制度',
+				name: '产量制度',
 				data: 20
 			}, {
-				name: '企业文化',
+				name: '岗位文化',
 				data: 18
 			}, {
-				name: '能力分',
+				name: '事件分',
+				data: 8
+			}, , {
+				name: '好人好事积分',
 				data: 8
 			}]
 		}
@@ -129,7 +136,13 @@
 			return {
 				cWidth: '',
 				cHeight: '',
-				pixelRatio: 1
+				pixelRatio: 1,
+				isnormal: true ,//是否是普通员工
+				msg : [
+					'uni-app行业峰会频频亮相，开发者反响热烈',
+					'DCloud完成B2轮融资，uni-app震撼发布',
+					'36氪热文榜推荐、CSDN公号推荐 DCloud CEO文章'
+				]
 			}
 		},
 		onLoad() {
@@ -147,7 +160,7 @@
 			//#endif
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
-            this.changeTab()
+			this.changeTab()
 
 		},
 		onReady() {
@@ -238,27 +251,41 @@
 				});
 			},
 			addshenqing: function() {
-				uni.navigateTo({
-					url: '../normaluser/addshenqing/addshenqing'
-				})
+				if (this.isnormal) {
+
+					uni.navigateTo({
+						url: '../normaluser/addshenqing/addshenqing'
+					})
+				} else {
+					uni.navigateTo({
+						url: '../normaluser/jifenluru/jifenluru'
+					})
+				}
+
 			},
 			changeTab() {
-				console.log(1)
 				uni.getStorage({
 					key: "isnomaluser",
 					success: function(res) {
 						if (res.data == 1) {
+							_self.isnormal = false
 							uni.setTabBarItem({
 								index: 2,
 								text: '审批',
 							})
 						} else {
+							_self.isnormal = true
 							uni.setTabBarItem({
 								index: 2,
 								text: '积分事件'
 							})
 						}
 					}
+				})
+			},
+			togonggao:function(){
+				uni.navigateTo({
+					url:'../alllistpage/messageList/messageList'
 				})
 			}
 

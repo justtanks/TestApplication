@@ -64,8 +64,11 @@
 			_that=this
 		},
 		methods:{
-			changepicZ:function(){
+			changepic:function(){
 				//修改图片界面跳转  或者弹出pop
+				uni.navigateTo({
+					url:'../normaluser/postheadimage/postheadimage'
+				})
 			},
 			changename:function(){
 				//修改姓名
