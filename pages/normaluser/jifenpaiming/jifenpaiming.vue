@@ -3,7 +3,7 @@
 	<view>
 		<!-- 顶部展示条 -->
 		<view class="topstyle">
-			<view style="margin-left: 25upx;">全员排名</view>
+			<view style="margin-left: 25upx;">{{targetpaiming}}</view>
 			<view style="margin-right: 25upx;" @click="showpup">筛选</view>
 		</view>
 		<!-- 中间空出的地方占位 -->
@@ -27,7 +27,7 @@
 		<!-- 弹出层使用 -->
 		<popup-layer ref="popup" :direction="direction">
 			<view class="pupustyle">
-				<view style="margin: 30upx 30upx;font-size: 28upx;">
+				<!-- <view style="margin: 30upx 30upx;font-size: 28upx;">
 					技术类型（单选）
 				</view>
 				<view style="display: flex;flex-direction: row;justify-content: flex-start;">
@@ -68,6 +68,27 @@
 					<button class="popbutton1" :class="{popbutton_choise:nengli}" @click="nengli1()">能力</button>
 					<button class="popbutton1" :class="{popbutton_choise:kaoqin}" @click="kaoqin1()">考勤</button>
 				</view>
+ -->
+
+				<view class="uni-list">
+					<radio-group @change="radioChange">
+						<view style="margin: 25upx 25upx 25upx;"> 积分排名</view>
+						<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in items" :key="item.value" style="justify-content: flex-start;display: flex;">
+							<view>
+								<radio :value="item.value" :checked="index === current" />
+							</view>
+							<view>{{item.name}}</view>
+						</label>
+						<!-- 	<view> 管理人员排名</view>
+						<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in items_guanli" :key="item.value" style="justify-content: flex-start;display: flex;">
+							<view>
+								<radio :value="item.value" :checked="index === current" />
+							</view>
+							<view>{{item.name}}</view>
+						</label> -->
+					</radio-group>
+				</view>
+
 
 				<!-- 最后的确定按钮 -->
 				<view class="buttonstyle popubottonbutton" @tap="popudown">
@@ -107,9 +128,53 @@
 				type: 'date',
 				value: '',
 				showPicker: false,
-
-				showpop: false
-
+				showpop: false,
+				items: [{
+						value: '1',
+						name: '月度积分排名'
+					},
+					{
+						value: '2',
+						name: '年度排名',
+						checked: 'true'
+					},
+					{
+						value: '3',
+						name: '累计积分排名'
+					},
+					{
+						value: '4',
+						name: '班组积分排名'
+					},
+					{
+						value: '5',
+						name: '公司积分排名'
+					},
+					{
+						value: '6',
+						name: '机长排名'
+					},
+					{
+						value: '7',
+						name: '班长排名',
+						checked: 'true'
+					},
+					{
+						value: '8',
+						name: '主任排名'
+					},
+					{
+						value: '9',
+						name: '部长排名'
+					},
+					{
+						value: '10',
+						name: '副总排名'
+					}
+				],
+				targetpaiming:'月度积分排名',
+				current: 0,
+				
 			};
 		},
 		onLoad() {
@@ -129,70 +194,83 @@
 				this.$refs.popup.close()
 				this.showpop = false
 			},
-			quanyuanpaiming: function() {
-				_self.allpeople = true;
-				_self.zhiwei = false
-			},
-			zhiweipaiming: function() {
-				_self.allpeople = false;
-				_self.zhiwei = true
-			},
-			contain: function() {
-				_self.containcontrol = true
-			},
-			containnot: function() {
-				_self.containcontrol = false
-			},
-			gonggong1() {
-				if (this.gonggong)
-					this.gonggong = false
-				else
-					this.gonggong = true
-			},
-			qiyewenhua1() {
-				if (this.wenhua)
-					this.wenhua = false
-				else
-					this.wenhua = true
-			},
-			jixiao1() {
-				if (this.jixiao)
-					this.jixiao = false
-				else
-					this.jixiao = true
-			},
-			guizhang1() {
-				if (this.guizhang)
-					this.guizhang = false
-				else
-					this.guizhang = true
-			},
-			nengli1() {
-				if (this.nengli)
-					this.nengli = false
-				else
-					this.nengli = true
-			},
-			kaoqin1() {
-				if (this.kaoqin)
-					this.kaoqin = false
-				else
-					this.kaoqin = true
-			},
-			choisetime(type) {
-				//弹出时间的选择框
-				this.type = type;
-				this.showPicker = true;
-				this.value = this[type];
-			},
-			onSelected1(e) { //选择时间后
-				this.showPicker = false;
-				if (e) {
-					this[this.type] = e.value;
+// 			quanyuanpaiming: function() {
+// 				_self.allpeople = true;
+// 				_self.zhiwei = false
+// 			},
+// 			zhiweipaiming: function() {
+// 				_self.allpeople = false;
+// 				_self.zhiwei = true
+// 			},
+// 			contain: function() {
+// 				_self.containcontrol = true
+// 			},
+// 			containnot: function() {
+// 				_self.containcontrol = false
+// 			},
+// 			gonggong1() {
+// 				if (this.gonggong)
+// 					this.gonggong = false
+// 				else
+// 					this.gonggong = true
+// 			},
+// 			qiyewenhua1() {
+// 				if (this.wenhua)
+// 					this.wenhua = false
+// 				else
+// 					this.wenhua = true
+// 			},
+// 			jixiao1() {
+// 				if (this.jixiao)
+// 					this.jixiao = false
+// 				else
+// 					this.jixiao = true
+// 			},
+// 			guizhang1() {
+// 				if (this.guizhang)
+// 					this.guizhang = false
+// 				else
+// 					this.guizhang = true
+// 			},
+// 			nengli1() {
+// 				if (this.nengli)
+// 					this.nengli = false
+// 				else
+// 					this.nengli = true
+// 			},
+// 			kaoqin1() {
+// 				if (this.kaoqin)
+// 					this.kaoqin = false
+// 				else
+// 					this.kaoqin = true
+// 			},
+// 			choisetime(type) {
+// 				//弹出时间的选择框
+// 				this.type = type;
+// 				this.showPicker = true;
+// 				this.value = this[type];
+// 			},
+// 			onSelected1(e) { //选择时间后
+// 				this.showPicker = false;
+// 				if (e) {
+// 					this[this.type] = e.value;
+// 				}
+// 			},
+			// 
+			radioChange: function(evt) {
+				for (let i = 0; i < this.items.length; i++) {
+					if (this.items[i].value === evt.target.value) {
+						this.current = i;
+						this.targetpaiming=this.items[i].name
+						break;
+					}
 				}
+				// this.targetpaiming=evt.target.name
 			}
-		},
-		onPullDownRefresh: function() {
+		
+
+	},
+	onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
 			setTimeout(function() {
 				uni.stopPullDownRefresh()
@@ -312,10 +390,11 @@
 	.paimingimage {
 		width: 40upx;
 		height: 40upx;
-		
+
 	}
-	.paimingcontain{
-	    flex: 1;
+
+	.paimingcontain {
+		flex: 1;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;

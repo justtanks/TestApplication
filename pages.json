@@ -208,6 +208,38 @@
         }
         ,{
             "path" : "pages/normaluser/postheadimage/postheadimage",
+            "style" : {
+           	"navigationBarTitleText":"上传头像",
+           	"enablePullDownRefresh":true,
+           	"app-plus":{
+           		"pullToRefresh":{
+           			"support":true,
+           			"scrollIndicator":"none",
+           			"height":"10%",
+           			"range":"10%",
+           			"color":"#007AFF"
+           		}
+           	}
+           }
+        }
+        ,{
+            "path" : "pages/normaluser/baobiao/baobiao",
+           "style" : {
+          	"navigationBarTitleText":"奖扣统计",
+          	"enablePullDownRefresh":true,
+          	"app-plus":{
+          		"pullToRefresh":{
+          			"support":true,
+          			"scrollIndicator":"none",
+          			"height":"10%",
+          			"range":"10%",
+          			"color":"#007AFF"
+          		}
+          	}
+          }
+        }
+        ,{
+            "path" : "pages/normaluser/testchart2/testchart2",
             "style" : {}
         }
     ],

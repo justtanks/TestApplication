@@ -61,7 +61,7 @@
 		<!-- <view class="gonggao uni-list-cell-navigate uni-navigate-right">
 			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
 		</view> -->
-	
+	<!-- 公告栏 -->
 		<view class="gonggao uni-swiper-msg" @click="togonggao">
 			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
