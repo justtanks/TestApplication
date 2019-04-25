@@ -24,11 +24,13 @@
 				<view class="titlestyle">30/10</view>
 			</view>
 		</view>
-		<view class="biaobiaocontain_1" >
-			<view @click="change" style="padding: 30upx 30upx 20upx 30upx;" >本月奖扣分任务</view>
+		<view class="biaobiaocontain_1">
+			<view @click="change" style="padding: 30upx 30upx 20upx 30upx;">本月奖扣分任务</view>
 			<view class="qiun-charts" style="background-color: #E5FDC3;">
 				<!--#ifdef H5 || MP-ALIPAY || MP-BAIDU || MP-TOUTIAO -->
-				<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #FFFFFF;" :style="{'width':cWidth*pixelRatio+'px','height':cHeight*pixelRatio+'px', 'transform': 'scale('+(1/pixelRatio)+')','margin-left':-cWidth*(pixelRatio-1)/2+'px','margin-top':-cHeight*(pixelRatio-1)/2+'px'}"></canvas>
+				<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #FFFFFF;" 
+				:style="{'width':cWidth*pixelRatio+'px','height':cHeight*pixelRatio+'px', 'transform': 'scale('+(1/pixelRatio)+')'
+				,'margin-left':-cWidth*(pixelRatio-1)/2+'px','margin-top':-cHeight*(pixelRatio-1)/2+'px'}"></canvas>
 				<!--#endif-->
 				<!--#ifdef MP-WEIXIN || APP-PLUS -->
 				<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #FFFFFF;"></canvas>
@@ -47,15 +49,13 @@
 				<!--#endif-->
 			</view>
 		</view>
-
-
 	</view>
 </template>
 
 <script>
 	// 使用wxchart
 	import wxCharts from '../../../components/wx-charts/wxcharts.js';
-	 
+
 	var _self;
 	var canvaColumn = null;
 	var Data = {
@@ -63,26 +63,30 @@
 			categories: ['第一周', '第二周', '第三周', '第四周'],
 			series: [{
 				name: '奖分',
-				data: [15, 20, 45, 37]
+				data: [15, 20, 45, 37],
+				color: "#3CB371"
 			}, {
 				name: '扣分',
-				data: [30, 40, 25, 14]
+				data: [30, 40, 25, 14],
+				color: "#CD6839"
 			}]
 		},
 		Pie: {
 			series: [{
 				name: '加分',
-				data: 50
+				data: 50,
+				color: "#3CB371"
 			}, {
 				name: '扣分',
-				data: 30
+				data: 30,
+				color: "#CD6839"
 			}]
 		}
 	};
-	
+
 	export default {
 		components: {
-			 
+
 		},
 		data() {
 			return {
@@ -93,8 +97,8 @@
 				cWidth3: '', //圆弧进度图
 				cHeight3: '', //圆弧进度图
 				pixelRatio: 1
-			
-               
+
+
 			}
 		},
 		onLoad() {
@@ -120,7 +124,7 @@
 
 		},
 		onReady() {
-			this.showColumn("canvasColumn",  Data.Column);
+			this.showColumn("canvasColumn", Data.Column);
 			this.showPie("canvasPie", Data.Pie);
 		},
 
@@ -168,9 +172,11 @@
 					dataLabel: true,
 				});
 			},
-			change:function(){
-				Data.Column.categories=['1','2','3','4']
+			change: function() {
+				Data.Column.categories = ['1', '2', '3', '4']
+				Data.Pie.series[0].data = 100;
 				this.showColumn("canvasColumn", Data.Column);
+				this.showPie("canvasPie", Data.Pie);
 			}
 		}
 	}
@@ -205,6 +211,7 @@
 		font-size: 30upx;
 		color: #666666;
 	}
+
 	.biaobiaocontain_1 {
 		background: #FFFFFF;
 		display: flex;

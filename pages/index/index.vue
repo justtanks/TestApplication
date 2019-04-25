@@ -43,6 +43,7 @@
 				<image src="../../static/huangse.png" class="chartmate"></image>
 				<view class="bottomfount">扣分</view>
 			</view> -->
+
 		</view>
 		<!-- 展示折线图 -->
 		<view style="display: flex; flex-direction: column;">
@@ -61,7 +62,7 @@
 		<!-- <view class="gonggao uni-list-cell-navigate uni-navigate-right">
 			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
 		</view> -->
-	<!-- 公告栏 -->
+		<!-- 公告栏 -->
 		<view class="gonggao uni-swiper-msg" @click="togonggao">
 			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
@@ -95,13 +96,19 @@
 	var canvaArea = null;
 	var Data = {
 		LineA: {
-			categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+			categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18',
+				'19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'
+			],
 			series: [{
 				name: '奖分',
-				data: [35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 6, 7]
+				data: [35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4,
+					5
+				]
 			}, {
 				name: '扣分',
-				data: [70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 6, 7]
+				data: [70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3,
+					4, 5
+				]
 			}]
 		},
 
@@ -137,8 +144,8 @@
 				cWidth: '',
 				cHeight: '',
 				pixelRatio: 1,
-				isnormal: true ,//是否是普通员工
-				msg : [
+				isnormal: true, //是否是普通员工
+				msg: [
 					'uni-app行业峰会频频亮相，开发者反响热烈',
 					'DCloud完成B2轮融资，uni-app震撼发布',
 					'36氪热文榜推荐、CSDN公号推荐 DCloud CEO文章'
@@ -283,9 +290,9 @@
 					}
 				})
 			},
-			togonggao:function(){
+			togonggao: function() {
 				uni.navigateTo({
-					url:'../alllistpage/messageList/messageList'
+					url: '../alllistpage/messageList/messageList'
 				})
 			}
 
