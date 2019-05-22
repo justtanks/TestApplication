@@ -167,7 +167,7 @@
 					pixelRatio: _self.pixelRatio,
 					series: chartData.series,
 					animation: true,
-					width: _self.cWidth * _self.pixelRatio,
+					width: _self.cWidth * _self.pixelRatio, 
 					height: _self.cHeight * _self.pixelRatio,
 					dataLabel: true,
 				});

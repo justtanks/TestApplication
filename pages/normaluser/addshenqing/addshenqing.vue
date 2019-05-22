@@ -10,13 +10,21 @@
 			<view style="font-size: 35upx;">事件时间</view>
 			<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{date}}</view>
 		</view>
-		<view class="timechoise uni-list-cell-navigate uni-navigate-right">
+		<!-- <view class="timechoise uni-list-cell-navigate uni-navigate-right">
 			<view style="font-size: 35upx;">证明人</view>
 			<input style="line-height: 1; font-size: 35upx;" placeholder="请输入姓名,2-8个字符" maxlength="8" />
+		</view> -->
+		<view class="timechoise uni-list-cell-navigate uni-navigate-bottom" @click="choisechushen">
+			<view style="font-size: 35upx;">初审人</view>
+			<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">{{chushenperson}}</view>
 		</view>
 		<view class="timechoise uni-list-cell-navigate uni-navigate-bottom" @click="choiseperson">
-			<view style="font-size: 35upx;">审批人</view>
+			<view style="font-size: 35upx;">终审人</view>
 			<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">{{shenpiperson}}</view>
+		</view>
+		<view class="timechoise uni-list-cell-navigate uni-navigate-bottom" @click="choisefenlei">
+			<view style="font-size: 35upx;">积分分类</view>
+			<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">{{fenlei}}</view>
 		</view>
 		<view class="timechoise">
 			<view style="font-size: 35upx;margin-left: 30upx;">指定积分规则</view>
@@ -55,8 +63,8 @@
 			<!--  -->
 			<view class="pupustyle_two">
 				<view class="topcontent">
-					<view style="position: fixed;width: 100%;background-color: #FFFFFF;min-height: 180upx;">
-						<mSearch :show='false' @search="search($event,0)"></mSearch>
+					<view style="position: fixed;width: 100%;background-color: #FFFFFF;min-height: 90upx;">
+						<!-- <mSearch :show='false' @search="search($event,0)"></mSearch> -->
 						<!-- 上面的目录导航条 -->
 						<view style="height: 80upx;display: flex;flex-direction: row;justify-content: flex-start;align-items: center;padding-left: 25upx;">
 							<view class="navtextstyle" v-for="(item,index) in barlist" :key="index" @click="baritemclick(index)">
@@ -66,12 +74,12 @@
 						</view>
 					</view>
 				</view>
-				<view style="height: 180upx;"></view>
+				<view style="height: 95upx;"></view>
 		
 				<scroll-view style="height: 1030upx;" scroll-y="true">
 		          <view style="width: 100%;">
 		          	<view class="cadlist" :class="listitemstyle" v-for="(item,index) in formdata" :key="index" @click="clickitem(index)">
-		          		<view style="font-size: 35upx;">{{item.value}}</view>
+		          		<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{item.value}}</view>
 		          		<image class="tonextstyle" v-if="!item.last" src="../../../static/tonext.png"></image>
 		          	</view>
 		          	<!-- <uni-load-more :status="status" :contentText="contentText"></uni-load-more> -->
@@ -130,9 +138,77 @@
 						value: 4
 					}
 				],
+				chushenarray: [{
+						label: '小明',
+						value: 1
+					},
+					{
+						label: '小红',
+						value: 2
+					},
+					{
+						label: '小黄',
+						value: 3
+					},
+					{
+						label: '小绿',
+						value: 4
+					}
+				],
+				guizearray:[
+					{
+							label: '加班类',
+							value: 1
+						},
+						{
+							label: '值班类',
+							value: 2
+						},
+						{
+							label: '客户表扬',
+							value: 3
+						},
+						{
+							label: '节能增效类',
+							value: 4
+						},
+						{
+							label: '建议类',
+							value: 5
+						},
+						{
+							label: '效率提升',
+							value: 6
+						},
+						{
+							label: '质量管理类',
+							value: 7
+						},
+						{
+							label: '安全管理类',
+							value: 8
+						},
+						{
+							label: '设备管理类',
+							value: 9
+						},
+						{
+							label: '其他类',
+							value: 10
+						},
+						{
+							label: '积极主动类',
+							value: 11
+						}
+				],
+				
 				'textnum':'0/30',
 				'inputresean':'',
 				'shenpiperson':'',
+				'chushenperson':'',
+				'fenlei':'',
+				'popid':1,
+				
 				'haverull':false,
 				// 时间选择器需要的数据
 				showPicker: false,
@@ -188,6 +264,7 @@
 			},
 			choiseperson:function(){
 				// 选择审批人
+				this.popid=2
 				this.pickerValueArray = this.pickerSingleArray
 				this.mode = 'selector'
 				this.deepLength = 1
@@ -248,7 +325,13 @@
 				console.log(e)
 			},
 			onConfirm(e) {
-				 this.shenpiperson=e.label;
+				if(this.popid==1){
+					this.chushenperson=e.label;
+				}else if(this.popid==2){
+					 this.shenpiperson=e.label;
+				}else{
+					this.fenlei=e.label
+				}
 			},
 			 close(e){
 			    this.imageList.splice(e,1);
@@ -287,6 +370,24 @@
 			baritemclick: function(e) {
 				
 			},
+			choisechushen:function(){
+				// 选择初审人
+				this.popid=1
+				this.pickerValueArray = this.chushenarray
+				this.mode = 'selector'
+				this.deepLength = 1
+				this.pickerValueDefault = [0]
+				this.$refs.mpvuePicker.show()
+			},
+			choisefenlei:function(){
+				// 选择分类
+				this.popid=3
+				this.pickerValueArray = this.guizearray
+				this.mode = 'selector'
+				this.deepLength = 1
+				this.pickerValueDefault = [0]
+				this.$refs.mpvuePicker.show()
+			}
 			 
 		},
 		 onBackPress() {

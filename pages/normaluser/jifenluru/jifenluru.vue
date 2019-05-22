@@ -3,6 +3,9 @@
 	<view>
 
 		<view style="background-color: #FFFFFF;">
+			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 35upx;line-height: 1;"
+			 show-confirm-bar="true" auto-height="true" placeholder="申请理由" maxlength="30" v-model="inputresean" @input="inputholder" />
+			<view class="textnum">{{textnum}}</view>
 
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="show1('left')">
 				<view style="font-size: 35upx;">选择人员</view>
@@ -10,6 +13,10 @@
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisetime('date')">
 				<view style="font-size: 35upx;">事件时间</view>
 				<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{date}}</view>
+			</view>
+			<view class="timechoise uni-list-cell-navigate uni-navigate-bottom" @click="choisefenlei">
+				<view style="font-size: 35upx;">积分分类</view>
+				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">{{fenlei}}</view>
 			</view>
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choiseRull('left')">
 				<view style="font-size: 35upx;">选择规则</view>
@@ -25,7 +32,7 @@
 			</view>
 		</view>
 
-		<view style="height: 150upx;width: 100%; position:fixed; bottom:0; display: flex; justify-content: center;align-items: center;">
+		<view style="height: 150upx;width: 100%; display: flex; justify-content: center;align-items: center;">
 			<view style="height: 45upx;width: 90%;">
 				<button class="buttonstyle" hover-class="muhovercolor" @click="addshenqing">提交</button>
 			</view>
@@ -107,8 +114,8 @@
 			<!--  -->
 			<view class="pupustyle_two">
 				<view class="topcontent">
-					<view style="position: fixed;width: 100%;background-color: #FFFFFF;min-height: 180upx;">
-						<mSearch :show='false' @search="search($event,0)"></mSearch>
+					<view style="position: fixed;width: 100%;background-color: #FFFFFF;min-height: 90upx;">
+						<!-- <mSearch :show='false' @search="search($event,0)"></mSearch> -->
 						<!-- 上面的目录导航条 -->
 						<view style="height: 80upx;display: flex;flex-direction: row;justify-content: flex-start;align-items: center;padding-left: 25upx;">
 							<view class="navtextstyle" v-for="(item,index) in barlist" :key="index" @click="baritemclick(index)">
@@ -118,12 +125,12 @@
 						</view>
 					</view>
 				</view>
-				<view style="height: 180upx;"></view>
+				<view style="height: 95upx;"></view>
 
 				<scroll-view style="height: 1030upx;" scroll-y="true">
                   <view style="width: 100%;">
                   	<view class="cadlist" :class="listitemstyle" v-for="(item,index) in formdata" :key="index" @click="clickitem(index)">
-                  		<view style="font-size: 35upx;">{{item.value}}</view>
+                  		<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{item.value}}</view>
                   		<image class="tonextstyle" v-if="!item.last" src="../../../static/tonext.png"></image>
                   	</view>
                   	<!-- <uni-load-more :status="status" :contentText="contentText"></uni-load-more> -->
@@ -133,13 +140,15 @@
 
 		</uni-drawer>
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
-		
+		<mpvue-picker :themeColor="themeColor" ref="mpvuePicker" :mode="mode" :deepLength="deepLength" :pickerValueDefault="pickerValueDefault"
+		 @onConfirm="onConfirm" @onCancel="onCancel" :pickerValueArray="pickerValueArray"></mpvue-picker>
 	</view>
 </template>
 
 <script>
 	// 选择时间的选择
 	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
+	import mpvuePicker from '../../../components/mpvue-picker/mpvuePicker.vue';
 	import dateutll from '../../../common/util.js'
 	// 添加上推的列表选择
 	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
@@ -153,11 +162,59 @@
 			MxDatePicker,
 			mSearch,
 			uniDrawer,
+			mpvuePicker,
 			uniLoadMore
 
 		},
 		data() {
 			return {
+				guizearray:[
+					{
+							label: '加班类',
+							value: 1
+						},
+						{
+							label: '值班类',
+							value: 2
+						},
+						{
+							label: '客户表扬',
+							value: 3
+						},
+						{
+							label: '节能增效类',
+							value: 4
+						},
+						{
+							label: '建议类',
+							value: 5
+						},
+						{
+							label: '效率提升',
+							value: 6
+						},
+						{
+							label: '质量管理类',
+							value: 7
+						},
+						{
+							label: '安全管理类',
+							value: 8
+						},
+						{
+							label: '设备管理类',
+							value: 9
+						},
+						{
+							label: '其他类',
+							value: 10
+						},
+						{
+							label: '积极主动类',
+							value: 11
+						}
+				],
+				fenlei:'',
 				// 第三个pop
 				showLeft: false,
 				showRigth: false,
@@ -168,7 +225,9 @@
 				date: '2019/01/01',
 				type: 'date',
 				value: '',
-				
+				// 文字项
+				'textnum':'0/30',
+				'inputresean':'',
 
 
 				// 模仿的数据
@@ -179,13 +238,25 @@
 				barlist: [], //建立一个导航条的文字的缓冲的数组
 				
 				// 递交审批
-				showLeft3:false
+				showLeft3:false,
+				
+				//关于选择分类弹窗
+				themeColor: '#007AFF',
+				pickerText: '',
+				mode: '',
+				deepLength: 1,
+				pickerValueDefault: [0],
+				pickerValueArray: [],
 			};
 		},
 		onReady() {
 			this.date = dateutll.dateUtils.getNowFormatDate()
 		},
 		methods: {
+			inputholder:function(e){
+				let length=this.inputresean.length;
+				this.textnum=length+'/'+'30'
+			},
 			show1(e) {
 				//展示第三个弹窗  选择人员
 				if (e === 'left') {
@@ -264,6 +335,20 @@
 			baritemclick: function(e) {
 				
 			},
+			choisefenlei:function(){
+				// 选择分类
+				this.pickerValueArray = this.guizearray
+				this.mode = 'selector'
+				this.deepLength = 1
+				this.pickerValueDefault = [0]
+				this.$refs.mpvuePicker.show()
+			},
+			onCancel(e) {
+				console.log(e)
+			},
+			onConfirm(e) {
+					this.fenlei=e.label
+			}
 
 
 		},
@@ -315,6 +400,18 @@
 <style>
 	page {
 		background-color: #F1F1F3;
+	}
+	.inputclass{
+		min-height: 60upx;
+		margin-left: 25upx;
+		margin-right: 25upx;
+		line-height: 1;
+	}
+	.placeholdderclass
+	{
+		font-size: 35upx;
+		align-items: center;
+		 line-height: 1;
 	}
 
 	.pupustyle {
@@ -378,6 +475,9 @@
 		margin-left: 25upx;
 		margin-right: 25upx;
 		border-bottom: #EBEBEB solid 0.5upx;
+	}
+	.textnum{
+		display: flex;flex-direction: row; justify-content: flex-end;margin-right: 25upx;color: #CCCCCC;
 	}
 
 </style>

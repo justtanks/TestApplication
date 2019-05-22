@@ -1,8 +1,8 @@
 <!-- 测试使用一种规则的东西 -->
 <template>
 	<view>
-		<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;min-height: 180upx;">
-			<mSearch :show='false' @search="search($event,0)"></mSearch>
+		<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;min-height: 85upx;">
+			<!-- <mSearch :show='false' @search="search($event,0)"></mSearch> -->
 			<!-- 上面的目录导航条 -->
 			<view style="height: 80upx;display: flex;flex-direction: row;justify-content: flex-start;align-items: center;padding-left: 25upx;">
 				<view class="navtextstyle" v-for="(item,index) in barlist" :key="index" @click="baritemclick(index)">
@@ -11,14 +11,14 @@
 				</view>
 			</view>
 		</view>
-		<view style="height:185upx ;"></view>
+		<view style="height:90upx ;"></view>
 		<view>
 			<view style="width: 100%;">
 				<view class="cadlist" :class="listitemstyle" v-for="(item,index) in formdata" :key="index" @click="clickitem(index)">
-					<view style="font-size: 35upx;">{{item.value}}</view>
+					<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{item.value}}</view>
 					<image class="tonextstyle" v-if="!item.last" src="../../../static/tonext.png"></image>
 				</view>
-				<uni-load-more :status="status" :contentText="contentText"></uni-load-more>
+			<!-- 	<uni-load-more :status="status" :contentText="contentText"></uni-load-more> -->
 			</view>
 		</view>
 	</view>
