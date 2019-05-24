@@ -33,6 +33,9 @@
 		<view class="timechoise uni-list-cell-navigate uni-navigate-right" v-if="haverull"  @click="choiseRull('left')" >
 			<view style="font-size: 35upx;">积分规则</view>
 		</view>
+		<view class="timechoise" v-show="showrulltext">
+			<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{rulltext}}</view>
+		</view>
 		<!-- 积分 -->
 		<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 			<view style="font-size: 35upx;">积分</view>
@@ -238,6 +241,9 @@
 				itemdata: {},
 				huanchong: [], // 建立缓冲的一个规则数组，通过数组最后一个来实现返回
 				barlist: [], //建立一个导航条的文字的缓冲的数组
+				// 规则文本
+				rulltext:'',
+			    showrulltext:false
 			};
 		},
 		onReady(){
@@ -272,8 +278,15 @@
 				this.$refs.mpvuePicker.show()
 				
 			},
+			// 选择规则的tab切换
 			switchchange:function(e){
 				 this.haverull=e.target.value;
+				 if(this.haverull){
+					 
+				 }else{
+					 this.rulltext=""
+					 this.showrulltext=false
+				 }
 			},
 			addshenqing:function(){
 				//添加上传图片  转化为base64 字符串的方法  这里是单个的转化为base64的方法
@@ -364,6 +377,10 @@
 					this.formdata = this.itemdata.children
 					this.huanchong.push(this.formdata)
 					this.barlist.push(this.itemdata.value)
+				}else{
+					this.showrulltext=true
+					this.rulltext=this.itemdata.value
+					this.showLeft1=false
 				}
 			
 			},
@@ -444,7 +461,7 @@
 	.timechoise{
 		margin: 10upx 25upx;
 		margin-right: 0upx;
-		height: 80upx;
+		min-height: 80upx;
 		width: auto;
 		display: flex;
 		flex-direction: row;

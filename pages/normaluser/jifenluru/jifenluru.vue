@@ -21,6 +21,9 @@
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choiseRull('left')">
 				<view style="font-size: 35upx;">选择规则</view>
 			</view>
+			<view class="timechoise" v-show="showrulltext">
+				<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{rulltext}}</view>
+			</view>
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="dijiaoshenpi('left')">
 				<view style="font-size: 35upx;">递交审批</view>
 				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">选填</view>
@@ -247,6 +250,9 @@
 				deepLength: 1,
 				pickerValueDefault: [0],
 				pickerValueArray: [],
+				// 规则文本
+				rulltext:'',
+				showrulltext:false
 			};
 		},
 		onReady() {
@@ -329,6 +335,10 @@
 					this.formdata = this.itemdata.children
 					this.huanchong.push(this.formdata)
 					this.barlist.push(this.itemdata.value)
+				}else{
+					this.showrulltext=true
+					this.rulltext=this.itemdata.value
+					this.showLeft1=false
 				}
 
 			},
@@ -434,7 +444,7 @@
 	.timechoise {
 		margin: 10upx 25upx;
 		margin-right: 0upx;
-		height: 80upx;
+		min-height: 80upx;
 		width: auto;
 		display: flex;
 		flex-direction: row;
