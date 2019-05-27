@@ -133,7 +133,7 @@
 				data: 8
 			}, , {
 				name: '质量管理类',
-				data: 8
+				data: 80
 			}, , {
 				name: '安全管理类',
 				data: 8
