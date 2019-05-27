@@ -114,45 +114,45 @@
 
 		Pie: {
 			series: [{
-				name: '加班类',
-				data: 56
-			}, {
-				name: '值班类',
-				data: 30
-			}, {
-				name: '客户表扬',
-				data: 20
-			}, {
-				name: '节能增效类',
-				data: 18
-			}, {
-				name: '建议类',
-				data: 8
-			}, , {
-				name: '效率提升',
-				data: 8
-			}, , {
-				name: '质量管理类',
-				data: 80
-			}, , {
-				name: '安全管理类',
-				data: 8
-			}, , {
-				name: '设备管理类',
-				data: 8
-			}, , {
-				name: '其他类',
-				data: 8
-			}, , {
-				name: '积极主动类',
-				data: 8
-			 },
-			  {
-			 	name: '好人好事类',
-			 	data: 8
-			  }
-		]
-	}
+					name: '加班类',
+					data: 56
+				}, {
+					name: '值班类',
+					data: 30
+				}, {
+					name: '客户表扬',
+					data: 20
+				}, {
+					name: '节能增效类',
+					data: 18
+				}, {
+					name: '建议类',
+					data: 8
+				}, {
+					name: '效率提升',
+					data: 8
+				}, {
+					name: '质量管理类',
+					data: 80
+				}, {
+					name: '安全管理类',
+					data: 8
+				}, {
+					name: '设备管理类',
+					data: 8
+				}, {
+					name: '其他类',
+					data: 8
+				}, {
+					name: '积极主动类',
+					data: 8
+				},
+				{
+					name: '好人好事类',
+					data: 8
+				}
+			]
+		}
 	}
 	export default {
 		components: {
