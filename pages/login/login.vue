@@ -22,6 +22,8 @@
 </template>
 
 <script>
+	// import url1 from '../../common/url.js'
+	var that
 	export default {
 		data() {
 			return {
@@ -30,45 +32,67 @@
 					phone: "",
 					password: ""
 				},
+				result:{}
 			};
+		},
+		onLoad:function(){
+			that=this
 		},
 		methods: {
 			defaultHandlerLogin: function() {
 				this.login.loading = true;
-				setTimeout((e => {
-					this.login.loading = false;
-					// 					 uni.navigateTo({
-					// 					 	url:"../normaluser/myrenwu/myrenwu"
-					// 					 })
-					// 默认的通过之后 不同的人有不同的值
-					if (this.login.phone == 1) {
-
-						uni.setStorage({
-							key: 'isnomaluser',
-							data: 1,
-							success: function() {
-								console.log('1success');
-							}
-						})
-					} else {
-						uni.setStorage({
-							key: 'isnomaluser',
-							data: 2,
-							success: function() {
-								console.log('2success');
-							}
-						})
-					}
-					uni.switchTab({
-						url: '../index/index',
-
-						success: function() {
-							//这里记住账号密码 然后自动登录
-
-						}
-					})
-
-				}), 1500);
+// 				setTimeout((e => {
+// 					this.login.loading = false;
+// 					// 					 uni.navigateTo({
+// 					// 					 	url:"../normaluser/myrenwu/myrenwu"
+// 					// 					 })
+// 					// 默认的通过之后 不同的人有不同的值
+// 					if (this.login.phone == 1) {
+// 
+// 						uni.setStorage({
+// 							key: 'isnomaluser',
+// 							data: 1,
+// 							success: function() {
+// 								console.log('1success');
+// 							}
+// 						})
+// 					} else {
+// 						uni.setStorage({
+// 							key: 'isnomaluser',
+// 							data: 2,
+// 							success: function() {
+// 								console.log('2success');
+// 							}
+// 						})
+// 					}
+// 					uni.switchTab({
+// 						url: '../index/index',
+// 
+// 						success: function() {
+// 							//这里记住账号密码 然后自动登录
+// 
+// 						}
+// 					})
+// 
+// 				}), 1500);
+               uni.request({
+               	url:'http://47.105.199.11/api/app/login',
+				data:{
+					user_login:that.login.phone,
+					user_pass:that.login.password,
+					device_type:'android'
+				},
+				method:'POST',
+				complete:function(res){
+					 console.log(res.data);
+					 that.result=res.data
+					 console.log(that.result.data.token)
+					 that.login.loading = false;
+				},
+				fail:function(res){
+					 console.log('error'+res.data);
+				}
+               })
 
 			},
 		}
