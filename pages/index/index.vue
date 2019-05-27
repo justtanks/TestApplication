@@ -311,6 +311,7 @@
 				})
 			},
 			togonggao: function() {
+				// The requested URL returned error: 403 Pushing to https://github.com/justtanks/TestApplication.git
 				uni.navigateTo({
 					url: '../alllistpage/messageList/messageList'
 				})
