@@ -115,7 +115,7 @@
 		Pie: {
 			series: [{
 				name: '加班类',
-				data: 50
+				data: 56
 			}, {
 				name: '值班类',
 				data: 30
