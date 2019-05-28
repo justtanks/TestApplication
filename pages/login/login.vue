@@ -37,12 +37,13 @@
 		},
 		onLoad: function() {
 			that = this
-			const phone = uni.getStorageSync('phone');
+			const phone = uni.getStorageSync('token');
 			const password = uni.getStorageSync('password')
-			if (phone != '' && password != '') {
+			const token=uni.getStorageSync('token')
+			if (token!='') {
 				this.login.phone = phone
 				this.login.password = password
-				this.defaultHandlerLogin()
+				this.setusermsg(token)
 			}
 		},
 		methods: {

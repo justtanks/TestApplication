@@ -29,13 +29,13 @@
 				<view style="font-size: 35upx;">积分</view>
 				<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分"  placeholder-style="color:#CCCCCC" maxlength="8" />
 			</view>
-			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="dijiaoshenpi('left')">
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisechushen">
 				<view style="font-size: 35upx;">选择初审人</view>
-				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;"></view>
+				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">{{chushen}}</view>
 			</view>
-			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="dijiaoshenpi('left')">
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisezhongshen">
 				<view style="font-size: 35upx;">选择终审人</view>
-				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;"></view>
+				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">{{zhongshen}}</view>
 			</view>
 			
 		</view>
@@ -163,7 +163,8 @@
 	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import mydata from "../../../common/mydata.js"
-
+	import url1 from '../../common/url.js'
+	var that
 	var _self;
 	export default {
 		components: {
@@ -222,6 +223,40 @@
 							value: 11
 						}
 				],
+				pickerSingleArray: [{
+						label: '中国',
+						value: 1
+					},
+					{
+						label: '俄罗斯',
+						value: 2
+					},
+					{
+						label: '美国',
+						value: 3
+					},
+					{
+						label: '日本',
+						value: 4
+					}
+				],
+				chushenarray: [{
+						label: '小明',
+						value: 1
+					},
+					{
+						label: '小红',
+						value: 2
+					},
+					{
+						label: '小黄',
+						value: 3
+					},
+					{
+						label: '小绿',
+						value: 4
+					}
+				],
 				fenlei:'',
 				// 第三个pop
 				showLeft: false,
@@ -257,11 +292,20 @@
 				pickerValueArray: [],
 				// 规则文本
 				rulltext:'',
-				showrulltext:false
+				showrulltext:false,
+				// 弹框id  1规则  2  初审人  3 终审人
+				'popid':1,
+				chushen:'',
+				zhongshen:'',
+				
+			    token:''
 			};
 		},
 		onReady() {
 			this.date = dateutll.dateUtils.getNowFormatDate()
+		},
+		onLoad() {
+			this.token=uni.getStorageSync('token')
 		},
 		methods: {
 			inputholder:function(e){
@@ -313,7 +357,6 @@
 
 				}
 			},
-			
 			search(e, val) {
 				// 搜索的方法
 				console.log(e, val);
@@ -352,18 +395,53 @@
 			},
 			choisefenlei:function(){
 				// 选择分类
-				this.pickerValueArray = this.guizearray
-				this.mode = 'selector'
-				this.deepLength = 1
-				this.pickerValueDefault = [0]
-				this.$refs.mpvuePicker.show()
+				this.popid=1
+				
+				this.showpoplist(this.guizearray)
+				
+			},
+			choisechushen:function(e){
+				this.popid=2
+				
+				this.showpoplist(this.pickerSingleArray)
+			
+			},
+			choisezhongshen:function(e){
+					this.popid=3
+					
+					this.showpoplist(this.chushenarray)
+					
 			},
 			onCancel(e) {
 				console.log(e)
 			},
 			onConfirm(e) {
-					this.fenlei=e.label
+					if(this.popid==1){
+						this.fenlei=e.label
+					}else if(this.popid==2){
+						 this.chushen=e.label;
+					}else{
+						this.zhongshen=e.label
+					}
+			},
+			showpoplist:function(list){
+				//展示分类 初审人  终审人的上推列表
+				this.pickerValueArray = list
+				this.mode = 'selector'
+				this.deepLength = 1
+				this.pickerValueDefault = [0]
+				this.$refs.mpvuePicker.show()
+			},
+			getguali:function(e){
+				//获取到管理人员并且展示列表
+				uni.showLoading({
+					title: '加载中'
+				});
+				uni.request({
+					url:
+				})
 			}
+			
 
 
 		},
