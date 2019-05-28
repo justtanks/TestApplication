@@ -22,79 +22,98 @@
 </template>
 
 <script>
-	// import url1 from '../../common/url.js'
+	import url1 from '../../common/url.js'
 	var that
 	export default {
 		data() {
 			return {
 				login: {
 					loading: false,
-					phone: "",
-					password: ""
+					phone: "18765512661",
+					password: "123456"
 				},
-				result:{}
+				result: {}
 			};
 		},
-		onLoad:function(){
-			that=this
+		onLoad: function() {
+			that = this
+			const phone = uni.getStorageSync('phone');
+			const password = uni.getStorageSync('password')
+			if (phone != '' && password != '') {
+				this.login.phone = phone
+				this.login.password = password
+				this.defaultHandlerLogin()
+			}
 		},
 		methods: {
 			defaultHandlerLogin: function() {
 				this.login.loading = true;
-// 				setTimeout((e => {
-// 					this.login.loading = false;
-// 					// 					 uni.navigateTo({
-// 					// 					 	url:"../normaluser/myrenwu/myrenwu"
-// 					// 					 })
-// 					// 默认的通过之后 不同的人有不同的值
-// 					if (this.login.phone == 1) {
-// 
-// 						uni.setStorage({
-// 							key: 'isnomaluser',
-// 							data: 1,
-// 							success: function() {
-// 								console.log('1success');
-// 							}
-// 						})
-// 					} else {
-// 						uni.setStorage({
-// 							key: 'isnomaluser',
-// 							data: 2,
-// 							success: function() {
-// 								console.log('2success');
-// 							}
-// 						})
-// 					}
-// 					uni.switchTab({
-// 						url: '../index/index',
-// 
-// 						success: function() {
-// 							//这里记住账号密码 然后自动登录
-// 
-// 						}
-// 					})
-// 
-// 				}), 1500);
-               uni.request({
-               	url:'http://47.105.199.11/api/app/login',
-				data:{
-					user_login:that.login.phone,
-					user_pass:that.login.password,
-					device_type:'android'
-				},
-				method:'POST',
-				complete:function(res){
-					 console.log(res.data);
-					 that.result=res.data
-					 console.log(that.result.data.token)
-					 that.login.loading = false;
-				},
-				fail:function(res){
-					 console.log('error'+res.data);
-				}
-               })
+				uni.request({
+					url: url1.login,
+					data: {
+						user_login: that.login.phone,
+						user_pass: that.login.password,
+						device_type: 'android'
+					},
+					method: 'POST',
+					complete: function(res) {
+						that.login.loading = false;
+						that.result = res.data
+						if (that.result.code != 1) {
+							uni.showToast({
+								title: that.result.msg,
+								duration: 1000
+							})
+							return
+						}
+						uni.setStorageSync('phone', that.login.phone)
+						uni.setStorageSync('password', that.login.password)
+                        that.setusermsg(that.result.data.token)
+						uni.setStorage({
+							key: 'token',
+							data: that.result.data.token,
+							success: function() {
+							
+							}
+						});
+						
+					},
+					fail: function(res) {
+						that.login.loading = false;
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000
+						})
+					}
+				})
 
 			},
+			setusermsg: function(token) {
+                // 设置请求的用户信息到缓存
+				uni.request({
+					url:url1.getuserinfo,
+					data:{
+						token:token,
+						deviceType:'android'
+					},
+					complete: (res) => {
+						// var msg=res.data
+						// console.error(JSON.stringify(res.data))
+						uni.setStorageSync('usermsg',JSON.stringify(res.data))
+						// 挑战到首页
+							uni.switchTab({
+							url: '../index/index',
+							success: function() {
+								//跳转到首页登录
+						
+							}
+						})
+					},
+					fail: (res) => {
+						console.log(res.data)
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -147,7 +166,7 @@
 		border: 2rpx solid #f2f2f2;
 	}
  */
-/* 	.logoimg {
+	/* 	.logoimg {
 		width: 200rpx;
 		height: 200rpx;
 		border-radius: 50%;

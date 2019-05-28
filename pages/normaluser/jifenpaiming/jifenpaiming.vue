@@ -148,7 +148,7 @@
 					},
 					{
 						value: '5',
-						name: '公司积分排名'
+						name: '副总排名'
 					},
 					{
 						value: '6',
@@ -166,10 +166,6 @@
 					{
 						value: '9',
 						name: '部长排名'
-					},
-					{
-						value: '10',
-						name: '副总排名'
 					}
 				],
 				targetpaiming:'月度积分排名',
