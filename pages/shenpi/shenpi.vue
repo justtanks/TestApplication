@@ -173,7 +173,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 	</view>
 </template>
@@ -184,7 +184,7 @@
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import MxDatePicker from '../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../common/util.js'
-	
+
 	export default {
 		components: {
 			mSearch,
@@ -208,7 +208,7 @@
 				status2: 'nomore',
 				status3: 'noMore',
 				status4: 'noMore',
-				status:"nomore",
+				status: "nomore",
 				loadingText: '加载中...',
 				// loadingType: 0, //定义加载方式 0---contentdown  1---contentrefresh 2---contentnomore
 				contentText: {
@@ -221,7 +221,8 @@
 				date: '2019/01/01',
 				type: 'date',
 				value: '',
-				
+				usermsg: {} //用户的信息对象
+
 			};
 		},
 		onLoad: function() {
@@ -232,11 +233,11 @@
 			this.date = dateutll.dateUtils.getNowFormatDate()
 		},
 		onBackPress: function() {
-		// 覆盖之前的方法 return true
-		if (this.showPicker) {
-			this.showPicker = false
-			return true
-		}
+			// 覆盖之前的方法 return true
+			if (this.showPicker) {
+				this.showPicker = false
+				return true
+			}
 		},
 		onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
@@ -308,24 +309,45 @@
 				console.log(e, val);
 			},
 			changeTab() {
+				// uni.getStorage({
+				// 	key: "isnomaluser",
+				// 	success: function(res) {
+				// 		_self.isnormal = res.data
+				// 		//改变tab在index界面
+				// 		//改变navitor 的文字
+				// 		if(_self.isnormal==1){
+				// 			uni.setNavigationBarTitle({
+				// 				title: '审批'
+				// 			});
+				// 		}else{
+				// 			uni.setNavigationBarTitle({
+				// 				title: '积分事件'
+				// 			});
+				// 		}
+				// 		
+				// 	}
+				// })
 				uni.getStorage({
-					key: "isnomaluser",
+					//获取到登录时候传递到缓存中的用户信息字符串，并且解析成对象
+					key: 'usermsg',
 					success: function(res) {
-						_self.isnormal = res.data
-						//改变tab在index界面
-						//改变navitor 的文字
-						if(_self.isnormal==1){
-							uni.setNavigationBarTitle({
-								title: '审批'
-							});
-						}else{
+						_self.usermsg = JSON.parse(res.data)
+						if (_self.usermsg.data.user.job == 22) {
+							// 是普通用户
+							_self.isnormal = 2
 							uni.setNavigationBarTitle({
 								title: '积分事件'
 							});
+						} else {
+							// 是管理用户
+							_self.isnormal = 1
+							uni.setNavigationBarTitle({
+								title: '审批'
+							});
 						}
-						
 					}
 				})
+
 			},
 			toshenpi: function(e) {
 				uni.navigateTo({
@@ -336,7 +358,7 @@
 				uni.showActionSheet({
 					itemList: ['列表1', '列表2', '列表3'],
 					success: function(res) {
-			
+
 					}
 				})
 			},
@@ -356,11 +378,11 @@
 				uni.showActionSheet({
 					itemList: ['部门1', '部门2', '部门3'],
 					success: function(res) {
-			
+
 					}
 				})
 			}
-			
+
 		}
 	}
 </script>
@@ -430,7 +452,7 @@
 		font-size: 30upx;
 		margin-right: 10upx;
 	}
-	
+
 	.topbar {
 		height: 60upx;
 		display: flex;
@@ -438,7 +460,7 @@
 		align-items: center;
 		margin-top: 10upx;
 	}
-	
+
 	.topbaritem {
 		display: flex;
 		flex-direction: row;

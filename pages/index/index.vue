@@ -170,7 +170,7 @@
 					'DCloud完成B2轮融资，uni-app震撼发布',
 					'36氪热文榜推荐、CSDN公号推荐 DCloud CEO文章'
 				],
-				usermsg:{}
+				usermsg: {}
 			}
 		},
 		onLoad() {
@@ -293,31 +293,27 @@
 			},
 			//获取到用户信息，并且解析和展示
 			changeTab() {
-				
-				// uni.getStorage({
-				// 	key: "isnomaluser",
-				// 	success: function(res) {
-				// 		if (res.data == 1) {
-				// 			_self.isnormal = false
-				// 			uni.setTabBarItem({
-				// 				index: 2,
-				// 				text: '审批',
-				// 			})
-				// 		} else {
-				// 			_self.isnormal = true
-				// 			uni.setTabBarItem({
-				// 				index: 2,
-				// 				text: '积分事件'
-				// 			})
-				// 		}
-				// 	}
-				// })
-				
 				uni.getStorage({
 					//获取到登录时候传递到缓存中的用户信息字符串，并且解析成对象
-					key:'usermsg',
-					success:function(res){
-						_self.usermsg=JSON.parse(res.data)
+					key: 'usermsg',
+					success: function(res) {
+						_self.usermsg = JSON.parse(res.data)
+						if (_self.usermsg.data.user.job == 22) {
+							// 是普通用户
+							_self.isnormal = true
+							uni.setTabBarItem({
+								index: 2,
+								text: '积分事件'
+							})
+
+						} else {
+							// 是管理用户
+							_self.isnormal = false
+							uni.setTabBarItem({
+								index: 2,
+								text: '审批',
+							})
+						}
 					}
 				})
 			},

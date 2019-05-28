@@ -24,15 +24,20 @@
 			<view class="timechoise" v-show="showrulltext">
 				<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{rulltext}}</view>
 			</view>
-			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="dijiaoshenpi('left')">
-				<view style="font-size: 35upx;">递交审批</view>
-				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">选填</view>
-			</view>
 			<!-- 积分 -->
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 				<view style="font-size: 35upx;">积分</view>
 				<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分"  placeholder-style="color:#CCCCCC" maxlength="8" />
 			</view>
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="dijiaoshenpi('left')">
+				<view style="font-size: 35upx;">选择初审人</view>
+				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;"></view>
+			</view>
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="dijiaoshenpi('left')">
+				<view style="font-size: 35upx;">选择终审人</view>
+				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;"></view>
+			</view>
+			
 		</view>
 
 		<view style="height: 150upx;width: 100%; display: flex; justify-content: center;align-items: center;">
