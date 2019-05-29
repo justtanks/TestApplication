@@ -123,7 +123,8 @@
 			addshenqing: function() {
 				if (this.isnormal) {
 					uni.navigateTo({
-						url: '../normaluser/addshenqing/addshenqing'
+						// url: '../normaluser/addshenqing/addshenqing'
+							url: '../normaluser/jifenluru/jifenluru'
 					})
 				} else {
 					uni.navigateTo({

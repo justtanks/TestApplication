@@ -282,7 +282,8 @@
 				if (this.isnormal) {
 
 					uni.navigateTo({
-						url: '../normaluser/addshenqing/addshenqing'
+						// url: '../normaluser/addshenqing/addshenqing'
+						url: '../normaluser/jifenluru/jifenluru'
 					})
 				} else {
 					uni.navigateTo({
@@ -318,7 +319,6 @@
 				})
 			},
 			togonggao: function() {
-				// The requested URL returned error: 403 Pushing to https://github.com/justtanks/TestApplication.git
 				uni.navigateTo({
 					url: '../alllistpage/messageList/messageList'
 				})

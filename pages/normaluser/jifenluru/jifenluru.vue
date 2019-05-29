@@ -7,13 +7,21 @@
 			 show-confirm-bar="true" auto-height="true" placeholder="申请理由" maxlength="30" v-model="inputresean" @input="inputholder" />
 			<view class="textnum">{{textnum}}</view>
 
-			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="show1('left')">
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="getalluser()">
 				<view style="font-size: 35upx;">选择人员</view>
 			</view>
+			<view class="timechoise" v-show="showalluser">
+				<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;margin-left: 25upx;margin-right: 25upx;color:#B6B6B6;">{{choiseduserName}}</view>
+			</view>
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisetime('date')">
-				<view style="font-size: 35upx;">事件时间</view>
+				<view style="font-size: 35upx;">录入日期</view>
 				<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{date}}</view>
 			</view>
+			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisetime('time')">
+				<view style="font-size: 35upx;">录入时间</view>
+				<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{time}}</view>
+			</view>
+			
 			<view class="timechoise uni-list-cell-navigate uni-navigate-bottom" @click="choisefenlei">
 				<view style="font-size: 35upx;">积分分类</view>
 				<view style="font-size: 35upx;margin-right: 50upx;color:#555555 ;">{{fenlei}}</view>
@@ -22,12 +30,12 @@
 				<view style="font-size: 35upx;">选择规则</view>
 			</view>
 			<view class="timechoise" v-show="showrulltext">
-				<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{rulltext}}</view>
+				<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;margin-left: 25upx;margin-right: 25upx;color:#B6B6B6;">{{rulltext}}</view>
 			</view>
 			<!-- 积分 -->
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 				<view style="font-size: 35upx;">积分</view>
-				<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分"  placeholder-style="color:#CCCCCC" maxlength="8" />
+				<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分" type="number"  placeholder-style="color:#CCCCCC" maxlength="8" v-model="score" />
 			</view>
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisechushen">
 				<view style="font-size: 35upx;">选择初审人</view>
@@ -52,9 +60,9 @@
 			<view class="pupustyle">
 				<view class="topcontent">
 					<view class="topstyle">
-						<view class="topstyle_choise" style="justify-content: flex-start;margin-left: 25upx;">取消</view>
+						<view class="topstyle_choise" style="justify-content: flex-start;margin-left: 25upx;" @click="cancelChoise">取消</view>
 						<view class="topstyle_choise" style="font-size: 33upx;">选择员工</view>
-						<view class="topstyle_choise" style="justify-content: flex-end;margin-right: 25upx;" @click="showpup">完成</view>
+						<view class="topstyle_choise" style="justify-content: flex-end;margin-right: 25upx;" @click="completeChoise">完成</view>
 					</view>
 					<mSearch :show='false' @search="search($event,0)"></mSearch>
 				</view>
@@ -62,14 +70,15 @@
 				<view style="height: 180upx;"></view>
 				<scroll-view style="height: 1020upx;" scroll-y="true">
 					<checkbox-group @change="checkboxChange">
-						<label class="listitem" v-for="(item,index) in 30" :key='index'>
+						<label class="listitem"  v-for="(item,index) in alluser" :key='index'>
+
 							<view>
-								<checkbox :value="helo" :checked="false" color="#007AFF" />
+								<checkbox :value="item.id" :checked="item.ischeck" color="#007AFF" />
 							</view>
 							<view style="margin-left: 25upx;">
 								<image src="../../../static/head_default.png" style="width: 75upx;height: 75upx;margin-right: 20upx;"></image>
 							</view>
-							<view style="margin-left: 30upx;">小明</view>
+							<view style="margin-left: 30upx;">{{item.user_nickname}}</view>
 						</label>
 
 					</checkbox-group>
@@ -81,10 +90,10 @@
 
 		</uni-drawer>
 		
-		<!-- 递交审批选择人员的drawer -->
+	<!-- 	递交审批选择人员的drawer
 		<uni-drawer :visible="showLeft3" :mode="drawmode" @close="closeDrawer('left')">
-			<!--  -->
-			<view class="pupustyle">
+		 
+ 			<view class="pupustyle">
 				<view class="topcontent">
 					<view class="topstyle">
 						<view class="topstyle_choise" style="justify-content: flex-start;margin-left: 25upx;">取消</view>
@@ -109,14 +118,14 @@
 		
 					</checkbox-group>
 				</scroll-view>
-				<!-- 	<view class="buttonstyle popubottonbutton" @tap="popudown">
+				  	<view class="buttonstyle popubottonbutton" @tap="popudown">
 					确定
 				</view> -->
-			</view>
+			<!-- </view> -->
 		
-		</uni-drawer>
+		<!-- </uni-drawer> -->
 		
-
+ 
 		<!-- 选择规则的drawer -->
 		<uni-drawer :visible="showLeft1" :mode="drawmode" @close="closeDrawer2('left')">
 			<!--  -->
@@ -163,8 +172,8 @@
 	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import mydata from "../../../common/mydata.js"
-	import url1 from '../../common/url.js'
-	var that
+	import url1 from '../../../common/url.js'
+	 
 	var _self;
 	export default {
 		components: {
@@ -177,87 +186,8 @@
 		},
 		data() {
 			return {
-				guizearray:[
-					{
-							label: '加班类',
-							value: 1
-						},
-						{
-							label: '值班类',
-							value: 2
-						},
-						{
-							label: '客户表扬',
-							value: 3
-						},
-						{
-							label: '节能增效类',
-							value: 4
-						},
-						{
-							label: '建议类',
-							value: 5
-						},
-						{
-							label: '效率提升',
-							value: 6
-						},
-						{
-							label: '质量管理类',
-							value: 7
-						},
-						{
-							label: '安全管理类',
-							value: 8
-						},
-						{
-							label: '设备管理类',
-							value: 9
-						},
-						{
-							label: '其他类',
-							value: 10
-						},
-						{
-							label: '积极主动类',
-							value: 11
-						}
-				],
-				pickerSingleArray: [{
-						label: '中国',
-						value: 1
-					},
-					{
-						label: '俄罗斯',
-						value: 2
-					},
-					{
-						label: '美国',
-						value: 3
-					},
-					{
-						label: '日本',
-						value: 4
-					}
-				],
-				chushenarray: [{
-						label: '小明',
-						value: 1
-					},
-					{
-						label: '小红',
-						value: 2
-					},
-					{
-						label: '小黄',
-						value: 3
-					},
-					{
-						label: '小绿',
-						value: 4
-					}
-				],
 				fenlei:'',
+				fenleiid:0,
 				// 第三个pop
 				showLeft: false,
 				showRigth: false,
@@ -265,8 +195,9 @@
 
 				// 时间选择器需要的数据
 				showPicker: false,
-				date: '2019/01/01',
+				date: '2019-01-01',
 				type: 'date',
+				time: '00:00:00',
 				value: '',
 				// 文字项
 				'textnum':'0/30',
@@ -296,32 +227,49 @@
 				// 弹框id  1规则  2  初审人  3 终审人
 				'popid':1,
 				chushen:'',
+				chushenid:0,
 				zhongshen:'',
+				zhongshenid:0,
 				
-			    token:''
+			    token:'',
+				score:0  ,//输入的积分
+				//分类的列表类
+				liebie:[],
+				//管理人员列表
+				guanli:[],
+				//终审人员列表
+				zhongshenlist:[],
+				alluser:[],
+				allman:[],
+				checkeduser:[],
+				//用逗号分隔的选择人的字符串
+				choiseduserid:'',
+				// 选择的名称
+				choiseduserName:'',
+				showalluser:false
 			};
 		},
 		onReady() {
 			this.date = dateutll.dateUtils.getNowFormatDate()
+			var  ts=new Date() 
+			this.time=ts.getHours()+':'+ts.getMinutes()+':'+ts.getSeconds()
+			
 		},
 		onLoad() {
+				_self = this;
 			this.token=uni.getStorageSync('token')
+			console.error(this.token)
+			
 		},
 		methods: {
 			inputholder:function(e){
 				let length=this.inputresean.length;
 				this.textnum=length+'/'+'30'
 			},
-			show1(e) {
+			show1() {
 				//展示第三个弹窗  选择人员
-				if (e === 'left') {
-					this.showLeft = true
-					this.drawmode = 'left'
-
-				} else {
-					this.showRigth = true
-					this.drawmode = 'right'
-				}
+				this.showLeft = true
+				this.drawmode = 'left'
 			},
 			dijiaoshenpi:function(e){
 				if (e === 'left') {
@@ -341,25 +289,33 @@
 			onSelected(e) { //选择时间的picker
 				this.showPicker = false;
 				if (e) {
-					this[this.type] = e.value;
+					this[this.type] = e.value.replace(/\//g, '-')
 				}
 			},
-			onLoad: function() {
-				_self = this;
-			},
-
 			choiseRull: function(e) {
 				//展示规则的界面
 				if (e === 'left') {
-					console.log("showleft")
 					this.showLeft1 = true
 					this.drawmode = 'left'
-
 				}
 			},
 			search(e, val) {
 				// 搜索的方法
-				console.log(e, val);
+				 var allusertemp=new Array;
+				console.error(e)
+				if(e===''){
+					 this.alluser=this.allman
+				}else{
+					for(let us of this.alluser){
+					     if(us.user_nickname.indexOf(e)==-1){
+							 us.isshow=false
+						 }else{
+							  allusertemp.push(us)
+						 }
+					}
+					 this.alluser=allusertemp
+				}
+				
 			},
 			closeDrawer(e) {  //关闭第一个drawer
 				if (e === 'left') {
@@ -396,32 +352,32 @@
 			choisefenlei:function(){
 				// 选择分类
 				this.popid=1
-				
-				this.showpoplist(this.guizearray)
-				
+				this.getfenlei()
 			},
 			choisechushen:function(e){
+				//选择初审人
 				this.popid=2
-				
-				this.showpoplist(this.pickerSingleArray)
-			
+				this.getguali()
 			},
 			choisezhongshen:function(e){
+				//选择终审人
 					this.popid=3
-					
-					this.showpoplist(this.chushenarray)
-					
+					this.getzhongshen()
 			},
 			onCancel(e) {
 				console.log(e)
 			},
 			onConfirm(e) {
+				      console.error(JSON.stringify(e))
 					if(this.popid==1){
 						this.fenlei=e.label
+						this.fenleiid= e.value[0]
 					}else if(this.popid==2){
 						 this.chushen=e.label;
+						 this.chushenid= e.value[0]
 					}else{
 						this.zhongshen=e.label
+						this.zhongshenid= e.value[0]
 					}
 			},
 			showpoplist:function(list){
@@ -434,12 +390,260 @@
 			},
 			getguali:function(e){
 				//获取到管理人员并且展示列表
+				if(_self.guanli.length!=0){
+					this.showpoplist( _self.guanli)
+					return
+				}
 				uni.showLoading({
 					title: '加载中'
 				});
 				uni.request({
-					url:
+					url:url1.getguali,
+					data:{
+						token:_self.token,
+						deviceType:'android'
+					},
+					complete: (e) => {
+						uni.hideLoading()
+						if(e.data.code!=1){
+							uni.showToast({
+								title:e.data.msg,
+								duration:1000
+							})
+							return
+						}
+						var val=e.data.data.leaderList
+						for(let ls of val){
+							 var person={label:ls.user_nickname, value:ls.id};
+							 _self.guanli.push(person)
+						}
+						this.showpoplist( _self.guanli)
+					}
 				})
+			},
+			getzhongshen:function(e){
+				//获取到终审人员并且展示列表
+				_self.zhongshenlist=[]
+				if(_self.score==0){
+					uni.showToast({
+						title:'请填写积分',
+						duration:1000
+					})
+					return
+				}
+				uni.showLoading({
+					title: '加载中'
+				});
+				uni.request({
+					url:url1.getzhongshen,
+					data:{
+						token:_self.token,
+						score:_self.score,
+						deviceType:'android',
+						
+					},
+					complete: (e) => {
+						uni.hideLoading()
+						if(e.data.code!=1){
+							uni.showToast({
+								title:e.data.msg,
+								duration:1000
+							})
+							return
+						}
+						var val=e.data.data.leaderList
+						for(let ls of val){
+							 var person={label:ls.user_nickname, value:ls.id};
+							 _self.zhongshenlist.push(person)
+						}
+						this.showpoplist( _self.zhongshenlist)
+					}
+				})
+			},
+			getalluser:function(showC){
+				//获取到所有人员并且展示列表
+				if(_self.alluser.length>0){
+					_self.show1()
+					return
+				}
+				uni.showLoading({
+					title: '加载中'
+				});
+				uni.request({
+					url:url1.getalluser,
+					data:{
+						token:_self.token,
+						deviceType:'android'
+					},
+					complete: (e) => {
+						uni.hideLoading()
+						if(e.data.code!=1){
+							uni.showToast({
+								title:e.data.msg,
+								duration:1000
+							})
+							return
+						}
+						//解析用户数据
+						_self.alluser=e.data.data.userList
+						_self.allman=_self.alluser
+						for(let it of _self.alluser){
+							it.ischeck=false
+							 
+						}
+						console.error(JSON.stringify(_self.alluser))
+						_self.show1()
+					}
+				})
+			},
+			getfenlei:function(e){
+				//获取到所有的分类
+				if(_self.liebie.length!=0){
+					this.showpoplist( _self.liebie)
+					return
+				}
+				uni.showLoading({
+					title: '加载中'
+				});
+				uni.request({
+					url:url1.getfenlei,
+					data:{
+						token:_self.token,
+						deviceType:'android'
+					},
+					complete: (e) => {
+						uni.hideLoading()
+						if(e.data.code!=1){
+							uni.showToast({
+								title:e.data.msg,
+								duration:1000
+							})
+							return
+						}
+						var val=e.data.data.cateList
+						for(let ls of val){
+							 var person={label:ls.name, value:ls.id};
+							 _self.liebie.push(person)
+						}
+					    this.showpoplist(_self.liebie)
+					}
+				})
+			},
+			completeChoise:function(){
+				//选择人员点击完成按钮
+				this.showLeft=false
+				this.choiseduserName=''
+				for(let la of this.alluser){
+					if( this.checkeduser.indexOf(la.id+'')==-1){
+						la.ischeck=false
+					}else{
+						la.ischeck=true
+						this.choiseduserName+=la.user_nickname+','
+					}
+				}
+				if(this.choiseduserName.length>0){
+					this.showalluser=true
+				}else{
+					this.showalluser=false
+				}
+				this.choiseduserid=this.checkeduser.join(',')
+			},
+			cancelChoise:function(){
+				// 选择人员点击取消按钮
+				this.showLeft=false
+			},
+			checkboxChange: function (e) {
+				//checkbox的选中状态
+				this.checkeduser=e.target.value
+				for(let us of this.allman){
+					if(this.checkeduser.indexOf(us.id+'')!=-1){
+						us.ischeck=true
+					}else{
+						us.ischeck=false
+					}
+				}
+			
+            },
+			addshenqing:function(e){
+				//添加申请
+				if(this.fenleiid==0){
+					uni.showToast({
+						title:'选择分类',
+						duration:1000
+					})
+					return
+				}
+				if(this.chushenid==0)
+				{
+					uni.showToast({
+						title:'选择初审人',
+						duration:1000
+					})
+					return
+				}
+				if(this.zhongshenid==0){
+					uni.showToast({
+						title:'选择终审人',
+						duration:1000
+					})
+					return
+				}
+				if(this.choiseduserName.length==0){
+					uni.showToast({
+						title:'请选择加分人',
+						duration:1000
+					})
+					return
+				}
+				if(this.score==0){
+					uni.showToast({
+						title:'请选择加减分数',
+						duration:1000
+					})
+					return
+				}
+				if(this.rulltext==''){
+					uni.showToast({
+						title:'请选择规则',
+						duration:1000
+					})
+					return
+				}
+				if(this.inputresean==''){
+						uni.showToast({
+						title:'请选择加分原因',
+						duration:1000
+					})
+					return
+				}
+				console.error(_self.chushenid)
+				uni.showLoading({
+					title:'积分上传中。。'
+				})
+				uni.request({
+					url:url1.inputjifen,
+					data:{
+						token:_self.token,
+						deviceType:'android',
+						cate:_self.fenleiid,
+						reason:_self.inputresean,
+						mark:_self.rulltext,
+						benefit_user:_self.choiseduserid,
+						pass_user1:_self.chushenid,
+						pass_user2:_self.zhongshenid,
+						apply_time:_self.date+' '+_self.time,
+						score:_self.score
+					},
+					method:"POST",
+					complete: (e) => {
+						uni.hideLoading()
+						uni.showToast({
+							title:e.data.msg,
+							duration:1000
+						})
+					}
+				})
+				
 			}
 			
 

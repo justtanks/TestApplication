@@ -29,21 +29,22 @@
 			return {
 				login: {
 					loading: false,
-					phone: "18765512661",
-					password: "123456"
+					phone: "18253485939",
+					password: "111111"
 				},
 				result: {}
 			};
 		},
 		onLoad: function() {
 			that = this
-			const phone = uni.getStorageSync('token');
+			const phone = uni.getStorageSync('phone');
 			const password = uni.getStorageSync('password')
 			const token=uni.getStorageSync('token')
-			if (token!='') {
+			if (token!=null&&token!=''&&token!=undefined) {
 				this.login.phone = phone
 				this.login.password = password
-				this.setusermsg(token)
+				// this.setusermsg(token)
+				this.defaultHandlerLogin()
 			}
 		},
 		methods: {
@@ -69,14 +70,9 @@
 						}
 						uni.setStorageSync('phone', that.login.phone)
 						uni.setStorageSync('password', that.login.password)
-                        that.setusermsg(that.result.data.token)
-						uni.setStorage({
-							key: 'token',
-							data: that.result.data.token,
-							success: function() {
-							
-							}
-						});
+						uni.setStorageSync('token',that.result.data.token)
+						console.error(that.result.data.token)
+						that.setusermsg(that.result.data.token)
 						
 					},
 					fail: function(res) {
