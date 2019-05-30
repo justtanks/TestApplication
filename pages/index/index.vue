@@ -6,8 +6,8 @@
 			<view class="uni-row uni-flex" style="align-items: center;margin: 20upx 25upx;">
 				<image src="../../static/head_default.png" style="width: 80upx; height: 80upx;"></image>
 				<view class="uni-flex uni-column" style="margin-left: 10upx;margin-top: 10upx;">
-					<view style="font-size: 35upx;line-height: 1;">技术部小马</view>
-					<view style="font-size: 25upx; color: #BBBBBB;">(公司员工)</view>
+					<view style="font-size: 35upx;line-height: 1;">{{username}}</view>
+					<view style="font-size: 25upx; color: #BBBBBB;">{{userjob}}</view>
 				</view>
 			</view>
 			<view class="uni-row uni-flex" style="align-items: center;">
@@ -170,7 +170,9 @@
 					'DCloud完成B2轮融资，uni-app震撼发布',
 					'36氪热文榜推荐、CSDN公号推荐 DCloud CEO文章'
 				],
-				usermsg: {}
+				usermsg: {},
+				username:'',
+				userjob:''
 			}
 		},
 		onLoad() {
@@ -299,6 +301,8 @@
 					key: 'usermsg',
 					success: function(res) {
 						_self.usermsg = JSON.parse(res.data)
+						_self.username=_self.usermsg.data.user.user_nickname
+						_self.userjob=_self.usermsg.data.user.job_name
 						if (_self.usermsg.data.user.job == 22) {
 							// 是普通用户
 							_self.isnormal = true

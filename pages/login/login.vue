@@ -95,7 +95,7 @@
 					},
 					complete: (res) => {
 						// var msg=res.data
-						// console.error(JSON.stringify(res.data))
+						console.error(JSON.stringify(res.data))
 						uni.setStorageSync('usermsg',JSON.stringify(res.data))
 						// 挑战到首页
 							uni.switchTab({

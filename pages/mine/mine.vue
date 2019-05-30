@@ -5,16 +5,16 @@
 			<view style="display: flex;flex-direction: row;margin-left: 30upx;" @click="changepic">
 				<image src="../../static/head_default.png" style="width: 120upx;height: 120upx;"></image>
 				<view style="display: flex;flex-direction: column;margin-left: 20upx;">
-					<view style="font-size: 35upx;">姓名</view>
-					<view style="font-size: 25upx;margin-top: 35upx;">技术部</view>
+					<view style="font-size: 35upx;">{{username}}</view>
+					<view style="font-size: 25upx;margin-top: 35upx;">{{userjob}}</view>
 				</view>
 			</view>
 			<image src="../../static/tonext.png" class="tonextstyle" style="margin-right: 30upx;"></image>
 		</view>
 		<view class="mine_list" style="margin-top: 20upx;" @click="changename">
-			<view class="mine_textstyle">姓名</view>
+			<view class="mine_textstyle">{{username}}</view>
 			<view class="leftstyle">
-				<view style="margin-right: 20upx;color: #555555;">稍微</view>
+				<view style="margin-right: 20upx;color: #555555;">{{username}}</view>
 				<image src="../../static/tonext.png" class="tonextstyle" style="visibility: hidden;"></image>
 			</view>
 		</view>
@@ -26,16 +26,16 @@
 			</view>
 		</view>
 		<view class="mine_list">
-			<view class="mine_textstyle">工号</view>
+			<view class="mine_textstyle">职称</view>
 			<view class="leftstyle">
-				<view style="margin-right: 20upx;color: #555555;">100000003</view>
+				<view style="margin-right: 20upx;color: #555555;">{{titlename}}</view>
 				<image src="../../static/tobottom.png" class="tonextstyle" style="visibility: hidden;"></image>
 			</view>
 		</view>
 		<view class="mine_list">
 			<view class="mine_textstyle">电话</view>
 			<view class="leftstyle">
-				<view style="margin-right: 20upx;color: #555555;">13556533356</view>
+				<view style="margin-right: 20upx;color: #555555;">{{userphone}}</view>
 				<image src="../../static/tobottom.png" class="tonextstyle" style="visibility: hidden;"></image>
 			</view>
 		</view>
@@ -56,14 +56,20 @@
 	export default {
 		data() {
 			return {
-				usersex: "男",
 				sexlist: ['男', '女'],
-                token:''
+                token:'',
+				usermsg: {},
+				username:'',
+				userjob:'',
+				usersex:'',
+				userphone:'',
+				titlename:''
 			};
 		},
 		onLoad: function() {
 			_that = this
 			this.token=uni.getStorageSync('token')
+			this.getusermsg()
 		},
 		methods: {
 			changepic: function() {
@@ -119,6 +125,26 @@
 
 						}
 
+					}
+				})
+			},
+			getusermsg() {
+				uni.getStorage({
+					//获取到登录时候传递到缓存中的用户信息字符串，并且解析成对象
+					key: 'usermsg',
+					success: function(res) {
+						_that.usermsg = JSON.parse(res.data)
+						_that.username=_that.usermsg.data.user.user_nickname
+						_that.userjob=_that.usermsg.data.user.job_name
+						_that.userphone=_that.usermsg.data.user.user_login
+						_that.titlename=_that.usermsg.data.user.title_name
+						if(_that.usermsg.data.user.sex==0)
+						{
+							_that.usersex='男'
+						}else{
+							_that.usersex='女'
+						}
+				
 					}
 				})
 			}

@@ -4,7 +4,7 @@
 
 		<view style="background-color: #FFFFFF;">
 			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 35upx;line-height: 1;"
-			 show-confirm-bar="true" auto-height="true" placeholder="申请理由" maxlength="30" v-model="inputresean" @input="inputholder" />
+			 show-confirm-bar="true" auto-height="true" placeholder="请填写加减分理由" maxlength="30" v-model="inputresean" @input="inputholder" />
 			<view class="textnum">{{textnum}}</view>
 
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="getalluser()">
@@ -89,43 +89,7 @@
 			</view>
 
 		</uni-drawer>
-		
-	<!-- 	递交审批选择人员的drawer
-		<uni-drawer :visible="showLeft3" :mode="drawmode" @close="closeDrawer('left')">
-		 
- 			<view class="pupustyle">
-				<view class="topcontent">
-					<view class="topstyle">
-						<view class="topstyle_choise" style="justify-content: flex-start;margin-left: 25upx;">取消</view>
-						<view class="topstyle_choise" style="font-size: 33upx;">选择员工</view>
-						<view class="topstyle_choise" style="justify-content: flex-end;margin-right: 25upx;" @click="showpup">完成</view>
-					</view>
-					<mSearch :show='false' @search="search($event,0)"></mSearch>
-				</view>
-		
-				<view style="height: 180upx;"></view>
-				<scroll-view style="height: 1020upx;" scroll-y="true">
-					<checkbox-group @change="checkboxChange">
-						<label class="listitem" v-for="(item,index) in 30" :key='index'>
-							<view>
-								<checkbox :value="helo" :checked="false" color="#007AFF" />
-							</view>
-							<view style="margin-left: 25upx;">
-								<image src="../../../static/head_default.png" style="width: 75upx;height: 75upx;margin-right: 20upx;"></image>
-							</view>
-							<view style="margin-left: 30upx;">小明</view>
-						</label>
-		
-					</checkbox-group>
-				</scroll-view>
-				  	<view class="buttonstyle popubottonbutton" @tap="popudown">
-					确定
-				</view> -->
-			<!-- </view> -->
-		
-		<!-- </uni-drawer> -->
-		
- 
+	
 		<!-- 选择规则的drawer -->
 		<uni-drawer :visible="showLeft1" :mode="drawmode" @close="closeDrawer2('left')">
 			<!--  -->
@@ -150,7 +114,6 @@
                   		<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{item.value}}</view>
                   		<image class="tonextstyle" v-if="!item.last" src="../../../static/tonext.png"></image>
                   	</view>
-                  	<!-- <uni-load-more :status="status" :contentText="contentText"></uni-load-more> -->
                   </view>
 				</scroll-view>
 			</view>
@@ -232,7 +195,7 @@
 				zhongshenid:0,
 				
 			    token:'',
-				score:0  ,//输入的积分
+				score:0 ,//输入的积分
 				//分类的列表类
 				liebie:[],
 				//管理人员列表
@@ -611,7 +574,7 @@
 				}
 				if(this.inputresean==''){
 						uni.showToast({
-						title:'请选择加分原因',
+						title:'请填写加减分原因',
 						duration:1000
 					})
 					return
