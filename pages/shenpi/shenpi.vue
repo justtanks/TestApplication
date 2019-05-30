@@ -7,8 +7,8 @@
 				<view class="uni-flex uni-row">
 					<view style="flex: 1;" class="topstle" :class="{border2text:isfirstbottom}" @click="firstclick">全部</view>
 					<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">待审批</view>
-					<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已通过</view>
-					<view style="flex: 1;" class="topstle" :class="{border2text:isfourbottom}" @click="fourclick">未通过</view>
+					<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已审批</view>
+					<!-- <view style="flex: 1;" class="topstle" :class="{border2text:isfourbottom}" @click="fourclick">未通过</view> -->
 				</view>
 				<mSearch :show='false' @search="search1($event,0)"></mSearch>
 			</view>
@@ -40,7 +40,7 @@
 
 						<view class="buttoncontainer">
 							<view>
-								<button style="font-size: 25upx;" class="buttonstyle">{{loadtype==1?'去审批':'撤销'}}</button>
+								<button style="font-size: 25upx;" class="buttonstyle">{{loadtype==1?'去审批':'查看'}}</button>
 							</view>
 						</view>
 					</view>
@@ -93,16 +93,16 @@
 							<view class="shenpistyle-one ">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
 						</view>
 
-						<view class="buttoncontainer">
+						<!-- <view class="buttoncontainer">
 							<view>
 								<button style="font-size: 25upx;" class="buttonstyle">撤销</button>
 							</view>
-						</view>
+						</view> -->
 					</view>
 					<uni-load-more :status="status3" :contentText="contentText"></uni-load-more>
 				</view>
-				<view v-show="isfourbottom" style="width: 100%;">
-					<!-- 未通过的界面 -->
+				<!-- <view v-show="isfourbottom" style="width: 100%;">
+					 
 					<view class="cadlist-one">
 						<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
 						<view style="display: flex;flex-direction: row;justify-content: space-between;">
@@ -126,7 +126,7 @@
 						</view>
 					</view>
 					<uni-load-more :status="status4" :contentText="contentText"></uni-load-more>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<!-- 下面使用户的界面 -->
