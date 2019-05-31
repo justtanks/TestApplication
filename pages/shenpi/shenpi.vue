@@ -35,7 +35,7 @@
 								小明&nbsp;&nbsp;驳回</view> -->
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one">申请时间: {{item.datestr}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
+							<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
 
 						<view class="buttoncontainer">
@@ -59,12 +59,12 @@
 							<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one">申请时间: {{item.datestr}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
+							<view class="shenpistyle-one">申请时间:  {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
 
 						<view class="buttoncontainer">
 							<view>
-								<button style="font-size: 25upx;" class="buttonstyle" @click="toshenpi()">去审批</button>
+								<button style="font-size: 25upx;" class="buttonstyle" @click="toshenpi(item)">去审批</button>
 							</view>
 						</view>
 					</view>
@@ -83,7 +83,7 @@
 							<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one">申请时间: {{item.datestr}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
+							<view class="shenpistyle-one">申请时间:  {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
 					</view>
 					<uni-load-more :status="status3" :contentText="contentText"></uni-load-more>
@@ -190,7 +190,15 @@
 				page3: 1,
 				allshenpilist: [],
 				completelist: [],
-				nodolist: []
+				nodolist: [],
+				
+				test:{
+					name:1,
+					page:"helo",
+					ssfdf:'sss'
+					
+					
+				}
 
 			};
 		},
@@ -328,8 +336,9 @@
 
 			},
 			toshenpi: function(e) {
+				 
 				uni.navigateTo({
-					url: '../normaluser/myshenpi/myshenpi'
+					url: '../normaluser/myshenpi/myshenpi?itemList='+encodeURIComponent(JSON.stringify(e))
 				})
 			},
 			fenlei: function(e) {
@@ -382,12 +391,12 @@
 								return
 							}
 							_self.allshenpilist = _self.allshenpilist.concat(e.data.data.applyList)
-							for (let it of _self.allshenpilist) {
-								let date = new Date(it.apply_time * 1000)
-								it.datestr = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay() + ' ' + date.getHours() + ':' +
-									date.getMinutes()
-							}
-
+// 							for (let it of _self.allshenpilist) {
+// 								let date = new Date(it.apply_time * 1000)
+// 								it.datestr = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay() + ' ' + date.getHours() + ':' +
+// 									date.getMinutes()
+// 							}
+// 
 
 						} else {
 							uni.showToast({

@@ -71,7 +71,6 @@
 						uni.setStorageSync('phone', that.login.phone)
 						uni.setStorageSync('password', that.login.password)
 						uni.setStorageSync('token',that.result.data.token)
-						console.error(that.result.data.token)
 						that.setusermsg(that.result.data.token)
 						
 					},

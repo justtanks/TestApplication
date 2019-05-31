@@ -17,5 +17,7 @@ module.exports ={
    //获取到积分分类
    getfenlei:"http://47.105.199.11"+'/api/app/score/getScoreCate',
    //获取我的审批列表
-   getshenpilist:"http://47.105.199.11"+'/api/app/score/getApplyList'
+   getshenpilist:"http://47.105.199.11"+'/api/app/score/getApplyList',
+   //提交审批
+   shenpi:"http://47.105.199.11"+'/api/app/score/doneApply'
 }
