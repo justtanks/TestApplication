@@ -10,9 +10,9 @@
 					<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已审批</view>
 					<!-- <view style="flex: 1;" class="topstle" :class="{border2text:isfourbottom}" @click="fourclick">未通过</view> -->
 				</view>
-				<mSearch :show='false' @search="search1($event,0)"></mSearch>
+				<!-- <mSearch :show='false' @search="search1($event,0)"></mSearch> -->
 			</view>
-			<view style="height:170upx ;"></view>
+			<view style="height:90upx ;"></view>
 			<view class="content">
 				<view v-show="isfirstbottom" style="width: 100%;">
 					<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
@@ -40,7 +40,7 @@
 
 						<view class="buttoncontainer">
 							<view>
-								<button style="font-size: 25upx;" class="buttonstyle">{{loadtype==1?'去审批':'查看'}}</button>
+								<button style="font-size: 25upx;" class="buttonstyle">查看</button>
 							</view>
 						</view>
 					</view>
@@ -167,11 +167,10 @@
 				loadtype: 3,
 				isluru: false,
 				// 上推加载更多的
-				status1: 'nomore',
-				status2: 'nomore',
-				status3: 'noMore',
-				status4: 'noMore',
-				status: "nomore",
+				status1: 'more',
+				status2: 'more',
+				status3: 'more',
+				status: "more",
 				loadingText: '加载中...',
 				// loadingType: 0, //定义加载方式 0---contentdown  1---contentrefresh 2---contentnomore
 				contentText: {
@@ -224,10 +223,30 @@
 			}
 		},
 		onPullDownRefresh: function() {
-			// 执行下拉刷新的方法
-			setTimeout(function() {
-				uni.stopPullDownRefresh()
-			}, 1000)
+			// // 执行下拉刷新的方法
+			// setTimeout(function() {
+			// 	uni.stopPullDownRefresh()
+			// }, 1000)
+			switch (_self.jiemiannum) {
+				case 1:
+					_self.page1 = 1
+                     _self.allshenpilist=[]
+					 this.getAllShenpiMsg()
+					break;
+				case 2:
+					_self.page2 = 1
+					_self.nodolist=[]
+					this.getnoneShenpi()
+					break;
+				case 3:
+					_self.page3 = 1
+                    _self.completelist=[]
+					this.getreadyShenpi()
+					break;
+				default:
+					break
+
+			}
 		},
 		onReachBottom: function() {
 			//触底的时候请求数据，即为上拉加载更多
@@ -277,13 +296,6 @@
 				_self.isfourbottom = false;
 				_self.jiemiannum = 3;
 			},
-			// fourclick: function(e) {
-			// 	_self.isfirstbottom = false;
-			// 	_self.issecondbottom = false;
-			// 	_self.isthirdbottom = false;
-			// 	_self.isfourbottom = true;
-			// 	_self.jiemiannum = 4;
-			// },
 			search1(e, val) {
 				// 搜索的方法
 				console.log(e, val);
@@ -363,7 +375,12 @@
 					complete: (e) => {
 						_self.status1 = 'more'
 						uni.hideLoading()
+						uni.stopPullDownRefresh()
 						if (e.data.code == '1') {
+							if (e.data.data.applyList.length == 0) {
+								_self.status1 = 'nomore'
+								return
+							}
 							_self.allshenpilist = _self.allshenpilist.concat(e.data.data.applyList)
 							for (let it of _self.allshenpilist) {
 								let date = new Date(it.apply_time * 1000)
@@ -396,13 +413,13 @@
 					complete: (e) => {
 						_self.status2 = 'more'
 						uni.hideLoading()
+						uni.stopPullDownRefresh()
 						if (e.data.code == '1') {
+							if (e.data.data.applyList.length == 0) {
+								_self.status2 = 'nomore'
+								return
+							}
 							_self.nodolist = _self.nodolist.concat(e.data.data.applyList)
-							// for(let it of _self.allshenpilist){
-							//  let date=new Date(it.apply_time*1000)
-							//  it.datestr=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()+':'+date.getMinutes()
-							// }
-
 
 						} else {
 							uni.showToast({
@@ -429,12 +446,13 @@
 					complete: (e) => {
 						_self.status3 = 'more'
 						uni.hideLoading()
+						uni.stopPullDownRefresh()
 						if (e.data.code == '1') {
+							if (e.data.data.applyList.length == 0) {
+								_self.status3 = 'nomore'
+								return
+							}
 							_self.completelist = _self.completelist.concat(e.data.data.applyList)
-							// for(let it of _self.allshenpilist){
-							//  let date=new Date(it.apply_time*1000)
-							//  it.datestr=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()+':'+date.getMinutes()
-							// }
 
 						} else {
 							uni.showToast({
@@ -445,8 +463,6 @@
 					}
 				})
 			}
-
-
 		}
 	}
 </script>
