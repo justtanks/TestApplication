@@ -15,6 +15,7 @@ module.exports ={
    //提交申请列表
    inputjifen:"http://47.105.199.11"+'/api/app/score/applyScore',
    //获取到积分分类
-   getfenlei:"http://47.105.199.11"+'/api/app/score/getScoreCate'
-   
+   getfenlei:"http://47.105.199.11"+'/api/app/score/getScoreCate',
+   //获取我的审批列表
+   getshenpilist:"http://47.105.199.11"+'/api/app/score/getApplyList'
 }

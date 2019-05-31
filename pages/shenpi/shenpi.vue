@@ -17,25 +17,25 @@
 				<view v-show="isfirstbottom" style="width: 100%;">
 					<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
 					<!-- 全部的审批 -->
-					<view class="cadlist-one" v-for="(item,index) in 7" :key="index">
-						<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
+					<view class="cadlist-one" v-for="(item,index) in allshenpilist" :key="index">
+						<view class="toptext-one">{{item.reason}}</view>
 						<view style="display: flex;flex-direction: row;justify-content: space-between;">
-							<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
-							<view class="fenshustyle">40分</view>
+							<view class="toptext-two">审批对象：{{item.benefit_user_name}}</view>
+							<view class="fenshustyle">{{item.score}}分</view>
 						</view>
-						<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
+						<view class="toptext-two" v-if="!isluru">申请类别：{{item.cate_name}} </view>
 						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-							<view class="shenpistyle-one "> 审批人:</view>
+							<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 							<!-- 实现三种样式的方式 -->
-							<view class="daishenpi" v-if="loadtype==1">
+							<!-- <view class="daishenpi" v-if="loadtype==1">
 								小明&nbsp;&nbsp;待审批</view>
 							<view class="daishenpi-tongguo" v-if="loadtype==2">
 								小明&nbsp;&nbsp;通过</view>
 							<view class="daishenpi-bohui" v-if="loadtype==3">
-								小明&nbsp;&nbsp;驳回</view>
+								小明&nbsp;&nbsp;驳回</view> -->
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+							<view class="shenpistyle-one">申请时间: {{item.datestr}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
 
 						<view class="buttoncontainer">
@@ -48,21 +48,18 @@
 				</view>
 				<view v-show="issecondbottom" style="width: 100%;">
 					<!-- 申请待通过的界面 -->
-					<view class="cadlist-one">
-						<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
+					<view class="cadlist-one" v-for="(item,index) in nodolist" :key="index">
+						<view class="toptext-one">{{item.reason}}</view>
 						<view style="display: flex;flex-direction: row;justify-content: space-between;">
-							<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
-							<view class="fenshustyle">40分</view>
+							<view class="toptext-two">审批对象：{{item.benefit_user_name}}</view>
+							<view class="fenshustyle">{{item.score}}分</view>
 						</view>
-						<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
+						<view class="toptext-two" v-if="!isluru">申请类别：{{item.cate_name}} </view>
 						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-							<view class="shenpistyle-one "> 审批人:</view>
-							<!-- 实现三种样式的方式 -->
-							<view class="daishenpi">
-								小明&nbsp;&nbsp;待审批</view>
+							<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one ">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+							<view class="shenpistyle-one">申请时间: {{item.datestr}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
 
 						<view class="buttoncontainer">
@@ -75,58 +72,23 @@
 				</view>
 				<view v-show="isthirdbottom" style="width: 100%;">
 					<!-- 已经通过的界面 -->
-					<view class="cadlist-one">
-						<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
+					<view class="cadlist-one" v-for="(item,index) in completelist" :key="index">
+						<view class="toptext-one">{{item.reason}}</view>
 						<view style="display: flex;flex-direction: row;justify-content: space-between;">
-							<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
-							<view class="fenshustyle">40分</view>
+							<view class="toptext-two">审批对象：{{item.benefit_user_name}}</view>
+							<view class="fenshustyle">{{item.score}}分</view>
 						</view>
-						<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
+						<view class="toptext-two" v-if="!isluru">申请类别：{{item.cate_name}} </view>
 						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-							<view class="shenpistyle-one "> 审批人:</view>
-							<!-- 实现三种样式的方式 -->
-							<view class="daishenpi-tongguo">
-								小明&nbsp;&nbsp;通过</view>
-
+							<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one ">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
+							<view class="shenpistyle-one">申请时间: {{item.datestr}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
-
-						<!-- <view class="buttoncontainer">
-							<view>
-								<button style="font-size: 25upx;" class="buttonstyle">撤销</button>
-							</view>
-						</view> -->
 					</view>
 					<uni-load-more :status="status3" :contentText="contentText"></uni-load-more>
 				</view>
-				<!-- <view v-show="isfourbottom" style="width: 100%;">
-					 
-					<view class="cadlist-one">
-						<view class="toptext-one">这是第一个列表的改善 待审批积分录入</view>
-						<view style="display: flex;flex-direction: row;justify-content: space-between;">
-							<view class="toptext-two">{{isluru?"积分录入":"积分申请"}}</view>
-							<view class="fenshustyle">40分</view>
-						</view>
-						<view class="toptext-two" v-if="!isluru">申请事由：由于什么什么 </view>
-						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-							<view class="shenpistyle-one "> 审批人:</view>
-							<view class="daishenpi-bohui">
-								小明&nbsp;&nbsp;驳回</view>
-						</view>
-						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one ">申请时间: 04月06日&nbsp;&nbsp;&nbsp; &nbsp;申请人:张小孔</view>
-						</view>
 
-						<view class="buttoncontainer">
-							<view>
-								<button style="font-size: 25upx;" class="buttonstyle">撤销</button>
-							</view>
-						</view>
-					</view>
-					<uni-load-more :status="status4" :contentText="contentText"></uni-load-more>
-				</view> -->
 			</view>
 		</view>
 		<!-- 下面使用户的界面 -->
@@ -184,6 +146,7 @@
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import MxDatePicker from '../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../common/util.js'
+	import URL from '../../common/url.js'
 
 	export default {
 		components: {
@@ -197,7 +160,7 @@
 				isfirstbottom: true,
 				issecondbottom: false,
 				isthirdbottom: false,
-				isfourbottom: false,
+				// isfourbottom: false,
 				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				// 显示当前界面
 				jiemiannum: 1,
@@ -221,13 +184,34 @@
 				date: '2019/01/01',
 				type: 'date',
 				value: '',
-				usermsg: {} //用户的信息对象
+				usermsg: {}, //用户的信息对象
+				token: '',
+				page1: 1,
+				page2: 1,
+				page3: 1,
+				allshenpilist: [],
+				completelist: [],
+				nodolist: []
 
 			};
 		},
 		onLoad: function() {
 			_self = this;
+			this.token = uni.getStorageSync('token')
 			this.changeTab()
+			if (this.isnormal == 1) {
+				// 管理人员的界面
+				uni.showLoading({
+
+				})
+				this.getAllShenpiMsg()
+				this.getnoneShenpi()
+				this.getreadyShenpi()
+
+			} else {
+				// 普通用户界面
+
+			}
 		},
 		onReady() {
 			this.date = dateutll.dateUtils.getNowFormatDate()
@@ -248,22 +232,22 @@
 		onReachBottom: function() {
 			//触底的时候请求数据，即为上拉加载更多
 			//为了更加清楚的看到效果，添加了定时器
-			console.log(_self.jiemiannum);
-			console.log(_self.status1)
 
 			switch (_self.jiemiannum) {
 				case 1:
 					_self.status1 = 'loading';
-					console.log(_self.status1)
+					_self.page1++
+					this.getAllShenpiMsg()
 					break;
 				case 2:
 					_self.status2 = 'loading'
+					_self.page2++
+					this.getnoneShenpi()
 					break;
 				case 3:
 					_self.status3 = 'loading'
-					break;
-				case 4:
-					_self.status4 = 'loading'
+					_self.page3++
+					this.getreadyShenpi()
 					break;
 				default:
 					break;
@@ -293,13 +277,13 @@
 				_self.isfourbottom = false;
 				_self.jiemiannum = 3;
 			},
-			fourclick: function(e) {
-				_self.isfirstbottom = false;
-				_self.issecondbottom = false;
-				_self.isthirdbottom = false;
-				_self.isfourbottom = true;
-				_self.jiemiannum = 4;
-			},
+			// fourclick: function(e) {
+			// 	_self.isfirstbottom = false;
+			// 	_self.issecondbottom = false;
+			// 	_self.isthirdbottom = false;
+			// 	_self.isfourbottom = true;
+			// 	_self.jiemiannum = 4;
+			// },
 			search1(e, val) {
 				// 搜索的方法
 				console.log(e, val);
@@ -309,24 +293,6 @@
 				console.log(e, val);
 			},
 			changeTab() {
-				// uni.getStorage({
-				// 	key: "isnomaluser",
-				// 	success: function(res) {
-				// 		_self.isnormal = res.data
-				// 		//改变tab在index界面
-				// 		//改变navitor 的文字
-				// 		if(_self.isnormal==1){
-				// 			uni.setNavigationBarTitle({
-				// 				title: '审批'
-				// 			});
-				// 		}else{
-				// 			uni.setNavigationBarTitle({
-				// 				title: '积分事件'
-				// 			});
-				// 		}
-				// 		
-				// 	}
-				// })
 				uni.getStorage({
 					//获取到登录时候传递到缓存中的用户信息字符串，并且解析成对象
 					key: 'usermsg',
@@ -381,7 +347,105 @@
 
 					}
 				})
+			},
+			getAllShenpiMsg: function() {
+				//获取所有的审批
+				uni.request({
+					url: URL.getshenpilist,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						type: 'all',
+						page: _self.page1,
+						pageSize: 15
+					},
+
+					complete: (e) => {
+						_self.status1 = 'more'
+						uni.hideLoading()
+						if (e.data.code == '1') {
+							_self.allshenpilist = _self.allshenpilist.concat(e.data.data.applyList)
+							for (let it of _self.allshenpilist) {
+								let date = new Date(it.apply_time * 1000)
+								it.datestr = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay() + ' ' + date.getHours() + ':' +
+									date.getMinutes()
+							}
+
+
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
+			},
+			getnoneShenpi: function() {
+				//获取到所有的未审批
+				uni.request({
+					url: URL.getshenpilist,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						type: 'apply',
+						page: _self.page2,
+						pageSize: 15
+					},
+
+					complete: (e) => {
+						_self.status2 = 'more'
+						uni.hideLoading()
+						if (e.data.code == '1') {
+							_self.nodolist = _self.nodolist.concat(e.data.data.applyList)
+							// for(let it of _self.allshenpilist){
+							//  let date=new Date(it.apply_time*1000)
+							//  it.datestr=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()+':'+date.getMinutes()
+							// }
+
+
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
+
+			},
+			getreadyShenpi: function() {
+				//获取到所有的已审批
+				uni.request({
+					url: URL.getshenpilist,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						type: 'done',
+						page: _self.page3,
+						pageSize: 15
+					},
+
+					complete: (e) => {
+						_self.status3 = 'more'
+						uni.hideLoading()
+						if (e.data.code == '1') {
+							_self.completelist = _self.completelist.concat(e.data.data.applyList)
+							// for(let it of _self.allshenpilist){
+							//  let date=new Date(it.apply_time*1000)
+							//  it.datestr=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()+':'+date.getMinutes()
+							// }
+
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
 			}
+
 
 		}
 	}
