@@ -39,8 +39,8 @@
 			that = this
 			const phone = uni.getStorageSync('phone');
 			const password = uni.getStorageSync('password')
-			const token=uni.getStorageSync('token')
-			if (token!=null&&token!=''&&token!=undefined) {
+			const token = uni.getStorageSync('token')
+			if (token != null && token != '' && token != undefined) {
 				this.login.phone = phone
 				this.login.password = password
 				// this.setusermsg(token)
@@ -65,51 +65,68 @@
 							uni.showToast({
 								title: that.result.msg,
 								duration: 1000,
-								icon:'none'
+								icon: 'none'
 							})
 							return
 						}
 						uni.setStorageSync('phone', that.login.phone)
 						uni.setStorageSync('password', that.login.password)
-						uni.setStorageSync('token',that.result.data.token)
+						uni.setStorageSync('token', that.result.data.token)
 						that.setusermsg(that.result.data.token)
-						
+
 					},
 					fail: function(res) {
 						that.login.loading = false;
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none',
-							position:'bottom'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+
 					}
 				})
 
 			},
 			setusermsg: function(token) {
-                // 设置请求的用户信息到缓存
+				// 设置请求的用户信息到缓存
 				uni.request({
-					url:url1.getuserinfo,
-					data:{
-						token:token,
-						deviceType:'android'
+					url: url1.getuserinfo,
+					data: {
+						token: token,
+						deviceType: 'android'
 					},
 					complete: (res) => {
 						// var msg=res.data
 						console.error(JSON.stringify(res.data))
-						uni.setStorageSync('usermsg',JSON.stringify(res.data))
+						uni.setStorageSync('usermsg', JSON.stringify(res.data))
 						// 挑战到首页
-							uni.switchTab({
+						uni.switchTab({
 							url: '../index/index',
 							success: function() {
 								//跳转到首页登录
-						
+
 							}
 						})
 					},
 					fail: (res) => {
-						console.log(res.data)
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon: 'none',
+							position: 'bottom'
+						})
+						// #endif
+						
 					}
 				})
 			}

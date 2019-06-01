@@ -146,18 +146,21 @@
 				   },
 				   complete:function(e){
 				   	uni.hideLoading()
-					uni.showToast({
-						title:e.data.msg,
-						duration:1000,
-						icon:'none'
-					})
+					that.toast(e.data.msg)
 				   },
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 			},
@@ -174,6 +177,20 @@
 					urls: this.imageList
 				})
 			},
+			toast:function(msg){
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif
+				
+			}
 		},
 		onBackPress() {
 			// 后退的方法

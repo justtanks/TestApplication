@@ -415,19 +415,22 @@
 							}
 							_self.allshenpilist = _self.allshenpilist.concat(e.data.data.applyList)
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 			},
@@ -455,19 +458,22 @@
 							_self.nodolist = _self.nodolist.concat(e.data.data.applyList)
 
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 
@@ -497,19 +503,22 @@
 							_self.completelist = _self.completelist.concat(e.data.data.applyList)
 
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 			},
@@ -534,19 +543,23 @@
 							}
 							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								// icon:'none'
-							})
+							_self.toast(e.data.msg)
+							
 						}
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 			},
@@ -574,21 +587,38 @@
 							}
 							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
+			},
+			toast:function(msg){
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif
+				
 			}
 		}
 	}

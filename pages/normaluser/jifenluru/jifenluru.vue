@@ -388,11 +388,7 @@
 				//获取到终审人员并且展示列表
 				_self.zhongshenlist=[]
 				if(_self.score==0){
-					uni.showToast({
-						title:'请填写积分',
-						duration:1000,
-						icon:'none'
-					})
+					_self.toast('请填写积分')
 					return
 				}
 				uni.showLoading({
@@ -424,11 +420,18 @@
 						this.showpoplist( _self.zhongshenlist)
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 			},
@@ -468,11 +471,7 @@
 						_self.show1()
 					},
 					fail: function(res) {
-						uni.showToast({
-							title: '网络错误',
-							duration: 1000,
-							icon:'none'
-						})
+						_self.toast('网络错误')
 					}
 				})
 			},
@@ -509,11 +508,18 @@
 					    this.showpoplist(_self.liebie)
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 			},
@@ -555,60 +561,32 @@
 			addshenqing:function(e){
 				//添加申请
 				if(this.fenleiid==0){
-					uni.showToast({
-						title:'选择分类',
-						duration:1000,
-						icon:'none'
-					})
+					_self.toast('选择分类')
 					return
 				}
 				if(this.chushenid==0)
 				{
-					uni.showToast({
-						title:'选择初审人',
-						duration:1000,
-						icon:'none'
-					})
+					_self.toast('选择初审人')
 					return
 				}
 				if(this.zhongshenid==0){
-					uni.showToast({
-						title:'选择终审人',
-						duration:1000,
-						icon:'none'
-					})
+					_self.toast('选择终审人')
 					return
 				}
 				if(this.choiseduserName.length==0){
-					uni.showToast({
-						title:'请选择加分人',
-						duration:1000,
-						icon:'none'
-					})
+						_self.toast('请选择加分人')
 					return
 				}
 				if(this.score==0){
-					uni.showToast({
-						title:'请选择加减分数',
-						duration:1000,
-						icon:'none'
-					})
+						_self.toast('请选择加减分数')
 					return
 				}
 				if(this.rulltext==''){
-					uni.showToast({
-						title:'请选择规则',
-						duration:1000,
-						icon:'none'
-					})
+						_self.toast('请选择规则')
 					return
 				}
 				if(this.inputresean==''){
-						uni.showToast({
-						title:'请填写加减分原因',
-						duration:1000,
-						icon:'none'
-					})
+					_self.toast('请填写加减分原因')
 					return
 				}
 				uni.showLoading({
@@ -637,23 +615,40 @@
 								duration:1000
 							})
 						}else{
-							uni.showToast({
-								title:e.data.msg,
-								duration:1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 						
 					},
 					
 					fail: function(res) {
-						uni.showToast({
-							title: '网络错误',
-							duration: 1000,
-							icon:'none'
-						})
+					// #ifdef APP-PLUS
+					plus.nativeUI.toast("网络错误");
+					// #endif
+					//#ifdef MP-WEIXIN
+					uni.showToast({
+						title: '网络错误',
+						duration: 1000,
+						icon: 'none',
+						position: 'bottom'
+					})
+					// #endif
+					
 					}
 				})
+				
+			},
+			toast:function(msg){
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif
 				
 			}
 			

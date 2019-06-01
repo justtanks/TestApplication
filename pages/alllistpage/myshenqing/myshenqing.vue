@@ -247,19 +247,12 @@
 							}
 							_self.notshenpi = _self.notshenpi.concat(e.data.data.applyList)
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 					},
 					fail: function(res) {
-						uni.showToast({
-							title: '网络错误',
-							duration: 1000,
-							icon:'none'
-						})
+						_self.toast('网络错误')
+						
 					}
 				})
 			},
@@ -287,19 +280,11 @@
 							_self.allreadyshenpi = _self.allreadyshenpi.concat(e.data.data.applyList)
 
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 					},
 					fail: function(res) {
-						uni.showToast({
-							title: '网络错误',
-							duration: 1000,
-							icon:'none'
-						})
+						_self.toast('网络错误')
 					}
 				})
 
@@ -328,19 +313,22 @@
 							_self.refuseshenpi = _self.refuseshenpi.concat(e.data.data.applyList)
 
 						} else {
-							uni.showToast({
-								title: '信息获取失败',
-								duration: 1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 						}
 					},
 					fail: function(res) {
+						// #ifdef APP-PLUS
+						plus.nativeUI.toast("网络错误");
+						// #endif
+						//#ifdef MP-WEIXIN
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon: 'none',
+							position: 'bottom'
 						})
+						// #endif
+						
 					}
 				})
 			},
@@ -350,6 +338,20 @@
 					url:'../../normaluser/shenpixiangqing/shenpixiangqing?itemdata='+encodeURIComponent(JSON.stringify(e))
 				})
 			},
+			toast:function(msg){
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif
+				
+			}
 
 		}
 	}
