@@ -19,5 +19,9 @@ module.exports ={
    //获取我的审批列表
    getshenpilist:"http://47.105.199.11"+'/api/app/score/getApplyList',
    //提交审批
-   shenpi:"http://47.105.199.11"+'/api/app/score/doneApply'
+   shenpi:"http://47.105.199.11"+'/api/app/score/doneApply',
+   //我提交的审批的列表
+   myshenpi:"http://47.105.199.11"+'/api/app/score/getMyApplyList',
+   //获取我的积分事件
+   jifenlist:"http://47.105.199.11"+'/api/app/score/getMyScoreList'
 }

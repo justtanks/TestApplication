@@ -40,7 +40,7 @@
 
 						<view class="buttoncontainer">
 							<view>
-								<button style="font-size: 25upx;" class="buttonstyle">查看</button>
+								<!-- <button style="font-size: 25upx;" class="buttonstyle">查看</button> -->
 							</view>
 						</view>
 					</view>
@@ -190,16 +190,7 @@
 				page3: 1,
 				allshenpilist: [],
 				completelist: [],
-				nodolist: [],
-				
-				test:{
-					name:1,
-					page:"helo",
-					ssfdf:'sss'
-					
-					
-				}
-
+				nodolist: []
 			};
 		},
 		onLoad: function() {
@@ -391,13 +382,6 @@
 								return
 							}
 							_self.allshenpilist = _self.allshenpilist.concat(e.data.data.applyList)
-// 							for (let it of _self.allshenpilist) {
-// 								let date = new Date(it.apply_time * 1000)
-// 								it.datestr = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay() + ' ' + date.getHours() + ':' +
-// 									date.getMinutes()
-// 							}
-// 
-
 						} else {
 							uni.showToast({
 								title: '信息获取失败',

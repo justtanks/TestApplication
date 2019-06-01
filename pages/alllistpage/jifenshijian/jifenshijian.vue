@@ -7,43 +7,36 @@
 					<view class="toptext1 ">分类</view>
 					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 				</view>
-				<view class="topbaritem" @click="bumen">
+				<!-- <view class="topbaritem" @click="bumen">
 					<view class="toptext1 ">部门</view>
 					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
-				</view>
+				</view> -->
 				<view class="topbaritem" @click="shijian('date')">
 					<view class="toptext1 ">时间</view>
 					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 				</view>
-
-				<!-- 	<view class="toptext1  ">部门</view>
-				<image class="tonextstyle" src="../../../static/tobottom.png"></image>
-				<view class="toptext1 ">时间</view>
-				<image class="tonextstyle" src="../../../static/tobottom.png"></image>
-			 -->
-
 			</view>
-			<mSearch :show='false' @search="search($event,0)"></mSearch>
+			<!-- <mSearch :show='false' @search="search($event,0)"></mSearch> -->
 		</view>
-		<view style="height:160upx ;"></view>
+		<view style="height:90upx ;"></view>
 		<view>
 			<view style="width: 100%;">
 				<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
 				<!-- 所有的任务 -->
-				<view class="cadlist-one">
-					<view class="toptext-one">积分事件的列表，标识现在有哪些积分事件正在发生</view>
+				<view class="cadlist-one" v-for="(item,index) in allmessgelist" :key="index">
+					<view class="toptext-one">{{item.reason}}</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">绩效分/技术部</view>
-						<view class="fenshustyle">40分</view>
+						<view class="toptext-two">分类:{{item.cate_name}}</view>
+						<view class="fenshustyle">{{item.score}}</view>
 					</view>
 
-					<!-- <view class="toptext-two">备注:由于什么什么 </view> -->
+					<view class="toptext-two">备注:{{item.mark}} </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 时间:1992-9-10</view>
+						<view class="shenpistyle-one ">申请时间:{{item.apply_time}}</view>
 					</view>
 					<view class="thingstyle">
-						<view class="shenpistyle-one ">对象：小明</view>
-						<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：小明</view>
+						<view class="shenpistyle-one ">积分对象：{{item.benefit_user_name}}</view>
+						<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：{{item.apply_user_name}}</view>
 					</view>
 				</view>
 				<uni-load-more :status="status" :contentText="contentText"></uni-load-more>
@@ -60,6 +53,7 @@
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../../common/util.js'
+	import URL from '../../../common/url.js'
 	export default {
 		components: {
 			mSearch,
@@ -70,7 +64,7 @@
 			return {
 				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				// 上推加载更多的
-				status: 'nomore',
+				status: 'more',
 				loadingText: '加载中...',
 				contentText: {
 					contentdown: '↑上拉显示更多',
@@ -82,10 +76,19 @@
 				date: '2019/01/01',
 				type: 'date',
 				value: '',
+				page1: 1,
+				token: '',
+				allmessgelist: [],
+
 			};
 		},
 		onLoad: function() {
 			_self = this;
+			this.token = uni.getStorageSync('token')
+			uni.showLoading({
+
+			})
+			this.getallmessge(0)
 
 		},
 		onReady() {
@@ -100,13 +103,17 @@
 		},
 		onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
-			setTimeout(function() {
-				uni.stopPullDownRefresh()
-			}, 1000)
+			this.allmessgelist = []
+			_self.page1 = 1
+			this.getnotShenpiMsg()
+
+
 		},
 		onReachBottom: function() {
 			//触底的时候请求数据，即为上拉加载更多
 			_self.status = 'loading';
+			_self.page1++
+			this.getallmessge()
 		},
 		methods: {
 			search(e, val) {
@@ -138,6 +145,38 @@
 					itemList: ['部门1', '部门2', '部门3'],
 					success: function(res) {
 
+					}
+				})
+			},
+			getallmessge: function() {
+				//获取所有的积分事件列表
+				//获取所有的审批
+				
+				uni.request({
+					url: URL.jifenlist,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						page: _self.page1,
+						pageSize: 15
+					},
+
+					complete: (e) => {
+						_self.status = 'more'
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						if (e.data.code == '1') {
+							if (e.data.data.scoreList.length == 0 || e.data.data.scoreList == null) {
+								_self.status = 'nomore'
+								return
+							}
+							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
 					}
 				})
 			}

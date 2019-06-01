@@ -10,86 +10,77 @@
 			<mSearch :show='false' @search="search($event,0)"></mSearch>
 		</view>
 		<view style="height:170upx ;"></view>
-		<view >
+		<view>
 			<view v-show="isfirstbottom" style="width: 100%;">
 				<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
 				<!-- 我的申请 申请待审批 -->
-				<view class="cadlist-one">
-					<view class="toptext-one">通过积分申请</view>
+				<view class="cadlist-one" v-for="(item,index) in notshenpi" :key="index">
+					<view class="toptext-one">{{item.reason}}</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">积分申请</view>
-						<view class="fenshustyle">40分</view>
+						<view class="toptext-two">审批对象：{{item.benefit_user_name}}</view>
+						<view class="fenshustyle">{{item.score}}分</view>
 					</view>
-
-					<view class="toptext-two">申请事由：由于什么什么 </view>
+					<view class="toptext-two" v-if="!isluru">申请类别：{{item.cate_name}} </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 审批人:</view>
-						<view class="daishenpi">
-							小明&nbsp;&nbsp;待审批</view>
+						<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 					</view>
-					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>申请时间: 04月06日</view>
+					<view style="display: flex;margin-top: 15upx;">
+						<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 					</view>
 
 					<view class="buttoncontainer">
-						<view style="display: flex;flex-direction: row;">
-							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">删除</button>
-							<button style="font-size: 25upx;" class="buttonstyle" @click="seeshenqing()">查看</button>
+						<view>
+						<button style="font-size: 25upx;" class="buttonstyle" @click="toshenpi(item)">查看</button>
 						</view>
 					</view>
 				</view>
+
 				<uni-load-more :status="status1" :contentText="contentText"></uni-load-more>
 			</view>
+
 			<view v-show="issecondbottom" style="width: 100%;">
 				<!-- 通过的申请 -->
-				<view class="cadlist-one">
-					<view class="toptext-one">通过积分申请</view>
+				<view class="cadlist-one" v-for="(item,index) in allreadyshenpi" :key="index">
+					<view class="toptext-one">{{item.reason}}</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">积分申请</view>
-						<view class="fenshustyle">40分</view>
+						<view class="toptext-two">审批对象：{{item.benefit_user_name}}</view>
+						<view class="fenshustyle">{{item.score}}分</view>
 					</view>
-
-					<view class="toptext-two">申请事由：由于什么什么 </view>
+					<view class="toptext-two" v-if="!isluru">申请类别：{{item.cate_name}} </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 审批人:</view>
-						<view class="daishenpi-tongguo">
-							小明&nbsp;&nbsp;通过</view>
+						<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 					</view>
-					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>申请时间: 04月06日</view>
+					<view style="display: flex;margin-top: 15upx;">
+						<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 					</view>
 
 					<view class="buttoncontainer">
-						<view style="display: flex;flex-direction: row;">
-							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
+						<view>
+							<button style="font-size: 25upx;" class="buttonstyle" @click="toshenpi(item)">查看</button>
 						</view>
 					</view>
 				</view>
+
+
 				<uni-load-more :status="status2" :contentText="contentText"></uni-load-more>
 			</view>
 			<view v-show="isthirdbottom" style="width: 100%;">
-				<!-- 驳回的申请 -->
-				<view class="cadlist-one">
-					<view class="toptext-one">通过积分申请</view>
+				<view class="cadlist-one" v-for="(item,index) in refuseshenpi" :key="index">
+					<view class="toptext-one">{{item.reason}}</view>
 					<view style="display: flex;flex-direction: row;justify-content: space-between;">
-						<view class="toptext-two">积分申请</view>
-						<view class="fenshustyle">40分</view>
+						<view class="toptext-two">审批对象：{{item.benefit_user_name}}</view>
+						<view class="fenshustyle">{{item.score}}分</view>
 					</view>
-
-					<view class="toptext-two">申请事由：由于什么什么 </view>
+					<view class="toptext-two" v-if="!isluru">申请类别：{{item.cate_name}} </view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-						<view class="shenpistyle-one "> 审批人:</view>
-						<view class="daishenpi-bohui">
-							小明&nbsp;&nbsp;驳回</view>
+						<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 					</view>
-					<view style="display: flex;margin-top: 15upx;margin-left: 20upx;">
-						<view shenpistyle-one>申请时间: 04月06日</view>
+					<view style="display: flex;margin-top: 15upx;">
+						<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 					</view>
-
 					<view class="buttoncontainer">
-						<view style="display: flex;flex-direction: row;">
-							<button style="font-size: 25upx;margin-right: 20upx;" class="buttonstyle">删除</button>
-							<button style="font-size: 25upx;" class="buttonstyle">查看</button>
+						<view>
+							<button style="font-size: 25upx;" class="buttonstyle" @click="toshenpi(item)">查看</button>
 						</view>
 					</view>
 				</view>
@@ -104,6 +95,7 @@
 	var _self;
 	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
+	import URL from '../../../common/url.js'
 	export default {
 		components: {
 			mSearch,
@@ -117,50 +109,82 @@
 				items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				// 显示当前界面
 				jiemiannum: 1,
-				type: 3,
 				isluru: false,
 				// 上推加载更多的
-				status1: 'noMore',
-				status2: 'noMore',
-				status3: 'noMore',
-				status4: 'noMore',
+				status1: 'more',
+				status2: 'more',
+				status3: 'more',
 				loadingText: '加载中...',
 				// loadingType: 0, //定义加载方式 0---contentdown  1---contentrefresh 2---contentnomore
 				contentText: {
-					contentdown: '↑上拉显示更多',
+					contentdown: '上拉显示更多',
 					contentrefresh: '正在加载...',
 					contentnomore: '没有更多数据了'
-				}
+				},
+				token: '',
+				page1: 1,
+				page2: 1,
+				page3: 1,
+				notshenpi: [], //所有的申请的列表
+				allreadyshenpi: [], //申请通过的列表
+				refuseshenpi: [], //申请驳回的列表
+
 			};
 		},
 		onLoad: function() {
 			_self = this;
+			this.token = uni.getStorageSync('token')
+			uni.showLoading({
+
+			})
+			this.getnotShenpiMsg()
+			this.getReadyShenpi()
+			this.getrefuseShenpi()
+
 		},
 		onBackPress: function() {
-			// 覆盖之前的方法 return true
+
 		},
 		onPullDownRefresh: function() {
-			// 执行下拉刷新的方法
-			setTimeout(function() {
-				uni.stopPullDownRefresh()
-			}, 1000)
+			switch (_self.jiemiannum) {
+				case 1:
+					_self.page1 = 1
+					_self.notshenpi = []
+					this.getnotShenpiMsg()
+					break;
+				case 2:
+					_self.page2 = 1
+					_self.allreadyshenpi = []
+					this.getReadyShenpi()
+					break;
+				case 3:
+					_self.page3 = 1
+					_self.refuseshenpi = []
+					this.getrefuseShenpi()
+					break;
+				default:
+					break
+
+			}
 		},
 		onReachBottom: function() {
 			//触底的时候请求数据，即为上拉加载更多
-			//为了更加清楚的看到效果，添加了定时器
-			console.log(_self.jiemiannum);
-			console.log(_self.status1)
-
+			//为了更加清楚的看到效果，添加了定
 			switch (_self.jiemiannum) {
 				case 1:
 					_self.status1 = 'loading';
-					console.log(_self.status1)
+					_self.page1++
+					this.getnotShenpiMsg()
 					break;
 				case 2:
 					_self.status2 = 'loading'
+					_self.page2++
+					this.getReadyShenpi()
 					break;
 				case 3:
 					_self.status3 = 'loading'
+					_self.page3++
+					this.getrefuseShenpi()
 					break;
 
 				default:
@@ -195,11 +219,114 @@
 				// 搜索的方法
 				console.log(e, val);
 			},
-			seeshenqing:function(e){
+			seeshenqing: function(e) {
 				uni.navigateTo({
-					url:'../../normaluser/seeShenqing/seeShenqing'
+					url: '../../normaluser/seeShenqing/seeShenqing'
 				})
-			}
+			},
+			getnotShenpiMsg: function() {
+				//获取所有的审批
+				uni.request({
+					url: URL.myshenpi,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						type: 'apply',
+						page: _self.page1,
+						pageSize: 15
+					},
+
+					complete: (e) => {
+						_self.status1 = 'more'
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						if (e.data.code == '1') {
+							if (e.data.data.applyList.length == 0) {
+								_self.status1 = 'nomore'
+								return
+							}
+							_self.notshenpi = _self.notshenpi.concat(e.data.data.applyList)
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
+			},
+			getReadyShenpi: function() {
+				//获取到所有的未审批
+				uni.request({
+					url: URL.myshenpi,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						type: 'pass',
+						page: _self.page2,
+						pageSize: 15
+					},
+
+					complete: (e) => {
+						_self.status2 = 'more'
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						if (e.data.code == '1') {
+							if (e.data.data.applyList.length == 0) {
+								_self.status2 = 'nomore'
+								return
+							}
+							_self.allreadyshenpi = _self.allreadyshenpi.concat(e.data.data.applyList)
+
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
+
+			},
+			getrefuseShenpi: function() {
+				//获取到所有的已审批
+				uni.request({
+					url: URL.myshenpi,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						type: 'refuse',
+						page: _self.page3,
+						pageSize: 15
+					},
+
+					complete: (e) => {
+						_self.status3 = 'more'
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						if (e.data.code == '1') {
+							if (e.data.data.applyList.length == 0) {
+								_self.status3 = 'nomore'
+								return
+							}
+							_self.refuseshenpi = _self.refuseshenpi.concat(e.data.data.applyList)
+
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
+			},
+			toshenpi: function(e) {
+				//跳转到我的申请的详情
+				uni.navigateTo({
+					url:'../../normaluser/shenpixiangqing/shenpixiangqing?itemdata='+encodeURIComponent(JSON.stringify(e))
+				})
+			},
+
 		}
 	}
 </script>
@@ -211,7 +338,7 @@
 		line-height: 1.5;
 	}
 
-	
+
 	.border2text {
 		color: #007AFF;
 		border-bottom-style: solid;
