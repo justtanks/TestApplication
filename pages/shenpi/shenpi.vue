@@ -327,7 +327,6 @@
 			},
 			search2(e, val) {
 				// 搜索的方法
-				console.log(e, val);
 			},
 			changeTab() {
 				
