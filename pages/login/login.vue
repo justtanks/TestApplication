@@ -30,7 +30,7 @@
 				login: {
 					loading: false,
 					phone: "18253485939",
-					password: "111111"
+					password: "111111",
 				},
 				result: {}
 			};
@@ -43,54 +43,52 @@
 			if (token != null && token != '' && token != undefined) {
 				this.login.phone = phone
 				this.login.password = password
-				// this.setusermsg(token)
 				this.defaultHandlerLogin()
 			}
 		},
 		methods: {
 			defaultHandlerLogin: function() {
-				this.login.loading = true;
-				uni.request({
-					url: url1.login,
-					data: {
-						user_login: that.login.phone,
-						user_pass: that.login.password,
-						device_type: 'android'
-					},
-					method: 'POST',
-					complete: function(res) {
-						that.login.loading = false;
-						that.result = res.data
-						if (that.result.code != 1) {
+				if (!this.login.loading) {
+					this.login.loading = true;
+					uni.request({
+						url: url1.login,
+						data: {
+							user_login: that.login.phone,
+							user_pass: that.login.password,
+							device_type: 'android'
+						},
+						method: 'POST',
+						complete: function(res) {
+							that.result = res.data
+							if (that.result.code != 1) {
+								that.toast(that.result.msg)
+								return
+							}
+							uni.setStorageSync('phone', that.login.phone)
+							uni.setStorageSync('password', that.login.password)
+							uni.setStorageSync('token', that.result.data.token)
+							that.setusermsg(that.result.data.token)
+							that.login.loading = false;
+
+						},
+						fail: function(res) {
+							that.login.loading = false;
+							// #ifdef APP-PLUS
+							plus.nativeUI.toast("网络错误");
+							// #endif
+							//#ifdef MP-WEIXIN
 							uni.showToast({
-								title: that.result.msg,
+								title: '网络错误',
 								duration: 1000,
-								icon: 'none'
+								icon: 'none',
+								position: 'bottom'
 							})
-							return
+							// #endif
+
 						}
-						uni.setStorageSync('phone', that.login.phone)
-						uni.setStorageSync('password', that.login.password)
-						uni.setStorageSync('token', that.result.data.token)
-						that.setusermsg(that.result.data.token)
+					})
+				}
 
-					},
-					fail: function(res) {
-						that.login.loading = false;
-						// #ifdef APP-PLUS
-						plus.nativeUI.toast("网络错误");
-						// #endif
-						//#ifdef MP-WEIXIN
-						uni.showToast({
-							title: '网络错误',
-							duration: 1000,
-							icon: 'none',
-							position: 'bottom'
-						})
-						// #endif
-
-					}
-				})
 
 			},
 			setusermsg: function(token) {
@@ -103,7 +101,6 @@
 					},
 					complete: (res) => {
 						// var msg=res.data
-						console.error(JSON.stringify(res.data))
 						uni.setStorageSync('usermsg', JSON.stringify(res.data))
 						// 挑战到首页
 						uni.switchTab({
@@ -126,9 +123,23 @@
 							position: 'bottom'
 						})
 						// #endif
-						
+
 					}
 				})
+			},
+			toast: function(msg) {
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif
+
 			}
 		}
 	}
