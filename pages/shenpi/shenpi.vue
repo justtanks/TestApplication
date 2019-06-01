@@ -59,7 +59,7 @@
 							<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one">申请时间:  {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
+							<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
 
 						<view class="buttoncontainer">
@@ -83,7 +83,7 @@
 							<view class="shenpistyle-one ">初审人：{{item.pass_user_name1}}&nbsp;&nbsp; 终审人：{{item.pass_user_name2}}</view>
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
-							<view class="shenpistyle-one">申请时间:  {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
+							<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 						</view>
 					</view>
 					<uni-load-more :status="status3" :contentText="contentText"></uni-load-more>
@@ -95,40 +95,40 @@
 		<view v-else="">
 			<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;">
 				<view class="topbar">
-					<view class="topbaritem" @click="fenlei">
+					<!-- <view class="topbaritem" @click="fenlei">
 						<view class="toptext1 ">分类</view>
 						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 					</view>
 					<view class="topbaritem" @click="bumen">
 						<view class="toptext1 ">部门</view>
 						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
-					</view>
+					</view> -->
 					<view class="topbaritem" @click="shijian('date')">
 						<view class="toptext1 ">时间</view>
 						<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 					</view>
 				</view>
-				<mSearch :show='false' @search="search2($event,0)"></mSearch>
+				<!-- <mSearch :show='false' @search="search2($event,0)"></mSearch> -->
 			</view>
-			<view style="height:160upx ;"></view>
+			<view style="height:90upx ;"></view>
 			<view class="content">
 				<view style="width: 100%;">
 					<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->
 					<!-- 所有的任务 -->
-					<view class="cadlist-one">
-						<view class="toptext-one">积分事件的列表，标识现在有哪些积分事件正在发生</view>
+					<view class="cadlist-one" v-for="(item,index) in jifenlist" :key="index">
+						<view class="toptext-one">{{item.reason}}</view>
 						<view style="display: flex;flex-direction: row;justify-content: space-between;">
-							<view class="toptext-two">绩效分/技术部</view>
-							<view class="fenshustyle">40分</view>
+							<view class="toptext-two">分类:{{item.cate_name}}</view>
+							<view class="fenshustyle">{{item.score}}</view>
 						</view>
 
-						<!-- <view class="toptext-two">备注:由于什么什么 </view> -->
+						<view class="toptext-two">备注:{{item.mark}} </view>
 						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
-							<view class="shenpistyle-one "> 时间:1992-9-10</view>
+							<view class="shenpistyle-one ">申请时间:{{item.apply_time}}</view>
 						</view>
 						<view class="thingstyle">
-							<view class="shenpistyle-one ">对象：小明</view>
-							<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：小明</view>
+							<view class="shenpistyle-one ">积分对象：{{item.benefit_user_name}}</view>
+							<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：{{item.apply_user_name}}</view>
 						</view>
 					</view>
 					<uni-load-more :status="status" :contentText="contentText"></uni-load-more>
@@ -156,7 +156,7 @@
 		},
 		data() {
 			return {
-				isnormal: 1, //是否是普通用户界面 1，不是
+				isnormal: 1, //是否是普通用户界面 1，不是  
 				isfirstbottom: true,
 				issecondbottom: false,
 				isthirdbottom: false,
@@ -170,7 +170,7 @@
 				status1: 'more',
 				status2: 'more',
 				status3: 'more',
-				status: "more",
+
 				loadingText: '加载中...',
 				// loadingType: 0, //定义加载方式 0---contentdown  1---contentrefresh 2---contentnomore
 				contentText: {
@@ -190,7 +190,15 @@
 				page3: 1,
 				allshenpilist: [],
 				completelist: [],
-				nodolist: []
+				nodolist: [],
+				//积分事件
+				status: "more",
+				page4: 1,
+				
+				model: 0, //0 是普通状态，  1是 时间选择状态
+				time: '',
+				jifenlist:[]
+
 			};
 		},
 		onLoad: function() {
@@ -206,8 +214,12 @@
 				this.getnoneShenpi()
 				this.getreadyShenpi()
 
-			} else {
+			} else{
 				// 普通用户界面
+				uni.showLoading({
+				
+				})
+				this.getallmessge()
 
 			}
 		},
@@ -222,54 +234,68 @@
 			}
 		},
 		onPullDownRefresh: function() {
-			// // 执行下拉刷新的方法
-			// setTimeout(function() {
-			// 	uni.stopPullDownRefresh()
-			// }, 1000)
-			switch (_self.jiemiannum) {
-				case 1:
-					_self.page1 = 1
-                     _self.allshenpilist=[]
-					 this.getAllShenpiMsg()
-					break;
-				case 2:
-					_self.page2 = 1
-					_self.nodolist=[]
-					this.getnoneShenpi()
-					break;
-				case 3:
-					_self.page3 = 1
-                    _self.completelist=[]
-					this.getreadyShenpi()
-					break;
-				default:
-					break
+			if (this.isnormal == 1) {
+				switch (_self.jiemiannum) {
+					case 1:
+						_self.page1 = 1
+						_self.allshenpilist = []
+						this.getAllShenpiMsg()
+						break;
+					case 2:
+						_self.page2 = 1
+						_self.nodolist = []
+						this.getnoneShenpi()
+						break;
+					case 3:
+						_self.page3 = 1
+						_self.completelist = []
+						this.getreadyShenpi()
+						break;
+					default:
+						break
+
+				}
+			} else {
+				// 执行下拉刷新的方法
+				this.model = 0
+				this.jifenlist = []
+				_self.page4 = 1
+				this.getallmessge()
 
 			}
+
 		},
 		onReachBottom: function() {
-			//触底的时候请求数据，即为上拉加载更多
-			//为了更加清楚的看到效果，添加了定时器
-
-			switch (_self.jiemiannum) {
-				case 1:
-					_self.status1 = 'loading';
-					_self.page1++
-					this.getAllShenpiMsg()
-					break;
-				case 2:
-					_self.status2 = 'loading'
-					_self.page2++
-					this.getnoneShenpi()
-					break;
-				case 3:
-					_self.status3 = 'loading'
-					_self.page3++
-					this.getreadyShenpi()
-					break;
-				default:
-					break;
+			if (this.isnormal == 1) {
+				switch (_self.jiemiannum) {
+					case 1:
+						_self.status1 = 'loading';
+						_self.page1++
+						this.getAllShenpiMsg()
+						break;
+					case 2:
+						_self.status2 = 'loading'
+						_self.page2++
+						this.getnoneShenpi()
+						break;
+					case 3:
+						_self.status3 = 'loading'
+						_self.page3++
+						this.getreadyShenpi()
+						break;
+					default:
+						break;
+				}
+			} else {
+				//触底的时候请求数据，即为上拉加载更多
+				_self.status = 'loading';
+				_self.page4++
+				if (this.model == 0)
+					this.getallmessge()
+				else
+					this.getallmessageoftime(this.time)
 			}
+
 
 
 		},
@@ -304,32 +330,28 @@
 				console.log(e, val);
 			},
 			changeTab() {
-				uni.getStorage({
-					//获取到登录时候传递到缓存中的用户信息字符串，并且解析成对象
-					key: 'usermsg',
-					success: function(res) {
-						_self.usermsg = JSON.parse(res.data)
-						if (_self.usermsg.data.user.job == 22) {
-							// 是普通用户
-							_self.isnormal = 2
-							uni.setNavigationBarTitle({
-								title: '积分事件'
-							});
-						} else {
-							// 是管理用户
-							_self.isnormal = 1
-							uni.setNavigationBarTitle({
-								title: '审批'
-							});
-						}
-					}
-				})
+				
+				_self.usermsg=JSON.parse(uni.getStorageSync('usermsg'))
+				if (_self.usermsg.data.user.job == 22) {
+					// 是普通用户
+					_self.isnormal = 2
+					uni.setNavigationBarTitle({
+						title: '积分事件'
+					});
+				} else {
+					// 是管理用户
+					_self.isnormal =1
+					uni.setNavigationBarTitle({
+						title: '审批'
+					});
+				}
+				
 
 			},
 			toshenpi: function(e) {
-				 
+
 				uni.navigateTo({
-					url: '../normaluser/myshenpi/myshenpi?itemList='+encodeURIComponent(JSON.stringify(e))
+					url: '../normaluser/myshenpi/myshenpi?itemList=' + encodeURIComponent(JSON.stringify(e))
 				})
 			},
 			fenlei: function(e) {
@@ -350,8 +372,18 @@
 				this.showPicker = false;
 				if (e) {
 					this[this.type] = e.value;
+					this.time = e.value.replace(/\//g, '-')
 				}
+				//选择时间之后，将所有列表清空，然后传入时间，下拉刷新后，时间为默认
+				_self.jifenlist = []
+				this.model = 1
+				this.getallmessageoftime(this.time)
+				uni.showLoading({
+					title:'正在获取数据'
+				})
+
 			},
+
 			bumen: function(e) {
 				uni.showActionSheet({
 					itemList: ['部门1', '部门2', '部门3'],
@@ -447,6 +479,67 @@
 							}
 							_self.completelist = _self.completelist.concat(e.data.data.applyList)
 
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
+			},
+			getallmessge: function() {
+				//获取所有的积分事件列表
+				uni.request({
+					url: URL.jifenlist,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						page: _self.page4,
+						pageSize: 15
+					},
+					complete: (e) => {
+						_self.status = 'more'
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						if (e.data.code == '1') {
+							if (e.data.data.scoreList.length == 0 || e.data.data.scoreList == null) {
+								_self.status = 'nomore'
+								return
+							}
+							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
+						} else {
+							uni.showToast({
+								title: '信息获取失败',
+								duration: 1000
+							})
+						}
+					}
+				})
+			},
+			getallmessageoftime: function(time) {
+				//获取积分事件列表
+				uni.request({
+					url: URL.jifenlist,
+					data: {
+						token: _self.token,
+						deviceType: "android",
+						page: _self.page4,
+						pageSize: 15,
+						applyTime: time
+					},
+
+					complete: (e) => {
+						console.error(e.data)
+						_self.status = 'more'
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						if (e.data.code == '1') {
+							if (e.data.data.scoreList.length == 0 || e.data.data.scoreList == null) {
+								_self.status = 'nomore'
+								return
+							}
+							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
 						} else {
 							uni.showToast({
 								title: '信息获取失败',
