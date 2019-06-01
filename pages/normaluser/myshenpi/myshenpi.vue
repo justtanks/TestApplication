@@ -145,13 +145,20 @@
 					   refuseReason:that.isagree?null:that.refusereason
 				   },
 				   complete:function(e){
-					   console.error(e.data)
 				   	uni.hideLoading()
 					uni.showToast({
 						title:e.data.msg,
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
-				   }
+				   },
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
+					}
 				})
 			},
 			

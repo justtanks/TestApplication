@@ -379,6 +379,7 @@
 				this.getallmessageoftime(this.time)
 				uni.showLoading({
 					title:'正在获取数据'
+					
 				})
 
 			},
@@ -416,9 +417,17 @@
 						} else {
 							uni.showToast({
 								title: '信息获取失败',
-								duration: 1000
+								duration: 1000,
+								icon:'none'
 							})
 						}
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 			},
@@ -448,9 +457,17 @@
 						} else {
 							uni.showToast({
 								title: '信息获取失败',
-								duration: 1000
+								duration: 1000,
+								icon:'none'
 							})
 						}
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 
@@ -481,9 +498,17 @@
 						} else {
 							uni.showToast({
 								title: '信息获取失败',
-								duration: 1000
+								duration: 1000,
+								icon:'none'
 							})
 						}
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 			},
@@ -510,9 +535,17 @@
 						} else {
 							uni.showToast({
 								title: '信息获取失败',
-								duration: 1000
+								duration: 1000,
+								// icon:'none'
 							})
 						}
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 			},
@@ -542,9 +575,17 @@
 						} else {
 							uni.showToast({
 								title: '信息获取失败',
-								duration: 1000
+								duration: 1000,
+								icon:'none'
 							})
 						}
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 			}

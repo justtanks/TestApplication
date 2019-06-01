@@ -64,7 +64,8 @@
 						if (that.result.code != 1) {
 							uni.showToast({
 								title: that.result.msg,
-								duration: 1000
+								duration: 1000,
+								icon:'none'
 							})
 							return
 						}
@@ -78,7 +79,8 @@
 						that.login.loading = false;
 						uni.showToast({
 							title: '网络错误',
-							duration: 1000
+							duration: 1000,
+							icon:'none'
 						})
 					}
 				})

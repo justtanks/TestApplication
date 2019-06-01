@@ -390,7 +390,8 @@
 				if(_self.score==0){
 					uni.showToast({
 						title:'请填写积分',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
@@ -410,7 +411,8 @@
 						if(e.data.code!=1){
 							uni.showToast({
 								title:e.data.msg,
-								duration:1000
+								duration:1000,
+								icon:'none'
 							})
 							return
 						}
@@ -420,6 +422,13 @@
 							 _self.zhongshenlist.push(person)
 						}
 						this.showpoplist( _self.zhongshenlist)
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 			},
@@ -443,7 +452,8 @@
 						if(e.data.code!=1){
 							uni.showToast({
 								title:e.data.msg,
-								duration:1000
+								duration:1000,
+								icon:'none'
 							})
 							return
 						}
@@ -456,6 +466,13 @@
 						}
 						console.error(JSON.stringify(_self.alluser))
 						_self.show1()
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 			},
@@ -479,7 +496,8 @@
 						if(e.data.code!=1){
 							uni.showToast({
 								title:e.data.msg,
-								duration:1000
+								duration:1000,
+								icon:'none'
 							})
 							return
 						}
@@ -489,6 +507,13 @@
 							 _self.liebie.push(person)
 						}
 					    this.showpoplist(_self.liebie)
+					},
+					fail: function(res) {
+						uni.showToast({
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
+						})
 					}
 				})
 			},
@@ -532,7 +557,8 @@
 				if(this.fenleiid==0){
 					uni.showToast({
 						title:'选择分类',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
@@ -540,46 +566,51 @@
 				{
 					uni.showToast({
 						title:'选择初审人',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
 				if(this.zhongshenid==0){
 					uni.showToast({
 						title:'选择终审人',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
 				if(this.choiseduserName.length==0){
 					uni.showToast({
 						title:'请选择加分人',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
 				if(this.score==0){
 					uni.showToast({
 						title:'请选择加减分数',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
 				if(this.rulltext==''){
 					uni.showToast({
 						title:'请选择规则',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
 				if(this.inputresean==''){
 						uni.showToast({
 						title:'请填写加减分原因',
-						duration:1000
+						duration:1000,
+						icon:'none'
 					})
 					return
 				}
-				console.error(_self.chushenid)
 				uni.showLoading({
 					title:'积分上传中。。'
 				})
@@ -600,9 +631,26 @@
 					method:"POST",
 					complete: (e) => {
 						uni.hideLoading()
+						if(e.data.code==1){
+							uni.showToast({
+								title:e.data.msg,
+								duration:1000
+							})
+						}else{
+							uni.showToast({
+								title:e.data.msg,
+								duration:1000,
+								icon:'none'
+							})
+						}
+						
+					},
+					
+					fail: function(res) {
 						uni.showToast({
-							title:e.data.msg,
-							duration:1000
+							title: '网络错误',
+							duration: 1000,
+							icon:'none'
 						})
 					}
 				})
