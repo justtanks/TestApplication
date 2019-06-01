@@ -10,14 +10,14 @@
 				<image src="../../static/paiminglogo.png" class="controlimage"></image>
 				<view class="control-text">积分排名</view>
 			</view>
-			<view class="controlbox" @click="mRenwu" hover-class="uni-list-cell-hover">
+			<!-- <view class="controlbox" @click="mRenwu" hover-class="uni-list-cell-hover">
 				<image src="../../static/renwulogo.png" class="controlimage"></image>
 				<view class="control-text">我的任务</view>
 			</view>
-			<view class="controlbox" @click="mFaburenwu" hover-class="uni-list-cell-hover">
+			<view class="controlbox" @click="mFaburenwu" hover-class="uni-list-cell-hover" >
 				<image src="../../static/faburenwu.png" class="controlimage"></image>
 				<view class="control-text">发布任务</view>
-			</view>
+			</view> -->
 			<!-- <view class="controlbox" @click="mJifenluru" hover-class="uni-list-cell-hover">
 				<image src="../../static/jifenluru.png" class="controlimage"></image>
 				<view class="control-text">积分录入</view>

@@ -481,7 +481,8 @@
 						deviceType: "android",
 						type: 'done',
 						page: _self.page3,
-						pageSize: 15
+						pageSize: 15,
+						
 					},
 
 					complete: (e) => {

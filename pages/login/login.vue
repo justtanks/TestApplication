@@ -80,7 +80,8 @@
 						uni.showToast({
 							title: '网络错误',
 							duration: 1000,
-							icon:'none'
+							icon:'none',
+							position:'bottom'
 						})
 					}
 				})
