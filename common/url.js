@@ -12,7 +12,7 @@ module.exports ={
    getzhongshen:"http://47.105.199.11"+'/api/app/user/getAllLeaderByScore',
    //获取所有用户列表
    getalluser:"http://47.105.199.11"+'/api/app/user/getAllUser',
-   //提交申请列表
+   //提交申请列表.
    inputjifen:"http://47.105.199.11"+'/api/app/score/applyScore',
    //获取到积分分类
    getfenlei:"http://47.105.199.11"+'/api/app/score/getScoreCate',
@@ -23,5 +23,9 @@ module.exports ={
    //我提交的审批的列表
    myshenpi:"http://47.105.199.11"+'/api/app/score/getMyApplyList',
    //获取我的积分事件
-   jifenlist:"http://47.105.199.11"+'/api/app/score/getMyScoreList'
+   jifenlist:"http://47.105.199.11"+'/api/app/score/getMyScoreList',
+   scoremsg: "http://47.105.199.11"+ '/api/app/score/getMyTask',
+   charmsg: "http://47.105.199.11"+'/api/app/score/getMyTaskByMonth',
+   
+   
 }

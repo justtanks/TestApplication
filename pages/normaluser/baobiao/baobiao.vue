@@ -10,24 +10,24 @@
 			</view>
 			<view class="topcontain">
 				<view class="titlestyle">今天</view>
-				<view class="titlestyle">10/1</view>
-				<view class="titlestyle">20/2</view>
+				<view class="titlestyle">{{todayadd}}</view>
+				<view class="titlestyle">{{todaycut}}</view>
 			</view>
 			<view class="topcontain">
 				<view class="titlestyle">本周</view>
-				<view class="titlestyle">50/20</view>
-				<view class="titlestyle">30/10</view>
+				<view class="titlestyle">{{weekadd}}</view>
+				<view class="titlestyle">{{weekcut}}</view>
 			</view>
 			<view class="topcontain">
 				<view class="titlestyle">本月</view>
-				<view class="titlestyle">50/20</view>
-				<view class="titlestyle">30/10</view>
+				<view class="titlestyle">{{mothadd}}</view>
+				<view class="titlestyle">{{mothcut}}</view>
 			</view>
 		</view>
 		<view class="biaobiaocontain_1">
 			<view style="display: flex; flex-direction: row;justify-content: space-between;align-items: center;padding: 30upx 30upx 20upx 30upx;">
 				<view @click="change">本月奖扣分任务</view>
-				<button type="default" size="mini" style="margin-right: 0upx;" @click="showpup"> 选择时间</button>
+				<button type="default" size="mini" style="margin-right: 0upx;" @click="choisedate()"> 选择时间</button>
 			</view>
 
 			<view class="qiun-charts" style="background-color: #E5FDC3;">
@@ -54,9 +54,9 @@
 		</view>
 
 		<!-- 弹出层使用 -->
-		<popup-layer ref="popup" :direction="direction">
-			<view class="pupustyle">
-				<!-- 	<view style="margin: 30upx 30upx;font-size: 28upx;">
+		<!-- <popup-layer ref="popup" :direction="direction">
+			<view class="pupustyle"> -->
+		<!-- 	<view style="margin: 30upx 30upx;font-size: 28upx;">
 					技术类型（单选）
 				</view>
 				<view style="display: flex;flex-direction: row;justify-content: flex-start;">
@@ -72,22 +72,22 @@
 					<button class="popbutton" :class="{popbutton_choise:!containcontrol}" @click="containnot">不包含管理者</button>
 				</view>
 				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 30upx;"></view> -->
-					<view style="height: 20upx; background-color: #F1F1F3;margin-top: 150upx;"></view>
+		<!-- 		<view style="height: 20upx; background-color: #F1F1F3;margin-top: 150upx;"></view>
 				<view style="display: flex;flex-direction: row; justify-content: space-between;">
 					<view style="margin: 30upx 30upx;">
 						时间
 					</view>
 					<view style="margin: 30upx;font-size: 28upx;">
- 
+
 					</view>
 				</view>
-				<view style="display: flex;flex-direction: row;margin-left: 40upx;margin-right: 40upx;" >
+				<view style="display: flex;flex-direction: row;margin-left: 40upx;margin-right: 40upx;">
 					<view style="flex: 1;display: flex; justify-content: center;align-items: center;font-size: 32upx;" @click="choisetime('date',1)">{{begindate}}</view>
 					<view style="flex: 1;display: flex;justify-content: center;align-items: center;">至</view>
 					<view style="flex: 1;display: flex;justify-content: center;align-items: center;font-size: 32upx;" @click="choisetime('date',2)">{{enddate}}</view>
 				</view>
-				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 50upx;"></view>
-				<!-- <view style="margin: 30upx 30upx;font-size: 28upx;">
+				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 50upx;"></view> -->
+		<!-- <view style="margin: 30upx 30upx;font-size: 28upx;">
 					积分分类 (多选)
 				</view>
 				<view style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap;margin-left: 25upx;margin-right: 25upx;">
@@ -99,23 +99,29 @@
 					<button class="popbutton1" :class="{popbutton_choise:kaoqin}" @click="kaoqin1()">考勤</button>
 				</view>
  -->
-				<!-- 最后的确定按钮 -->
-				<view class="buttonstyle popubottonbutton" @tap="popudown">
+		<!-- 最后的确定按钮 -->
+		<!-- 	<view class="buttonstyle popubottonbutton" @tap="popudown">
 					确定
 				</view>
 			</view>
-		</popup-layer>
-		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected1" @cancel="onSelected1" />
+		</popup-layer> -->
+		<!-- <mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected1" @cancel="onSelected1" /> -->
+
+		<mpvue-picker :themeColor="themeColor" ref="mpvuePicker" :mode="mode" :deepLength="deepLength" :pickerValueDefault="pickerValueDefault"
+		 @onConfirm="onConfirm" @onCancel="onCancel" :pickerValueArray="pickerValueArray"></mpvue-picker>
+
 	</view>
 </template>
 
 <script>
 	// 使用wxchart
 	import wxCharts from '../../../components/wx-charts/wxcharts.js';
-	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
+	// import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../../common/util.js'
-
+	import mpvuePicker from '../../../components/mpvue-picker/mpvuePicker.vue';
 	import popupLayer from '../../../components/popup-layer/popup-layer.vue';
+	import URL from '../../../common/url.js'
+
 
 	var _self;
 	var canvaColumn = null;
@@ -148,7 +154,8 @@
 	export default {
 		components: {
 			popupLayer,
-			MxDatePicker
+			mpvuePicker
+			// MxDatePicker
 		},
 		data() {
 			return {
@@ -161,25 +168,116 @@
 				pixelRatio: 1,
 				// 时间选择的框
 				direction: 'left',
+				themeColor: '#007AFF',
+				pickerText: '',
+				mode: '',
+				deepLength: 1,
+				pickerValueDefault: [0],
+				pickerValueArray: [],
 				// 时间选择器需要的数据
 				showPicker: false,
-				date: '2019/01/01',
+				date: '',
 				type: 'date',
 				value: '',
-				begindate: '2019/01/01',
-				enddate: '2019/01/01',
-				datety:'' //是开始时间1 结束时间2
+				begindate: '',
+				enddate: '',
+				datety: '', //是开始时间1 结束时间2
+				//图表对象
+				colomn: {},
+				piedata: {},
+				//网络获取的对象
+				scoreData: {},
+				chartData: {},
+				token: '',
+				pickerSingleArray: [{
+						label: '一月',
+						value: 1
+					},
+					{
+						label: '二月',
+						value: 2
+					},
+					{
+						label: '三月',
+						value: 3
+					},
+					{
+						label: '四月',
+						value: 4
+					},
+					{
+						label: '五月',
+						value: 5
+					},
+					{
+						label: '六月',
+						value: 6
+					},
+					{
+						label: '七月',
+						value: 7
+					},
+					{
+						label: '八月',
+						value: 8
+					},
+					{
+						label: '九月',
+						value: 9
+					},
+					{
+						label: '十月',
+						value: 10
+					},
+					{
+						label: '十一月',
+						value: 11
+					},
+					{
+						label: '十二月',
+						value: 12
+					}
+				],
+				todayadd: '',
+				todaycut: '',
+				weekadd: '',
+				weekcut: '',
+				mothadd: '',
+				mothcut: '',
+				Column: {
+					categories: ['第一周', '第二周', '第三周', '第四周'],
+					series: [{
+						name: '奖分',
+						data: [],
+						color: "#3CB371"
+					}, {
+						name: '扣分',
+						data: [],
+						color: "#CD6839"
+					}]
+				},
+				Pie: {
+					series: [{
+						name: '加分',
+						data: 0,
+						color: "#3CB371"
+					}, {
+						name: '扣分',
+						data: 0,
+						color: "#CD6839"
+					}]
+				}
+
 
 
 			}
 		},
-		onReady() {
-			this.date = dateutll.dateUtils.getNowFormatDate()
-			this.begindate = dateutll.dateUtils.getNowFormatDate()
-			this.enddate = dateutll.dateUtils.getNowFormatDate()
-		},
 		onLoad() {
 			_self = this;
+			this.token = uni.getStorageSync('token')
+			this.date = dateutll.dateUtils.getNowFormatDate()
+			this.begindate = this.date
+			this.enddate = this.date
 			//#ifdef H5 || MP-ALIPAY || MP-BAIDU || MP-TOUTIAO
 			uni.getSystemInfo({
 				success: function(res) {
@@ -197,6 +295,10 @@
 			this.cHeight2 = uni.upx2px(1100);
 			this.cWidth3 = uni.upx2px(250);
 			this.cHeight3 = uni.upx2px(250);
+			//获取网络数据
+
+			this.getScore()
+			this.getchartdata()
 
 
 		},
@@ -250,50 +352,139 @@
 				});
 			},
 			change: function() {
-				Data.Column.categories = ['1', '2', '3', '4']
-				Data.Pie.series[0].data = 100;
+				// Data.Column.categories = ['1', '2', '3', '4']
+				// Data.Pie.series[0].data = 100;
 				this.showColumn("canvasColumn", Data.Column);
 				this.showPie("canvasPie", Data.Pie);
 			},
-			// shijian: function(type) {
-			// 	//弹出时间的选择框
-			// 	this.type = type;
-			// 	this.showPicker = true;
-			// 	this.value = this[type];
-			// },
-			// onSelected(e) { //选择时间的picker
-			// 	this.showPicker = false;
-			// 	if (e) {
-			// 		this[this.type] = e.value;
-			// 	}
-			// },
-			showpup: function() {
-				// 弹出弹窗
-				this.$refs.popup.show() // 弹出
-				this.showpop = true
+			onCancel(e) {
+				console.log(e)
 			},
-			popudown: function() {
-				this.$refs.popup.close()
-				this.showpop = false
+			onConfirm(e) {
+				var month = e.value[0]
+				var da = new Date()
+				this.date = da.getFullYear() + '-' + month + '-' + '1'
+				_self.Column.series[0].data=[]
+				_self.Column.series[1].data=[]
+				this.getchartdata()
+
 			},
-			choisetime(type,datetype) {
-				//弹出时间的选择框
-				this.datety=datetype
-				this.type = type;
-				this.showPicker = true;
-				this.value = this[type];
+			toast: function(msg) {
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif	
 			},
-			onSelected1(e) { //选择时间后
-				this.showPicker = false;
-				if (e) {
-					console.log(this.datety)
-					if(this.datety==1){
-						this.begindate=e.value
-					}else{
-						this.enddate=e.value
+			getScore: function(e) {
+				//获取到加减分情况
+				uni.showLoading({
+
+				})
+				uni.request({
+					url: URL.scoremsg,
+					data: {
+						token: _self.token,
+						deviceType: 'android'
+					},
+					complete: function(e) {
+						uni.hideLoading()
+						_self.scoreData = e.data
+						if (e.data.code == 1) {
+							console.error(e.data.data.dayResultPlus)
+							let toadd = _self.scoreData.data.dayResultPlus
+							let tocut = _self.scoreData.data.dayResultMinus
+							let weadd = _self.scoreData.data.weekResultPlus
+							let wecut = _self.scoreData.data.weekResultMinus
+							let moadd = _self.scoreData.data.monthResultPlus
+							let mocut = _self.scoreData.data.monthResultMinus
+
+
+							if (toadd.count == 0) toadd.score = 0
+							if (tocut.count == 0) tocut.score = 0
+							if (weadd.count == 0) weadd.score = 0
+							if (wecut.count == 0) wecut.score = 0
+							if (moadd.count == 0) moadd.score = 0
+							if (mocut.count == 0) mocut.score = 0
+
+							_self.todayadd = toadd.count + '/' + toadd.score
+							_self.todaycut = tocut.count + '/' + tocut.score
+							_self.weekadd = weadd.count + '/' + weadd.score
+							_self.weekcut = wecut.count + '/' + wecut.score
+							_self.mothadd = moadd.count + '/' + moadd.score
+							_self.mothcut = mocut.count + '/' + mocut.score
+
+						} else {
+							_self.toast(e.data.msg)
+						}
+
 					}
-				}
+				})
+
 			},
+			getchartdata: function(e) {
+				//获取到柱状图和饼图的数据
+				console.error(_self.date)
+				uni.showLoading({
+
+				})
+				uni.request({
+					url: URL.charmsg,
+					data: {
+						token: _self.token,
+						deviceType: 'android',
+						applyTime: _self.date
+					},
+					complete: function(e) {
+						console.error(JSON.stringify(e.data))
+						uni.hideLoading()
+						_self.chartData = e.data
+						if (e.data.code == 1) {
+                           let bardata=e.data.data.bar
+						   for(let s of bardata)
+						   {
+							   _self.Column.series[0].data.push(parseInt(s.plus))
+							   _self.Column.series[1].data.push(parseInt(s.minus))
+						   }
+						   if(bardata.length==5){
+							   _self.Column.categories.push('第五周')
+						   }
+						   
+						   let piedata=e.data.data.pie
+						   for(let a of piedata){
+							   if(a.name=='加分'){
+								   _self.Pie.series[0].data=parseInt(a.data)
+							   }else{
+								   _self.Pie.series[1].data=parseInt(a.data)
+							   }
+						   }
+						   
+						   _self.showColumn("canvasColumn", _self.Column);
+						   _self.showPie("canvasPie", _self.Pie);
+
+						} else {
+							_self.toast(e.data.msg)
+						}
+
+					}
+				})
+
+			},
+			choisedate: function() {
+				// 选择审批人
+				this.pickerValueArray = this.pickerSingleArray
+				this.mode = 'selector'
+				this.deepLength = 1
+				this.pickerValueDefault = [0]
+				this.$refs.mpvuePicker.show()
+
+			}
 		}
 	}
 </script>

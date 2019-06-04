@@ -2,9 +2,9 @@
 <template>
 	<view>
 		<view class="uni-flex uni-row controlcenter-row" style="margin-top: 60upx; flex-wrap: wrap;">
-			<view class="controlbox" @click="mJifen()" hover-class="uni-list-cell-hover">
+			<view class="controlbox" @click="mJifen()" hover-class="uni-list-cell-hover" v-if="isnormal==1">
 				<image src="../../static/jifenlogo.png" class="controlimage"></image>
-				<view class="control-text">奖扣统计</view>
+				<view class="control-text"   >奖扣统计</view>
 			</view>
 			<view class="controlbox" @click="mPaiming" hover-class="uni-list-cell-hover">
 				<image src="../../static/paiminglogo.png" class="controlimage"></image>
@@ -40,7 +40,7 @@
 			</view>
 		</view>
 		<view style="height: 50upx;width: auto;margin: 100upx 25upx 120upx 25upx;">
-			<button class="buttonstyle" @click="addshenqing">{{isnormal?'申请积分':'积分录入'}}</button>
+			<button class="buttonstyle" @click="addshenqing">{{isnormal==2?'申请积分':'积分录入'}}</button>
 		</view>
 	</view>
 
@@ -56,7 +56,8 @@
 		},
 		data() {
 			return {
-				isnormal: true //是否是普通员工
+				isnormal: 0 ,//是否是普通员工
+				usermsg:{}
 			};
 		},
 		onShow: function() {
@@ -134,17 +135,20 @@
 
 			},
 			getstore:function(){
-				uni.getStorage({
-					key: "isnomaluser",
-					success: function(res) {
-		
-						if (res.data == 1) {
-							_self.isnormal = false
-						} else {
-							_self.isnormal = true
-						}
-					}
-				})
+				_self.usermsg=JSON.parse(uni.getStorageSync('usermsg'))
+				if (_self.usermsg.data.user.job == 22) {
+					// 是普通用户
+					_self.isnormal = 2
+					uni.setNavigationBarTitle({
+						title: '积分事件'
+					});
+				} else {
+					// 是管理用户
+					_self.isnormal =1
+					uni.setNavigationBarTitle({
+						title: '审批'
+					});
+				}
 			}
 		}
 	}

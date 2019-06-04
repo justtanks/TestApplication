@@ -617,8 +617,7 @@
 					icon: 'none',
 					position: 'bottom'
 				})
-				// #endif
-				
+				// #endif	
 			}
 		}
 	}
