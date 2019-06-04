@@ -430,7 +430,6 @@
 			},
 			getchartdata: function(e) {
 				//获取到柱状图和饼图的数据
-				console.error(_self.date)
 				uni.showLoading({
 
 				})
