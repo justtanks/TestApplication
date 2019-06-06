@@ -7,9 +7,9 @@
 				<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">已通过</view>
 				<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">未通过</view>
 			</view>
-			<mSearch :show='false' @search="search($event,0)"></mSearch>
+			<!-- <mSearch :show='false' @search="search($event,0)"></mSearch> -->
 		</view>
-		<view style="height:170upx ;"></view>
+		<view style="height:90upx ;"></view>
 		<view>
 			<view v-show="isfirstbottom" style="width: 100%;">
 				<!-- 做一个列表   积分录入和积分申请，以及积分的状态都是后台给的状态，这里只是模拟-->

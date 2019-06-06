@@ -19,11 +19,11 @@
 		<view class="uni-flex uni-row secondrow-contain">
 			<view class="seondrow" style="align-items: center;">
 				<view class="bigfount">0</view>
-				<view class="bottomfount">昨日积分</view>
+				<view class="bottomfount">今日积分</view>
 			</view>
 			<view class="seondrow" style="align-items: center;">
 				<view class="bigfount">0</view>
-				<view class="bottomfount">今日积分</view>
+				<view class="bottomfount">本周积分</view>
 			</view>
 			<view class="seondrow" style="align-items: center;">
 				<view class="bigfount">0</view>
