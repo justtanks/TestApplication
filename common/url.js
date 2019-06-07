@@ -24,8 +24,16 @@ module.exports ={
    myshenpi:"http://47.105.199.11"+'/api/app/score/getMyApplyList',
    //获取我的积分事件
    jifenlist:"http://47.105.199.11"+'/api/app/score/getMyScoreList',
+   // 获取到积分嘻嘻
    scoremsg: "http://47.105.199.11"+ '/api/app/score/getMyTask',
+   
    charmsg: "http://47.105.199.11"+'/api/app/score/getMyTaskByMonth',
+   //获取到首页的分数信息
+   getindexcore: "http://47.105.199.11"+'/api/app/score/myScoreInfo',
+   //获取到首页柱状图信息
+   getindexzhu:"http://47.105.199.11"+'/api/app/score/getMyMonthBar',
+   //获取到首页饼图信息
+   getindexbing:"http://47.105.199.11"+'/api/app/score/getMyMonthPie'
    
    
 }

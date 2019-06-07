@@ -12,27 +12,27 @@
 			</view>
 			<view class="uni-row uni-flex" style="align-items: center;">
 				<view style="font-size: 40upx;">总积分</view>
-				<view style="font-size: 40upx;margin-right: 25upx;margin-left: 10upx;">10000</view>
+				<view style="font-size: 40upx;margin-right: 25upx;margin-left: 10upx;">{{allscore}}</view>
 			</view>
 		</view>
 		<!-- 展示积分和排名 -->
 		<view class="uni-flex uni-row secondrow-contain">
 			<view class="seondrow" style="align-items: center;">
-				<view class="bigfount">0</view>
+				<view class="bigfount">{{todayscore}}</view>
 				<view class="bottomfount">今日积分</view>
 			</view>
 			<view class="seondrow" style="align-items: center;">
-				<view class="bigfount">0</view>
+				<view class="bigfount">{{weekscore}}</view>
 				<view class="bottomfount">本周积分</view>
 			</view>
 			<view class="seondrow" style="align-items: center;">
-				<view class="bigfount">0</view>
-				<view class="bottomfount">月度积分</view>
+				<view class="bigfount">{{mothscore}}</view>
+				<view class="bottomfount">本月积分</view>
 			</view>
-			<view class="seondrow" style="align-items: center;">
+			<!-- <view class="seondrow" style="align-items: center;">
 				<view class="bigfount">0</view>
 				<view class="bottomfount">累计积分</view>
-			</view>
+			</view> -->
 		</view>
 		<!-- 展示图标 标识 -->
 		<view class="uni-flex uni-row contantmargin" style="justify-content: space-between;align-items: center; height: 70upx;">
@@ -63,7 +63,8 @@
 			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
 		</view> -->
 		<!-- 公告栏 -->
-		<view class="gonggao uni-swiper-msg" @click="togonggao">
+		
+		<!-- <view class="gonggao uni-swiper-msg" @click="togonggao">
 			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
 				<swiper-item v-for="(item, index) in msg" :key="index">
@@ -71,7 +72,7 @@
 				</swiper-item>
 			</swiper>
 			<image class="tonextstyle" src="../../static/tonext.png"></image>
-		</view>
+		</view> -->
 		<view class="qiun-charts">
 			<!--#ifdef H5-->
 			<canvas canvasId="canvasPie" class="charts" :style="{'width':cWidth*pixelRatio+'px','height':cHeight*pixelRatio+'px', 'transform': 'scale('+(1/pixelRatio)+')','margin-left':-cWidth*(pixelRatio-1)/2+'px','margin-top':-cHeight*(pixelRatio-1)/2+'px'}"></canvas>
@@ -89,71 +90,72 @@
 <script>
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import wxCharts from '../../components/wx-charts/wxcharts.js'
+	import URL from '../../common/url.js'
 	var _self;
 	var canvaColumn = null;
 	var canvaLineA = null;
 	var canvaLineB = null;
 	var canvaArea = null;
-	var Data = {
-		LineA: {
-			categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18',
-				'19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'
-			],
-			series: [{
-				name: '奖分',
-				data: [35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4,
-					5
-				]
-			}, {
-				name: '扣分',
-				data: [70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3,
-					4, 5
-				]
-			}]
-		},
-
-		Pie: {
-			series: [{
-					name: '加班类',
-					data: 56
-				}, {
-					name: '值班类',
-					data: 30
-				}, {
-					name: '客户表扬',
-					data: 20
-				}, {
-					name: '节能增效类',
-					data: 18
-				}, {
-					name: '建议类',
-					data: 8
-				}, {
-					name: '效率提升',
-					data: 8
-				}, {
-					name: '质量管理类',
-					data: 80
-				}, {
-					name: '安全管理类',
-					data: 8
-				}, {
-					name: '设备管理类',
-					data: 8
-				}, {
-					name: '其他类',
-					data: 8
-				}, {
-					name: '积极主动类',
-					data: 8
-				},
-				{
-					name: '好人好事类',
-					data: 8
-				}
-			]
-		}
-	}
+// 	var Data = {
+// 		LineA: {
+// 			categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18',
+// 				'19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'
+// 			],
+// 			series: [{
+// 				name: '奖分',
+// 				data: [35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4,
+// 					5
+// 				]
+// 			}, {
+// 				name: '扣分',
+// 				data: [70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3,
+// 					4, 5
+// 				]
+// 			}]
+// 		},
+// 
+// 		Pie: {
+// 			series: [{
+// 					name: '加班类',
+// 					data: 56
+// 				}, {
+// 					name: '值班类',
+// 					data: 30
+// 				}, {
+// 					name: '客户表扬',
+// 					data: 20
+// 				}, {
+// 					name: '节能增效类',
+// 					data: 18
+// 				}, {
+// 					name: '建议类',
+// 					data: 8
+// 				}, {
+// 					name: '效率提升',
+// 					data: 8
+// 				}, {
+// 					name: '质量管理类',
+// 					data: 80
+// 				}, {
+// 					name: '安全管理类',
+// 					data: 8
+// 				}, {
+// 					name: '设备管理类',
+// 					data: 8
+// 				}, {
+// 					name: '其他类',
+// 					data: 8
+// 				}, {
+// 					name: '积极主动类',
+// 					data: 8
+// 				},
+// 				{
+// 					name: '好人好事类',
+// 					data: 8
+// 				}
+// 			]
+		// }
+	// }
 	export default {
 		components: {
 			uniLoadMore,
@@ -171,12 +173,44 @@
 					'36氪热文榜推荐、CSDN公号推荐 DCloud CEO文章'
 				],
 				usermsg: {},
-				username:'',
-				userjob:''
+				username: '',
+				userjob: '',
+				token: '',
+				todayscore:'0',
+				weekscore:'0',
+				mothscore:'0',
+				allscore:'0',
+				
+				Column: {
+					categories: [],
+					series: [{
+						name: '奖分',
+						data: [],
+						color: "#3CB371"
+					}, {
+						name: '扣分',
+						data: [],
+						color: "#CD6839"
+					}]
+				},
+				Pie: {
+					series: [
+// 						{
+// 						name: '加分',
+// 						data: 0,
+// 						color: "#3CB371"
+// 					}, {
+// 						name: '扣分',
+// 						data: 0,
+// 						color: "#CD6839"
+// 					},
+					]
+				}
 			}
 		},
 		onLoad() {
 			_self = this;
+			this.token = uni.getStorageSync('token')
 			//#ifdef H5
 			uni.getSystemInfo({
 				success: function(res) {
@@ -191,11 +225,15 @@
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
 			this.changeTab()
+			uni.showLoading({})
+			this.getscore()
+			this.getBing()
+			this.getzhu()
 
 		},
 		onReady() {
-			this.showLineA("canvasLineA", Data.LineA);
-			this.showPie("canvasPie", Data.Pie);
+			// this.showLineA("canvasLineA", Data.LineA);
+			// this.showPie("canvasPie", Data.Pie);
 		},
 		methods: {
 			showLineA(canvasId, chartData) {
@@ -301,8 +339,8 @@
 					key: 'usermsg',
 					success: function(res) {
 						_self.usermsg = JSON.parse(res.data)
-						_self.username=_self.usermsg.data.user.user_nickname
-						_self.userjob=_self.usermsg.data.user.job_name
+						_self.username = _self.usermsg.data.user.user_nickname
+						_self.userjob = _self.usermsg.data.user.job_name
 						if (_self.usermsg.data.user.job == 22) {
 							// 是普通用户
 							_self.isnormal = true
@@ -326,7 +364,113 @@
 				uni.navigateTo({
 					url: '../alllistpage/messageList/messageList'
 				})
-			}
+			},
+			getscore: function() {
+				//获取分数信息
+				uni.request({
+					url: URL.getindexcore,
+					data: {
+						token: _self.token,
+						deviceType: 'android'
+					},
+					complete: function(e) {
+						uni.hideLoading()
+						if (e.data.code == 1) {
+							_self.todayscore=e.data.data.scoreInfo.today
+							_self.weekscore=e.data.data.scoreInfo.today//临时数据
+							_self.mothscore=e.data.data.scoreInfo.month
+							_self.allscore=e.data.data.scoreInfo.all+''
+							
+
+						} else {
+							_self.toast(e.data.msg)
+						}
+					},
+					fail: function(e) {
+						_self.toast('网络请求失败，请刷新')
+					}
+				})
+			},
+			getzhu: function(e) {
+				//获取折线图数据
+				uni.request({
+					url: URL.getindexzhu,
+					data: {
+						token: _self.token,
+						deviceType: 'android'
+					},
+					complete: function(e) {
+						console.error(JSON.stringify(e.data))
+						
+						uni.hideLoading()
+						if (e.data.code == 1) {
+							let addscore=e.data.data.scorePlus
+							let scoreMinus=e.data.data.scoreMinus
+							for(let ad of addscore){
+								_self.Column.categories.push(ad.day)
+								_self.Column.series[0].data.push(ad.score)
+							}
+							for(let am of scoreMinus){
+								_self.Column.series[1].data.push(am.score)
+							}
+							_self.showLineA("canvasLineA", _self.Column);
+							
+							
+						} else {
+							_self.toast(e.data.msg)
+						}
+					},
+					fail: function(e) {
+						_self.toast('网络请求失败，请刷新')
+					}
+
+				})
+			},
+			getBing: function(e) {
+				//获取饼图数据
+				uni.request({
+					url: URL.getindexbing,
+					data: {
+						token: _self.token,
+						deviceType: 'android'
+					},
+					complete: function(e) {
+						console.error(JSON.stringify(e.data))
+						uni.hideLoading()
+						if (e.data.code == 1) {
+							let pid=e.data.data.pie
+							for(let o of pid){
+								let oo={}
+								oo.name=o.cate_name
+								oo.data=o.count
+								_self.Pie.series.push(oo)
+							}
+							_self.showPie("canvasPie", _self.Pie);
+
+
+						} else {
+							_self.toast(e.data.msg)
+						}
+					},
+					fail: function(e) {
+						_self.toast('网络请求失败，请刷新')
+					}
+
+				})
+			},
+			toast: function(msg) {
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif	
+			},
 
 		},
 		onPullDownRefresh: function() {

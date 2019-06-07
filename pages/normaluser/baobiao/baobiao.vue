@@ -441,7 +441,6 @@
 						applyTime: _self.date
 					},
 					complete: function(e) {
-						console.error(JSON.stringify(e.data))
 						uni.hideLoading()
 						_self.chartData = e.data
 						if (e.data.code == 1) {

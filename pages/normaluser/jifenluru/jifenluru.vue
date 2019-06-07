@@ -581,10 +581,10 @@
 						_self.toast('请选择加减分数')
 					return
 				}
-				if(this.rulltext==''){
-						_self.toast('请选择规则')
-					return
-				}
+// 				if(this.rulltext==''){
+// 						_self.toast('请选择规则')
+// 					return
+// 				}
 				if(this.inputresean==''){
 					_self.toast('请填写加减分原因')
 					return
@@ -610,9 +610,9 @@
 					complete: (e) => {
 						uni.hideLoading()
 						if(e.data.code==1){
-							uni.showToast({
-								title:e.data.msg,
-								duration:1000
+							_self.toast(e.data.msg)
+							uni.navigateBack({
+								delta:1
 							})
 						}else{
 							_self.toast(e.data.msg)

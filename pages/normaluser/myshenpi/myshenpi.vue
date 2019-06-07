@@ -41,7 +41,7 @@
 				</view>
 				<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 					<view style="font-size: 35upx;">积分</view>
-					<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分" :disabled="!inputenable" type="number"
+					<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分"  type="number"
 					 placeholder-style="color:#CCCCCC" maxlength="8" :value="score" />
 				</view>
 				<view class="timechoise uni-list-cell-navigate" style="flex-direction: column;align-items: flex-start;">
@@ -109,11 +109,11 @@
 				  this.itemdata=JSON.parse(e.itemList)
 	             }
 				 this.score=this.itemdata.score
-				 if(this.itemdata.pass_step==2){
-					 this.inputenable=true
-				 }else{
-					 this.inputenable=false
-				 }
+// 				 if(this.itemdata.pass_step==2){
+// 					 this.inputenable=true
+// 				 }else{
+// 					 this.inputenable=false
+// 				 }
 		},
 		methods:{
 			inputholder2:function(e){
@@ -147,6 +147,9 @@
 				   complete:function(e){
 				   	uni.hideLoading()
 					that.toast(e.data.msg)
+					uni.navigateBack({
+						delta:1
+					})
 				   },
 					fail: function(res) {
 						// #ifdef APP-PLUS

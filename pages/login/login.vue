@@ -29,8 +29,8 @@
 			return {
 				login: {
 					loading: false,
-					phone: "18253485939",
-					password: "111111",
+					phone: "",
+					password: "",
 				},
 				result: {}
 			};
