@@ -33,7 +33,12 @@ module.exports ={
    //获取到首页柱状图信息
    getindexzhu:"http://47.105.199.11"+'/api/app/score/getMyMonthBar',
    //获取到首页饼图信息
-   getindexbing:"http://47.105.199.11"+'/api/app/score/getMyMonthPie'
-   
+   getindexbing:"http://47.105.199.11"+'/api/app/score/getMyMonthPie',
+   //获取到公告信息
+   getnotice:"http://47.105.199.11"+'/api/app/user/getNotice',
+   //获取到排名信息
+   getpaiming:"http://47.105.199.11"+'/api/app/score/getRank',
+   //修改密码
+   changepass:"http://47.105.199.11"+'/api/app/user/changePassword'
    
 }
