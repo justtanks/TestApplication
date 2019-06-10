@@ -23,7 +23,7 @@
 			</view>
 			<view class="seondrow" style="align-items: center;">
 				<view class="bigfount">{{weekscore}}</view>
-				<view class="bottomfount">本周积分</view>
+				<view class="bottomfount">昨日积分</view>
 			</view>
 			<view class="seondrow" style="align-items: center;">
 				<view class="bigfount">{{mothscore}}</view>
@@ -378,7 +378,7 @@
 						uni.hideLoading()
 						if (e.data.code == 1) {
 							_self.todayscore=e.data.data.scoreInfo.today
-							_self.weekscore=e.data.data.scoreInfo.today//临时数据
+							_self.weekscore=e.data.data.scoreInfo.yesterday//临时数据
 							_self.mothscore=e.data.data.scoreInfo.month
 							_self.allscore=e.data.data.scoreInfo.all+''
 							

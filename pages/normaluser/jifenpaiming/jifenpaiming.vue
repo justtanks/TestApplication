@@ -42,9 +42,9 @@
 
 
 				<!-- 最后的确定按钮 -->
-				<view class="buttonstyle popubottonbutton" @tap="popudown">
+				<!-- <view class="buttonstyle popubottonbutton" @tap="popudown">
 					确定
-				</view>
+				</view> -->
 			</view>
 		</popup-layer>
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected1" @cancel="onSelected1" />
@@ -67,19 +67,6 @@
 		data() {
 			return {
 				direction: 'left',
-				// allpeople: true, //选择筛选所有人
-				// containcontrol: true, //包含管理者的筛选
-				// gonggong: false,
-				// wenhua: false,
-				// jixiao: false,
-				// guizhang: false,
-				// nengli: false,
-				// kaoqin: false,
-
-				// 时间控件
-				// date: '2019/01/01',
-				// type: 'date',
-				// value: '',
 				showPicker: false,
 				showpop: false,
 				items: [{
@@ -158,6 +145,9 @@
 						this.current = i;
 						this.targetpaiming = this.items[i].name
 						this.type = this.items[i].type
+						this.$refs.popup.close()
+						this.showpop = false
+						this.getPaiming()
 						break;
 					}
 				}
