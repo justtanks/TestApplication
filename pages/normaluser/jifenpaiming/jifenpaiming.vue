@@ -9,7 +9,7 @@
 		<!-- 中间空出的地方占位 -->
 		<view style="height: 100upx;"></view>
 		<!-- 列表 -->
-		<view class="listitem" v-for="(item,index) in 30" :key='index'>
+		<view class="listitem" v-for="(item,index) in rankList" :key='index'>
 			<view class="paimingcontain">
 				<image class="paimingimage" v-if="index==0" src="../../../static/first.png"></image>
 				<image class="paimingimage" v-else-if="index==1" src="../../../static/second.png"></image>
@@ -19,56 +19,14 @@
 			<view class='paiminimg'>
 				<image src="../../../static/head_default.png" style="width: 75upx;height: 75upx;margin-right: 20upx;"></image>
 			</view>
-			<view class="paimingname">小明</view>
+			<view class="paimingname" @click="clickitem(item)">{{item.user_nickname}}</view>
 			<view class="paimingfenshu">
-				100
+				{{item.score}}
 			</view>
 		</view>
 		<!-- 弹出层使用 -->
 		<popup-layer ref="popup" :direction="direction">
 			<view class="pupustyle">
-				<!-- <view style="margin: 30upx 30upx;font-size: 28upx;">
-					技术类型（单选）
-				</view>
-				<view style="display: flex;flex-direction: row;justify-content: flex-start;">
-					<button class="popbutton" :class="{popbutton_choise:allpeople}" @click="quanyuanpaiming">全员排名</button>
-					<button class="popbutton" :class="{popbutton_choise:!allpeople}" @click="zhiweipaiming">职位排名</button>
-				</view>
-				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 30upx;"></view>
-				<view style="margin: 30upx 30upx;font-size: 28upx;">
-					人员范围
-				</view>
-				<view style="display: flex;flex-direction: row;justify-content: flex-start;">
-					<button class="popbutton" :class="{popbutton_choise:containcontrol}" @click="contain">包含管理者</button>
-					<button class="popbutton" :class="{popbutton_choise:!containcontrol}" @click="containnot">不包含管理者</button>
-				</view>
-				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 30upx;"></view>
-				<view style="display: flex;flex-direction: row; justify-content: space-between;">
-					<view style="margin: 30upx 30upx;">
-						时间
-					</view>
-					<view style="margin: 30upx;font-size: 28upx;">
-						重置
-					</view>
-				</view>
-				<view style="display: flex;flex-direction: row;margin-left: 40upx;margin-right: 40upx;" @click="choisetime('date')">
-					<view style="flex: 1;display: flex; justify-content: center;align-items: center;font-size: 32upx;">{{date}}</view>
-					<view style="flex: 1;display: flex;justify-content: center;align-items: center;">至</view>
-					<view style="flex: 1;display: flex;justify-content: center;align-items: center;font-size: 32upx;">2019-2-1</view>
-				</view>
-				<view style="height: 20upx; background-color: #F1F1F3;margin-top: 50upx;"></view>
-				<view style="margin: 30upx 30upx;font-size: 28upx;">
-					积分分类 (多选)
-				</view>
-				<view style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap;margin-left: 25upx;margin-right: 25upx;">
-					<button class="popbutton1" :class="{popbutton_choise:gonggong}" @click="gonggong1()">公共部分</button>
-					<button class="popbutton1" :class="{popbutton_choise:wenhua}" @click="qiyewenhua1()">企业文化</button>
-					<button class="popbutton1" :class="{popbutton_choise:jixiao}" @click="jixiao1()">绩效</button>
-					<button class="popbutton1" :class="{popbutton_choise:guizhang}" @click="guizhang1()">规章制度</button>
-					<button class="popbutton1" :class="{popbutton_choise:nengli}" @click="nengli1()">能力</button>
-					<button class="popbutton1" :class="{popbutton_choise:kaoqin}" @click="kaoqin1()">考勤</button>
-				</view>
- -->
 
 				<view class="uni-list">
 					<radio-group @change="radioChange">
@@ -79,13 +37,6 @@
 							</view>
 							<view>{{item.name}}</view>
 						</label>
-						<!-- 	<view> 管理人员排名</view>
-						<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in items_guanli" :key="item.value" style="justify-content: flex-start;display: flex;">
-							<view>
-								<radio :value="item.value" :checked="index === current" />
-							</view>
-							<view>{{item.name}}</view>
-						</label> -->
 					</radio-group>
 				</view>
 
@@ -105,6 +56,8 @@
 	// 选择时间的选择
 	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../../common/util.js'
+	import URL from '../../../common/url.js'
+
 	var _self;
 	export default {
 		components: {
@@ -114,67 +67,75 @@
 		data() {
 			return {
 				direction: 'left',
-				allpeople: true, //选择筛选所有人
-				containcontrol: true, //包含管理者的筛选
-				gonggong: false,
-				wenhua: false,
-				jixiao: false,
-				guizhang: false,
-				nengli: false,
-				kaoqin: false,
+				// allpeople: true, //选择筛选所有人
+				// containcontrol: true, //包含管理者的筛选
+				// gonggong: false,
+				// wenhua: false,
+				// jixiao: false,
+				// guizhang: false,
+				// nengli: false,
+				// kaoqin: false,
 
 				// 时间控件
-				date: '2019/01/01',
-				type: 'date',
-				value: '',
+				// date: '2019/01/01',
+				// type: 'date',
+				// value: '',
 				showPicker: false,
 				showpop: false,
 				items: [{
 						value: '1',
-						name: '月度积分排名'
+						name: '月度积分排名',
+						type: 'month'
 					},
 					{
 						value: '2',
 						name: '年度排名',
-						checked: 'true'
+						checked: 'true',
+						type: 'year'
 					},
 					{
 						value: '3',
-						name: '累计积分排名'
-					},
-					{
-						value: '4',
-						name: '班组积分排名'
+						name: '累计积分排名',
+						type: 'all'
 					},
 					{
 						value: '5',
-						name: '副总排名'
+						name: '副总排名',
+						type: 'fuzong'
 					},
 					{
 						value: '6',
-						name: '机长排名'
+						name: '机长排名',
+						type: 'jizhang'
 					},
 					{
 						value: '7',
 						name: '班长排名',
-						checked: 'true'
+						type: 'banzhang'
 					},
 					{
 						value: '8',
-						name: '主任排名'
+						name: '主任排名',
+						type: 'zhuren'
 					},
 					{
 						value: '9',
-						name: '部长排名'
+						name: '部长排名',
+						type: 'buzhan'
 					}
 				],
-				targetpaiming:'月度积分排名',
+				targetpaiming: '月度积分排名',
 				current: 0,
-				
+				token: '',
+				type: 'month',
+				rankList: []
+
 			};
 		},
 		onLoad() {
 			_self = this
+			this.token = uni.getStorageSync('token')
+			this.getPaiming()
 		},
 		onReady() {
 			this.date = dateutll.dateUtils.getNowFormatDate()
@@ -189,88 +150,64 @@
 			popudown: function() {
 				this.$refs.popup.close()
 				this.showpop = false
+				this.getPaiming()
 			},
-// 			quanyuanpaiming: function() {
-// 				_self.allpeople = true;
-// 				_self.zhiwei = false
-// 			},
-// 			zhiweipaiming: function() {
-// 				_self.allpeople = false;
-// 				_self.zhiwei = true
-// 			},
-// 			contain: function() {
-// 				_self.containcontrol = true
-// 			},
-// 			containnot: function() {
-// 				_self.containcontrol = false
-// 			},
-// 			gonggong1() {
-// 				if (this.gonggong)
-// 					this.gonggong = false
-// 				else
-// 					this.gonggong = true
-// 			},
-// 			qiyewenhua1() {
-// 				if (this.wenhua)
-// 					this.wenhua = false
-// 				else
-// 					this.wenhua = true
-// 			},
-// 			jixiao1() {
-// 				if (this.jixiao)
-// 					this.jixiao = false
-// 				else
-// 					this.jixiao = true
-// 			},
-// 			guizhang1() {
-// 				if (this.guizhang)
-// 					this.guizhang = false
-// 				else
-// 					this.guizhang = true
-// 			},
-// 			nengli1() {
-// 				if (this.nengli)
-// 					this.nengli = false
-// 				else
-// 					this.nengli = true
-// 			},
-// 			kaoqin1() {
-// 				if (this.kaoqin)
-// 					this.kaoqin = false
-// 				else
-// 					this.kaoqin = true
-// 			},
-// 			choisetime(type) {
-// 				//弹出时间的选择框
-// 				this.type = type;
-// 				this.showPicker = true;
-// 				this.value = this[type];
-// 			},
-// 			onSelected1(e) { //选择时间后
-// 				this.showPicker = false;
-// 				if (e) {
-// 					this[this.type] = e.value;
-// 				}
-// 			},
-			// 
 			radioChange: function(evt) {
 				for (let i = 0; i < this.items.length; i++) {
 					if (this.items[i].value === evt.target.value) {
 						this.current = i;
-						this.targetpaiming=this.items[i].name
+						this.targetpaiming = this.items[i].name
+						this.type = this.items[i].type
 						break;
 					}
 				}
 				// this.targetpaiming=evt.target.name
-			}
-		
+			},
+			getPaiming: function(e) {
+				uni.showLoading({
 
-	},
-	onPullDownRefresh: function() {
+				})
+				uni.request({
+					url: URL.getpaiming,
+					data: {
+						token: _self.token,
+						deviceType: 'android',
+						type: _self.type
+					},
+					complete: function(e) {
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						_self.toast(e.data.msg)
+						if (e.data.code == 1) {
+							_self.rankList = e.data.data.rank
+						} else {
+
+						}
+					}
+				})
+			},
+			clickitem: function(e) {
+
+			},
+			toast: function(msg) {
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif
+			}
+
+
+		},
+		onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
-			setTimeout(function() {
-				uni.stopPullDownRefresh()
-			}, 1000)
+			this.getPaiming()
 		},
 		onBackPress: function() {
 			if (this.showPicker) {

@@ -374,6 +374,7 @@
 						deviceType: 'android'
 					},
 					complete: function(e) {
+						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
 							_self.todayscore=e.data.data.scoreInfo.today
@@ -400,8 +401,7 @@
 						deviceType: 'android'
 					},
 					complete: function(e) {
-						console.error(JSON.stringify(e.data))
-						
+						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
 							let addscore=e.data.data.scorePlus
@@ -435,7 +435,8 @@
 						deviceType: 'android'
 					},
 					complete: function(e) {
-						console.error(JSON.stringify(e.data))
+						
+						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
 							let pid=e.data.data.pie
@@ -475,9 +476,10 @@
 		},
 		onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
-			setTimeout(function() {
-				uni.stopPullDownRefresh()
-			}, 1000)
+			uni.showLoading({})
+			this.getscore()
+			this.getBing()
+			this.getzhu()
 		}
 	}
 </script>
