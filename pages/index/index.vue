@@ -64,15 +64,15 @@
 		</view> -->
 		<!-- 公告栏 -->
 		
-		<!-- <view class="gonggao uni-swiper-msg" @click="togonggao">
+		<view class="gonggao uni-swiper-msg" @click="togonggao">
 			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
 				<swiper-item v-for="(item, index) in msg" :key="index">
-					<navigator style="color: #666666;">{{item}}</navigator>
+					<navigator style="color: #666666;">{{item.post_content}}</navigator>
 				</swiper-item>
 			</swiper>
 			<image class="tonextstyle" src="../../static/tonext.png"></image>
-		</view> -->
+		</view>
 		<view class="qiun-charts">
 			<!--#ifdef H5-->
 			<canvas canvasId="canvasPie" class="charts" :style="{'width':cWidth*pixelRatio+'px','height':cHeight*pixelRatio+'px', 'transform': 'scale('+(1/pixelRatio)+')','margin-left':-cWidth*(pixelRatio-1)/2+'px','margin-top':-cHeight*(pixelRatio-1)/2+'px'}"></canvas>
@@ -168,9 +168,7 @@
 				pixelRatio: 1,
 				isnormal: true, //是否是普通员工
 				msg: [
-					'uni-app行业峰会频频亮相，开发者反响热烈',
-					'DCloud完成B2轮融资，uni-app震撼发布',
-					'36氪热文榜推荐、CSDN公号推荐 DCloud CEO文章'
+					 
 				],
 				usermsg: {},
 				username: '',
@@ -229,6 +227,7 @@
 			this.getscore()
 			this.getBing()
 			this.getzhu()
+			this.getlist()
 
 		},
 		onReady() {
@@ -472,6 +471,29 @@
 				})
 				// #endif	
 			},
+			getlist:function(){
+				uni.request({
+					url:URL.getnotice,
+					data:{
+						token:_self.token,
+						deviceType:'android'
+					},
+					complete:function(e){
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						if(e.data.code==1){
+							// let list=e.data.data.notice
+						  _self.msg=e.data.data.notice
+						}else{
+							_self.toast(e.data.msg)
+						}
+					},
+					fail:function(e){
+						_self.toast('网络错误')
+					}
+				})
+				
+			}
 
 		},
 		onPullDownRefresh: function() {
@@ -480,6 +502,7 @@
 			this.getscore()
 			this.getBing()
 			this.getzhu()
+			this.getlist()
 		}
 	}
 </script>
