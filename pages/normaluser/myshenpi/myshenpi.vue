@@ -41,8 +41,8 @@
 				</view>
 				<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 					<view style="font-size: 35upx;">积分</view>
-					<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分"  type="number"
-					 placeholder-style="color:#CCCCCC" maxlength="8" :value="score" />
+					<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分" type="number" placeholder-style="color:#CCCCCC"
+					 maxlength="8" :value="score" />
 				</view>
 				<view class="timechoise uni-list-cell-navigate" style="flex-direction: column;align-items: flex-start;">
 					<view style="font-size: 35upx;">申请原因：</view>
@@ -114,6 +114,7 @@
 // 				 }else{
 // 					 this.inputenable=false
 // 				 }
+                  
 		},
 		methods:{
 			inputholder2:function(e){
@@ -139,10 +140,11 @@
 				   data:{
 					   token:that.token,
 					   deviceType:'android',
-					   id:that.itemdata.id,
+					   // id:that.itemdata.id,
 					   score:that.score,
 					   status:that.isagree?1:2,
-					   refuseReason:that.isagree?null:that.refusereason
+					   refuseReason:that.isagree?null:that.refusereason,
+					   team:that.itemdata.team
 				   },
 				   complete:function(e){
 				   	uni.hideLoading()

@@ -64,13 +64,22 @@
 						<view class="topstyle_choise" style="font-size: 33upx;">选择员工</view>
 						<view class="topstyle_choise" style="justify-content: flex-end;margin-right: 25upx;" @click="completeChoise">完成</view>
 					</view>
-					<mSearch :show='false' @search="search($event,0)"></mSearch>
+					<!-- <mSearch :show='false' @search="search($event,0)"></mSearch> -->
 				</view>
 
-				<view style="height: 180upx;"></view>
-				<scroll-view style="height: 1020upx;" scroll-y="true">
+				<view style="height: 95upx;"></view>
+					<scroll-view style="height: 1020upx;" scroll-y="true" v-if="showlist">
+				    <view style="width: 100%;">
+				  	<view class="cadlist" :class="listitemstyle" v-for="(item,index) in alluser" :key="index" @click="choisezhu(item)">
+				  		<view style="font-size: 35upx;margin-top: 10upx;margin-bottom: 10upx;">{{item.name}}</view>
+				  		<image class="tonextstyle"  src="../../../static/tonext.png"></image>
+				  	</view>
+				  </view>
+				</scroll-view>
+				
+				<scroll-view style="height: 1020upx;" scroll-y="true" v-else="" >
 					<checkbox-group @change="checkboxChange">
-						<label class="listitem"  v-for="(item,index) in alluser" :key='index'>
+						<label class="listitem"  v-for="(item,index) in xiaozuuser" :key='index'>
 
 							<view>
 								<checkbox :value="item.id" :checked="item.ischeck" color="#007AFF" />
@@ -202,14 +211,18 @@
 				guanli:[],
 				//终审人员列表
 				zhongshenlist:[],
-				alluser:[],
-				allman:[],
+				alluser:[],  //所有的人员
+				xiaozuuser:[], //小组的人员  每次选择都会变化
+				allman:[],          //搜索使用的人员，当前不再使用这个变量
 				checkeduser:[],
 				//用逗号分隔的选择人的字符串
 				choiseduserid:'',
 				// 选择的名称
 				choiseduserName:'',
-				showalluser:false
+				showalluser:false,//是否显示所有的选择的人员的名字的显示框
+				
+				showlist:true  ,//是否显示的是小组
+				allid:[]//选择的用户的id
 			};
 		},
 		onReady() {
@@ -221,8 +234,6 @@
 		onLoad() {
 				_self = this;
 			this.token=uni.getStorageSync('token')
-			console.error(this.token)
-			
 		},
 		methods: {
 			inputholder:function(e){
@@ -265,7 +276,6 @@
 			search(e, val) {
 				// 搜索的方法
 				 var allusertemp=new Array;
-				console.error(e)
 				if(e===''){
 					 this.alluser=this.allman
 				}else{
@@ -328,10 +338,10 @@
 					this.getzhongshen()
 			},
 			onCancel(e) {
-				console.log(e)
+				
 			},
 			onConfirm(e) {
-				      console.error(JSON.stringify(e))
+				     
 					if(this.popid==1){
 						this.fenlei=e.label
 						this.fenleiid= e.value[0]
@@ -453,21 +463,16 @@
 					complete: (e) => {
 						uni.hideLoading()
 						if(e.data.code!=1){
-							uni.showToast({
-								title:e.data.msg,
-								duration:1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 							return
 						}
 						//解析用户数据
 						_self.alluser=e.data.data.userList
-						_self.allman=_self.alluser
-						for(let it of _self.alluser){
-							it.ischeck=false
-							 
-						}
-						console.error(JSON.stringify(_self.alluser))
+						// _self.allman=_self.alluser
+						// for(let it of _self.alluser){
+						// 	it.ischeck=false
+						// 	 
+						// }
 						_self.show1()
 					},
 					fail: function(res) {
@@ -525,22 +530,30 @@
 			},
 			completeChoise:function(){
 				//选择人员点击完成按钮
-				this.showLeft=false
 				this.choiseduserName=''
+				this.allid=[]
 				for(let la of this.alluser){
-					if( this.checkeduser.indexOf(la.id+'')==-1){
-						la.ischeck=false
-					}else{
-						la.ischeck=true
-						this.choiseduserName+=la.user_nickname+','
+					for(let as of la.member){
+						if( as.ischeck==true){
+							this.choiseduserName+=as.user_nickname+','
+							this.allid.push(as.id)
+						}
 					}
+					
 				}
+				if(this.allid.length==0){
+					this.toast('未选择人员')
+					return
+				}
+				
 				if(this.choiseduserName.length>0){
 					this.showalluser=true
 				}else{
 					this.showalluser=false
 				}
-				this.choiseduserid=this.checkeduser.join(',')
+				this.choiseduserid=this.allid.join(',')
+				this.showLeft=false
+				this.showlist=true
 			},
 			cancelChoise:function(){
 				// 选择人员点击取消按钮
@@ -549,7 +562,7 @@
 			checkboxChange: function (e) {
 				//checkbox的选中状态
 				this.checkeduser=e.target.value
-				for(let us of this.allman){
+				for(let us of this.xiaozuuser){
 					if(this.checkeduser.indexOf(us.id+'')!=-1){
 						us.ischeck=true
 					}else{
@@ -637,6 +650,12 @@
 				})
 				
 			},
+			choisezhu:function(e){
+				//选择小组
+				_self.xiaozuuser=e.member
+				_self.showlist=false
+				
+			},
 			toast:function(msg){
 				// #ifdef APP-PLUS
 				plus.nativeUI.toast(msg);
@@ -656,7 +675,11 @@
 		},
 
 		onBackPress() {
-			// 后退的方法
+			if(!this.showlist){
+				this.showlist=true
+				return true
+			}
+				// 后退的方法
 			if (this.showRigth || this.showLeft) {
 				// this.closeDrawer(this.drawmode)
 				this.showLeft=false
@@ -674,6 +697,7 @@
 				this.showLeft3=false
 				return true
 			}
+			
 			// 关闭第二个抽屉，也就是规则的抽屉
 			if(this.showLeft1){
 				if (this.huanchong.length >1) {
@@ -720,6 +744,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		background: #EEEEEE;
 	}
 
 	.topcontent {
@@ -774,9 +799,10 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		margin-left: 25upx;
-		margin-right: 25upx;
+		padding-left:25upx;
+		padding-right: 25upx;
 		border-bottom: #EBEBEB solid 0.5upx;
+		background: #FFFFFF;
 	}
 	.textnum{
 		display: flex;flex-direction: row; justify-content: flex-end;margin-right: 25upx;color: #CCCCCC;
