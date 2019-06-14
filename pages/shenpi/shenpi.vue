@@ -40,7 +40,7 @@
 
 						<view class="buttoncontainer">
 							<view>
-								<!-- <button style="font-size: 25upx;" class="buttonstyle">查看</button> -->
+								<button style="font-size: 25upx;" class="buttonstyle"  @click="goxiangqing(item)">查看</button>
 							</view>
 						</view>
 					</view>
@@ -84,6 +84,11 @@
 						</view>
 						<view style="display: flex;margin-top: 15upx;">
 							<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
+						</view>
+						<view class="buttoncontainer">
+							<view>
+								<button style="font-size: 25upx;" class="buttonstyle"  @click="goxiangqing(item)">查看</button>
+							</view>
 						</view>
 					</view>
 					<uni-load-more :status="status3" :contentText="contentText"></uni-load-more>
@@ -348,9 +353,15 @@
 
 			},
 			toshenpi: function(e) {
-
+                  //到审批这个记录的界面
 				uni.navigateTo({
 					url: '../normaluser/myshenpi/myshenpi?itemList=' + encodeURIComponent(JSON.stringify(e))
+				})
+			},
+			goxiangqing:function(e){
+				// 到展示审批信息的界面
+				uni.navigateTo({
+					url:'../normaluser/chakanshenpi/chakanshenpi?itemList=' + encodeURIComponent(JSON.stringify(e))
 				})
 			},
 			fenlei: function(e) {

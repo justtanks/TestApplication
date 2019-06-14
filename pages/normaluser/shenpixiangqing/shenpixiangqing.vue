@@ -1,4 +1,4 @@
-<!-- 审批内容详情 -->
+	<!-- 我的申请 申请待审批 -->
 <template>
 	<view>
 		<view style="width: 100%;">
