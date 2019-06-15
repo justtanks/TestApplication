@@ -352,8 +352,6 @@
 				});
 			},
 			change: function() {
-				// Data.Column.categories = ['1', '2', '3', '4']
-				// Data.Pie.series[0].data = 100;
 				this.showColumn("canvasColumn", Data.Column);
 				this.showPie("canvasPie", Data.Pie);
 			},
@@ -413,12 +411,12 @@
 							if (moadd.count == 0) moadd.score = 0
 							if (mocut.count == 0) mocut.score = 0
 
-							_self.todayadd = toadd.count + '/' + toadd.score
-							_self.todaycut = tocut.count + '/' + tocut.score
-							_self.weekadd = weadd.count + '/' + weadd.score
-							_self.weekcut = wecut.count + '/' + wecut.score
-							_self.mothadd = moadd.count + '/' + moadd.score
-							_self.mothcut = mocut.count + '/' + mocut.score
+							_self.todayadd = toadd.score + '/' + toadd.count
+							_self.todaycut = tocut.score + '/' + tocut.count
+							_self.weekadd = weadd.score + '/' + weadd.count
+							_self.weekcut = wecut.score + '/' + wecut.count
+							_self.mothadd = moadd.score + '/' + moadd.count
+							_self.mothcut = mocut.score + '/' + mocut.count
 
 						} else {
 							_self.toast(e.data.msg)
@@ -441,6 +439,7 @@
 						applyTime: _self.date
 					},
 					complete: function(e) {
+					
 						uni.hideLoading()
 						_self.chartData = e.data
 						if (e.data.code == 1) {
@@ -448,7 +447,7 @@
 						   for(let s of bardata)
 						   {
 							   _self.Column.series[0].data.push(parseInt(s.plus))
-							   _self.Column.series[1].data.push(parseInt(s.minus))
+							   _self.Column.series[1].data.push(0-parseInt(s.minus))
 						   }
 						   if(bardata.length==5){
 							   _self.Column.categories.push('第五周')
@@ -459,7 +458,7 @@
 							   if(a.name=='加分'){
 								   _self.Pie.series[0].data=parseInt(a.data)
 							   }else{
-								   _self.Pie.series[1].data=parseInt(a.data)
+								   _self.Pie.series[1].data=0-parseInt(a.data)
 							   }
 						   }
 						   

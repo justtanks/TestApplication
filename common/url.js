@@ -39,6 +39,8 @@ module.exports ={
    //获取到排名信息
    getpaiming:"http://47.105.199.11"+'/api/app/score/getRank',
    //修改密码
-   changepass:"http://47.105.199.11"+'/api/app/user/changePassword'
+   changepass:"http://47.105.199.11"+'/api/app/user/changePassword',
+   //获取到审批的详情的界面
+   getshenpixiangqing: "http://47.105.199.11"+'/api/app/score/getTeamDetail'
    
 }

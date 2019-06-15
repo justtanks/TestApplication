@@ -101,6 +101,7 @@
 			// this.barlist.push('全部规则')
 		},
 	    onLoad:function(e){
+			
 					  that=this
 					  this.token = uni.getStorageSync('token')
 				  try{
@@ -109,6 +110,7 @@
 				  this.itemdata=JSON.parse(e.itemList)
 	             }
 				 this.score=this.itemdata.score
+				 this.getxiangqing()
 // 				 if(this.itemdata.pass_step==2){
 // 					 this.inputenable=true
 // 				 }else{
@@ -180,6 +182,38 @@
 				uni.previewImage({
 					current: current,
 					urls: this.imageList
+				})
+			},
+			getxiangqing:function(e){
+				uni.showLoading({
+					title:'获取信息中。。'
+				})
+				uni.request({
+					url:URL.getshenpixiangqing,
+					data:{
+						 token:that.token,
+						deviceType:'android',
+						team:that.itemdata.team
+					},
+					complete:function(e){
+						uni.hideLoading()
+                        // console.error(JSON.stringify(e.data))				
+						// that.itemdata.benefit_user_name=e.data.data.
+						that.toast(e.data.msg)
+						if(e.data.code==1){
+							let users=e.data.data.applyList
+							let userStr=[]
+							for(let us of users){
+								userStr.push(us.benefit_user_name)
+							}
+							that.itemdata.benefit_user_name=userStr.join(',')
+						}
+						
+						
+					},
+					fail:function(e){
+						that.toast('网络错误')
+					}
 				})
 			},
 			toast:function(msg){
