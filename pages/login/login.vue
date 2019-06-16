@@ -59,6 +59,7 @@
 						},
 						method: 'POST',
 						complete: function(res) {
+							that.login.loading = false;
 							that.result = res.data
 							if (that.result.code != 1) {
 								that.toast(that.result.msg)
@@ -68,7 +69,6 @@
 							uni.setStorageSync('password', that.login.password)
 							uni.setStorageSync('token', that.result.data.token)
 							that.setusermsg(that.result.data.token)
-							that.login.loading = false;
 
 						},
 						fail: function(res) {
