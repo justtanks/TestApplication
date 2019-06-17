@@ -376,7 +376,7 @@
 						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
-							// console.error(JSON.stringify(e.data))
+							console.error(JSON.stringify(e.data))
 							_self.todayscore=e.data.data.scoreInfo.today
 							_self.weekscore=e.data.data.scoreInfo.week//临时数据
 							_self.mothscore=e.data.data.scoreInfo.month
