@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<view class="uni-row uni-flex" style="align-items: center;">
-				<view style="font-size: 40upx;">总积分</view>
+				<view style="font-size: 40upx;">累计积分</view>
 				<view style="font-size: 40upx;margin-right: 25upx;margin-left: 10upx;">{{allscore}}</view>
 			</view>
 		</view>
@@ -29,10 +29,10 @@
 				<view class="bigfount">{{mothscore}}</view>
 				<view class="bottomfount">本月积分</view>
 			</view>
-			<!-- <view class="seondrow" style="align-items: center;">
-				<view class="bigfount">0</view>
-				<view class="bottomfount">累计积分</view>
-			</view> -->
+			<view class="seondrow" style="align-items: center;">
+				<view class="bigfount">{{yearScore}}</view>
+				<view class="bottomfount">年积分</view>
+			</view>
 		</view>
 		<!-- 展示图标 标识 -->
 		<view class="uni-flex uni-row contantmargin" style="justify-content: space-between;align-items: center; height: 70upx;">
@@ -178,6 +178,7 @@
 				weekscore:'0',
 				mothscore:'0',
 				allscore:'0',
+				yearScore:'',
 				
 				Column: {
 					categories: [],
@@ -381,7 +382,7 @@
 							_self.weekscore=e.data.data.scoreInfo.week//临时数据
 							_self.mothscore=e.data.data.scoreInfo.month
 							_self.allscore=e.data.data.scoreInfo.all+''
-							
+							_self.yearScore=e.data.data.scoreInfo.year
 
 						} else {
 							_self.toast(e.data.msg)
