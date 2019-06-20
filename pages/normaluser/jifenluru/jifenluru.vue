@@ -532,25 +532,30 @@
 				//选择人员点击完成按钮
 				this.choiseduserName=''
 				this.allid=[]
+				console.error('1')
 				for(let la of this.alluser){
+					if(la.member==null){
+						continue
+					}
 					for(let as of la.member){
 						if( as.ischeck==true){
 							this.choiseduserName+=as.user_nickname+','
 							this.allid.push(as.id)
 						}
 					}
-					
 				}
+				console.error('2')
 				if(this.allid.length==0){
 					this.toast('未选择人员')
 					return
 				}
-				
+				console.error('3')
 				if(this.choiseduserName.length>0){
 					this.showalluser=true
 				}else{
 					this.showalluser=false
 				}
+					console.error('4')
 				this.choiseduserid=this.allid.join(',')
 				this.showLeft=false
 				this.showlist=true
