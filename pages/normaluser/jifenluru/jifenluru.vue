@@ -461,6 +461,7 @@
 						deviceType:'android'
 					},
 					complete: (e) => {
+						console.error(JSON.stringify(e.data))
 						uni.hideLoading()
 						if(e.data.code!=1){
 							_self.toast(e.data.msg)
