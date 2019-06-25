@@ -109,6 +109,11 @@
 						value: '9',
 						name: '部长排名',
 						type: 'buzhan'
+					},
+					{
+						value: '10',
+						name: '小组排名',
+						type: 'group'
 					}
 				],
 				targetpaiming: '月度积分排名',
@@ -165,6 +170,7 @@
 						type: _self.type
 					},
 					complete: function(e) {
+						console.error(JSON.stringify(e.data))
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
 						_self.toast(e.data.msg)

@@ -18,7 +18,7 @@
 				<image src="../../static/tonext.png" class="tonextstyle" style="visibility: hidden;"></image>
 			</view>
 		</view>
-		<view class="mine_list" @click="changesex">
+		<view class="mine_list" @click="changesex" v-show="false">
 			<view class="mine_textstyle">性别</view>
 			<view class="leftstyle">
 				<view style="margin-right: 20upx;color: #555555;">{{usersex}}</view>

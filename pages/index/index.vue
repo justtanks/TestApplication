@@ -402,6 +402,7 @@
 						deviceType: 'android'
 					},
 					complete: function(e) {
+						 
 						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
@@ -436,11 +437,13 @@
 						deviceType: 'android'
 					},
 					complete: function(e) {
-						
 						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
 							let pid=e.data.data.pie
+							if(pid.length==0){
+								return
+							}
 							for(let o of pid){
 								let oo={}
 								oo.name=o.cate_name
@@ -481,6 +484,7 @@
 						deviceType:'android'
 					},
 					complete:function(e){
+						console.error(JSON.stringify(e.data))
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
 						if(e.data.code==1){
