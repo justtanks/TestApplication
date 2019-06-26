@@ -8,6 +8,7 @@
 		</view>
 		<!-- 中间空出的地方占位 -->
 		<view style="height: 100upx;"></view>
+		<button type="default" size="mini" style="margin-left: 20upx;" @click="choisezhiwei()" v-if="showzhiwei">{{zhiwei}}</button>
 		<!-- 列表 -->
 		<view class="listitem" v-for="(item,index) in rankList" :key='index'>
 			<view class="paimingcontain">
@@ -48,6 +49,9 @@
 			</view>
 		</popup-layer>
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected1" @cancel="onSelected1" />
+
+		<mpvue-picker :themeColor="themeColor" ref="mpvuePicker" :mode="mode" :deepLength="deepLength" :pickerValueDefault="pickerValueDefault"
+		 @onConfirm="onConfirm" @onCancel="onCancel" :pickerValueArray="pickerValueArray"></mpvue-picker>
 	</view>
 </template>
 
@@ -57,12 +61,15 @@
 	import MxDatePicker from '../../../components/mx-datepicker/mx-datepicker.vue'
 	import dateutll from '../../../common/util.js'
 	import URL from '../../../common/url.js'
+	import mpvuePicker from '../../../components/mpvue-picker/mpvuePicker.vue';
 
 	var _self;
 	export default {
 		components: {
 			popupLayer,
+			mpvuePicker,
 			MxDatePicker
+
 		},
 		data() {
 			return {
@@ -116,11 +123,51 @@
 						type: 'group'
 					}
 				],
+				pickerSingleArray: [{
+						label: '机长',
+						key: 'jizhang',
+						value:'jizhang'
+					},
+					{
+						label: '班长',
+						key: 'banzhang',
+						value: 'banzhang'
+					},
+					{
+						label: '主任',
+						key: 'zhuren',
+						value:'zhuren'
+					},
+					{
+						label: '部长',
+						key: 'buzhang',
+						value: 'buzhang'
+					},
+					{
+						label: '副总',
+						key: 'fuzong',
+						value: 'fuzong'
+					},
+					{
+						label: '员工',
+						key: 'yuangong',
+						value: 'yuangong'
+					}
+				],
 				targetpaiming: '月度积分排名',
 				current: 0,
 				token: '',
 				type: 'month',
-				rankList: []
+				rankList: [],
+				zhiwei: '全部',
+				showzhiwei: true,
+				job: '',
+				themeColor: '#007AFF',
+				pickerText: '',
+				mode: '',
+				deepLength: 1,
+				pickerValueDefault: [0],
+				pickerValueArray: [],
 
 			};
 		},
@@ -142,7 +189,7 @@
 			popudown: function() {
 				this.$refs.popup.close()
 				this.showpop = false
-				this.getPaiming()
+				// this.getPaiming()
 			},
 			radioChange: function(evt) {
 				for (let i = 0; i < this.items.length; i++) {
@@ -150,9 +197,22 @@
 						this.current = i;
 						this.targetpaiming = this.items[i].name
 						this.type = this.items[i].type
+						if (this.type == 'month' || this.type == 'year' || this.type == 'all') {
+							this.showzhiwei = true
+						} else {
+							this.showzhiwei = false
+						}
 						this.$refs.popup.close()
 						this.showpop = false
 						this.getPaiming()
+						this.job = ''
+						this.zhiwei = '全部'
+						// if (this.showzhiwei == true && this.job == '') {
+						// 	this.getPaiming()
+						// } else {
+						// 	this.getPaimingbyjob()
+						// }
+
 						break;
 					}
 				}
@@ -170,7 +230,6 @@
 						type: _self.type
 					},
 					complete: function(e) {
-						console.error(JSON.stringify(e.data))
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
 						_self.toast(e.data.msg)
@@ -182,6 +241,49 @@
 					}
 				})
 			},
+			getPaimingbyjob: function(e) {
+				uni.showLoading({
+
+				})
+				uni.request({
+					url: URL.getpaiming,
+					data: {
+						token: _self.token,
+						deviceType: 'android',
+						type: _self.type,
+						job: _self.job
+
+					},
+					complete: function(e) {
+						uni.hideLoading()
+						uni.stopPullDownRefresh()
+						_self.toast(e.data.msg)
+						if (e.data.code == 1) {
+							_self.rankList = e.data.data.rank
+						} else {
+
+						}
+					}
+				})
+			},
+			choisezhiwei:function(){
+				// 选择审批人
+				this.pickerValueArray = this.pickerSingleArray
+				this.mode = 'selector'
+				this.deepLength = 1
+				this.pickerValueDefault = [0]
+				this.$refs.mpvuePicker.show()
+				
+			},
+			onCancel(e) {
+				console.log(e)
+			},
+			onConfirm(e) {
+				this.job = e.value[0];
+				this.zhiwei = e.label
+				this.getPaimingbyjob()
+			},
+
 			clickitem: function(e) {
 
 			},
