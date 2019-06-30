@@ -4,7 +4,7 @@
 		<view style="position: fixed; z-index: 99;width: 100%;background-color: #FFFFFF;">
 			<view class="topbar">
 				<!-- <view class="topbaritem" @click="fenlei">
-					<view class="toptext1 ">分类</view>
+					<view class="toptext1 ">{{types}}</view>
 					<image class="tonextstyle" src="../../../static/tobottom.png"></image>
 				</view> -->
 				<!-- <view class="topbaritem" @click="bumen">
@@ -38,6 +38,11 @@
 					<view class="thingstyle">
 						<view class="shenpistyle-one ">积分对象：{{item.benefit_user_name}}</view>
 						<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：{{item.apply_user_name}}</view>
+					</view>
+					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;margin-bottom: 10upx;">
+						<view v-if="item.in==0" class="shenpistyle-one " style="color: #666666;">审批状态:{{item.info}}</view>
+						<view v-else-if="item.in==1" class="shenpistyle-one " style="color: #09BB07;">审批状态:{{item.info}}</view>
+						<view v-else="" class="shenpistyle-one " style="color: #CD0000;">审批状态:{{item.info}}</view>
 					</view>
 				</view>
 				<uni-load-more :status="status" :contentText="contentText"></uni-load-more>
@@ -81,7 +86,8 @@
 				token: '',
 				model:0  ,//0 是普通状态，  1是 时间选择状态
 				time:'',
-				jifenlist:[]
+				jifenlist:[],
+				types:"全部"
 
 			};
 		},
@@ -125,13 +131,12 @@
 		methods: {
 			search(e, val) {
 				// 搜索的方法
-				console.log(e, val);
 			},
 			fenlei: function(e) {
 				uni.showActionSheet({
-					itemList: ['列表1', '列表2', '列表3'],
+					itemList: ['全部', '待审批', '已通过','未通过'],
 					success: function(res) {
-
+                       
 					}
 				})
 			},
@@ -173,7 +178,8 @@
 						token: _self.token,
 						deviceType: "android",
 						page: _self.page1,
-						pageSize: 15
+						pageSize: 15,
+						type:'all'
 					},
 					complete: (e) => {
 						_self.status = 'more'
@@ -184,7 +190,39 @@
 								_self.status = 'nomore'
 								return
 							}
-							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
+							let datalist=e.data.data.scoreList
+							for(let da of datalist){
+								if(da.pass_status1==0){
+									da.info='初审审核中'
+									da.in=0
+								}else if(da.pass_status1==1){
+									if(da.pass_status2==0){
+										da.info='初审通过，终审审核中'
+										da.in=0
+									}else if(da.pass_status2==1){
+										
+										if(status==0){
+											da.info='终审通过，管理员审核中'
+											da.in=0
+										}else if(status==1){
+											da.info='管理员审核通过，积分录入成功'
+											da.in=1
+										}else{
+											da.info='管理员审核未通过'
+											da.in=2
+										}
+										
+									}else{
+										da.info='终审未通过'
+										da.in=2
+									}
+									
+								}else{
+									da.info='初审未通过'
+									da.in=2
+								}
+							}
+							_self.jifenlist = _self.jifenlist.concat(datalist)
 						} else {
 							_self.toast(e.data.msg)
 						}
@@ -213,7 +251,8 @@
 						deviceType: "android",
 						page: _self.page1,
 						pageSize: 15,
-						applyTime:time
+						applyTime:time,
+						type:'all'
 					},
 				
 					complete: (e) => {
@@ -226,7 +265,39 @@
 								_self.status = 'nomore'
 								return
 							}
-							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
+							let datalist=e.data.data.scoreList
+							for(let da of datalist){
+								if(da.pass_status1==0){
+									da.info='初审审核中'
+									da.in=0
+								}else if(da.pass_status1==1){
+									if(da.pass_status2==0){
+										da.info='初审通过，终审审核中'
+										da.in=0
+									}else if(da.pass_status2==1){
+										
+										if(status==0){
+											da.info='终审通过，管理员审核中'
+											da.in=0
+										}else if(status==1){
+											da.info='管理员审核通过，积分录入成功'
+											da.in=1
+										}else{
+											da.info='管理员审核未通过'
+											da.in=2
+										}
+										
+									}else{
+										da.info='终审未通过'
+										da.in=2
+									}
+									
+								}else{
+									da.info='初审未通过'
+									da.in=2
+								}
+							}
+							_self.jifenlist = _self.jifenlist.concat(datalist)
 						} else {
 							_self.toast(e.data.msg)
 						}

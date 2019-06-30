@@ -237,6 +237,7 @@
 					},
 
 					complete: (e) => {
+						console.error(JSON.stringify(e.data))
 						_self.status1 = 'more'
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
@@ -269,6 +270,7 @@
 					},
 
 					complete: (e) => {
+						console.error(JSON.stringify(e.data))
 						_self.status2 = 'more'
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
@@ -302,6 +304,7 @@
 					},
 
 					complete: (e) => {
+						console.error(JSON.stringify(e.data))
 						_self.status3 = 'more'
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
