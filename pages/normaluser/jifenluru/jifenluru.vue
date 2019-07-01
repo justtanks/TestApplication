@@ -128,6 +128,46 @@
 			</view>
 
 		</uni-drawer>
+		<!-- 选择初审人的drawer -->
+		<popup-layer ref="popup" :direction="direction">
+			<view class="pupustyle" style="width: 500upx;">
+		
+				<view class="uni-list">
+					<radio-group @change="radioChange">
+						<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in guanlirenyuan" :key="item.id" 
+						style="justify-content: flex-start;display: flex;">
+							<view>
+								<radio :value="item.id+':'+item.user_nickname" />
+							</view>
+							<view>{{item.user_nickname}}</view>
+						</label>
+					</radio-group>
+				</view>
+		           
+			</view>
+		</popup-layer>
+		
+		<!-- 选择终审人的pop -->
+		<popup-layer ref="popup1" :direction="direction">
+			<view class="pupustyle" style="width: 500upx;">
+		
+				<view class="uni-list">
+					<radio-group @change="radioChange1">
+						<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in zhongshenrenyuan" :key="item.id" 
+						style="justify-content: flex-start;display: flex;">
+							<view>
+								<radio :value="item.id+':'+item.user_nickname" />
+							</view>
+							<view>{{item.user_nickname}}</view>
+						</label>
+					</radio-group>
+				</view>
+		           
+			</view>
+		</popup-layer>
+		
+		
+		
 		<mx-date-picker :show="showPicker" :type="type" :value="value" :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 		<mpvue-picker :themeColor="themeColor" ref="mpvuePicker" :mode="mode" :deepLength="deepLength" :pickerValueDefault="pickerValueDefault"
 		 @onConfirm="onConfirm" @onCancel="onCancel" :pickerValueArray="pickerValueArray"></mpvue-picker>
@@ -145,6 +185,7 @@
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import mydata from "../../../common/mydata.js"
 	import url1 from '../../../common/url.js'
+	import popupLayer from '../../../components/popup-layer/popup-layer.vue';
 	 
 	var _self;
 	export default {
@@ -153,7 +194,8 @@
 			mSearch,
 			uniDrawer,
 			mpvuePicker,
-			uniLoadMore
+			uniLoadMore,
+			popupLayer
 
 		},
 		data() {
@@ -222,7 +264,13 @@
 				showalluser:false,//是否显示所有的选择的人员的名字的显示框
 				
 				showlist:true  ,//是否显示的是小组
-				allid:[]//选择的用户的id
+				allid:[],//选择的用户的id
+				// 选择初审人的界面
+				direction: 'left',
+				showpop: false,
+				guanlirenyuan:[],
+				zhongshenrenyuan:[],
+				
 			};
 		},
 		onReady() {
@@ -363,8 +411,12 @@
 			},
 			getguali:function(e){
 				//获取到管理人员并且展示列表
-				if(_self.guanli.length!=0){
-					this.showpoplist( _self.guanli)
+				// if(_self.guanli.length!=0){
+				// 	this.showpoplist( _self.guanli)
+				// 	return
+				// }
+				if(_self.guanlirenyuan.length!=0){
+					_self.showpup()
 					return
 				}
 				uni.showLoading({
@@ -385,12 +437,15 @@
 							})
 							return
 						}
-						var val=e.data.data.leaderList
-						for(let ls of val){
-							 var person={label:ls.user_nickname, value:ls.id};
-							 _self.guanli.push(person)
-						}
-						this.showpoplist( _self.guanli)
+						// var val=e.data.data.leaderList
+						// console.error(JSON.stringify(_self.guanlirenyuan))
+						// for(let ls of val){
+						// 	 var person={label:ls.user_nickname, value:ls.id};
+						// 	 _self.guanli.push(person)
+						// }
+						// this.showpoplist( _self.guanli)  
+							_self.guanlirenyuan=e.data.data.leaderList
+						_self.showpup()
 					}
 				})
 			},
@@ -418,12 +473,16 @@
 							_self.toast(e.data.msg)
 							return
 						}
-						var val=e.data.data.leaderList
-						for(let ls of val){
-							 var person={label:ls.user_nickname, value:ls.id};
-							 _self.zhongshenlist.push(person)
-						}
-						this.showpoplist( _self.zhongshenlist)
+						// var val=e.data.data.leaderList
+						// for(let ls of val){
+						// 	 var person={label:ls.user_nickname, value:ls.id};
+						// 	 _self.zhongshenlist.push(person)
+						// }
+						// this.showpoplist( _self.zhongshenlist)
+						_self.zhongshenrenyuan=e.data.data.leaderList
+						_self.showpup1()
+						
+						
 					},
 					fail: function(res) {
 						// #ifdef APP-PLUS
@@ -662,6 +721,40 @@
 				_self.xiaozuuser=e.member
 				_self.showlist=false
 				
+			},
+			showpup: function() {
+				// 弹出弹窗
+				this.$refs.popup.show() // 弹出
+				this.showpop = true
+			},
+			popudown: function() {
+				this.$refs.popup.close()
+				this.showpop = false
+				// this.getPaiming()
+			},
+			// 终审的弹窗的弹出
+			showpup1: function() {
+				// 弹出弹窗
+				this.$refs.popup1.show() // 弹出
+			},
+			// 终审的弹窗的消失
+			popudown1: function() {
+				this.$refs.popup1.close()
+			},
+			// 初审的单选组的变化
+			radioChange: function(evt) {
+				let str=evt.target.value.split(":")
+				_self.chushenid=str[0]
+				_self.chushen=str[1]
+				_self.popudown()
+				
+			},
+			// 终身的单选组变化
+			radioChange1: function(evt) {
+				let str=evt.target.value.split(":")
+				_self.zhongshenid=str[0]
+				_self.zhongshen=str[1]
+				_self.popudown1()
 			},
 			toast:function(msg){
 				// #ifdef APP-PLUS
