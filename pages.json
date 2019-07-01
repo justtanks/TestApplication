@@ -104,10 +104,10 @@
             "path" : "pages/normaluser/jifenpaiming/jifenpaiming",
             "style" : {
 				"navigationBarTitleText":"积分排名",
-				"enablePullDownRefresh":true,
+				"enablePullDownRefresh":false,
 				"app-plus":{
 					"pullToRefresh":{
-						"support":true,
+						"support":false,
 						"scrollIndicator":"none",
 						"height":"10%",
 						"range":"10%",

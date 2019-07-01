@@ -35,7 +35,7 @@
 			<!-- 积分 -->
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 				<view style="font-size: 35upx;">积分</view>
-				<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分" type="number"  placeholder-style="color:#CCCCCC" maxlength="8" v-model="score" />
+				<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分"   placeholder-style="color:#CCCCCC" maxlength="8" v-model="score" />
 			</view>
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="choisechushen">
 				<view style="font-size: 35upx;">选择初审人</view>
@@ -415,11 +415,7 @@
 					complete: (e) => {
 						uni.hideLoading()
 						if(e.data.code!=1){
-							uni.showToast({
-								title:e.data.msg,
-								duration:1000,
-								icon:'none'
-							})
+							_self.toast(e.data.msg)
 							return
 						}
 						var val=e.data.data.leaderList
@@ -578,6 +574,7 @@
 			
             },
 			addshenqing:function(e){
+				console.error(isNaN(this.score))
 				//添加申请
 				if(this.fenleiid==0){
 					_self.toast('选择分类')
@@ -596,10 +593,15 @@
 						_self.toast('请选择加分人')
 					return
 				}
+				 if(isNaN(this.score)){
+					 _self.toast('积分格式不对,请填写数字')
+					 return
+				 }
 				if(this.score==0){
 						_self.toast('请选择加减分数')
 					return
 				}
+				
 // 				if(this.rulltext==''){
 // 						_self.toast('请选择规则')
 // 					return
