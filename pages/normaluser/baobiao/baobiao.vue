@@ -125,31 +125,31 @@
 
 	var _self;
 	var canvaColumn = null;
-	var Data = {
-		Column: {
-			categories: ['第一周', '第二周', '第三周', '第四周'],
-			series: [{
-				name: '奖分',
-				data: [15, 20, 45, 37],
-				color: "#3CB371"
-			}, {
-				name: '扣分',
-				data: [30, 40, 25, 14],
-				color: "#CD6839"
-			}]
-		},
-		Pie: {
-			series: [{
-				name: '加分',
-				data: 50,
-				color: "#3CB371"
-			}, {
-				name: '扣分',
-				data: 30,
-				color: "#CD6839"
-			}]
-		}
-	};
+	// var Data = {
+	// 	Column: {
+	// 		categories: ['第一周', '第二周', '第三周', '第四周'],
+	// 		series: [{
+	// 			name: '奖分',
+	// 			data: [15, 20, 45, 37],
+	// 			color: "#3CB371"
+	// 		}, {
+	// 			name: '扣分',
+	// 			data: [30, 40, 25, 14],
+	// 			color: "#CD6839"
+	// 		}]
+	// 	},
+	// 	Pie: {
+	// 		series: [{
+	// 			name: '加分',
+	// 			data: 50,
+	// 			color: "#3CB371"
+	// 		}, {
+	// 			name: '扣分',
+	// 			data: 30,
+	// 			color: "#CD6839"
+	// 		}]
+	// 	}
+	// };
 
 	export default {
 		components: {
@@ -245,7 +245,7 @@
 				mothadd: '',
 				mothcut: '',
 				Column: {
-					categories: ['第一周', '第二周', '第三周', '第四周'],
+					categories: ['第一周', '第二周', '第三周', '第四周','第五周'],
 					series: [{
 						name: '奖分',
 						data: [],
@@ -303,8 +303,9 @@
 
 		},
 		onReady() {
-			this.showColumn("canvasColumn", Data.Column);
-			this.showPie("canvasPie", Data.Pie);
+			// this.showColumn("canvasColumn", this.Column);
+			// this.showPie("canvasPie", this.Pie);
+			
 		},
 
 		methods: {
@@ -352,8 +353,8 @@
 				});
 			},
 			change: function() {
-				this.showColumn("canvasColumn", Data.Column);
-				this.showPie("canvasPie", Data.Pie);
+				this.showColumn("canvasColumn", this.Column);
+				this.showPie("canvasPie", this.Pie);
 			},
 			onCancel(e) {
 				console.log(e)
@@ -442,6 +443,7 @@
 					
 						uni.hideLoading()
 						_self.chartData = e.data
+						console.error(JSON.stringify(e.data))
 						if (e.data.code == 1) {
                            let bardata=e.data.data.bar
 						   for(let s of bardata)
@@ -449,9 +451,7 @@
 							   _self.Column.series[0].data.push(parseInt(s.plus))
 							   _self.Column.series[1].data.push(0-parseInt(s.minus))
 						   }
-						   if(bardata.length==5){
-							   _self.Column.categories.push('第五周')
-						   }
+						   
 						   
 						   let piedata=e.data.data.pie
 						   for(let a of piedata){

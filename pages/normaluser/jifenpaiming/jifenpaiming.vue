@@ -92,31 +92,31 @@
 						name: '累计积分排名',
 						type: 'all'
 					},
-					{
-						value: '5',
-						name: '副总排名',
-						type: 'fuzong'
-					},
-					{
-						value: '6',
-						name: '机长排名',
-						type: 'jizhang'
-					},
-					{
-						value: '7',
-						name: '班长排名',
-						type: 'banzhang'
-					},
-					{
-						value: '8',
-						name: '主任排名',
-						type: 'zhuren'
-					},
-					{
-						value: '9',
-						name: '部长排名',
-						type: 'buzhan'
-					},
+					// {
+					// 	value: '5',
+					// 	name: '副总排名',
+					// 	type: 'fuzong'
+					// },
+					// {
+					// 	value: '6',
+					// 	name: '机长排名',
+					// 	type: 'jizhang'
+					// },
+					// {
+					// 	value: '7',
+					// 	name: '班长排名',
+					// 	type: 'banzhang'
+					// },
+					// {
+					// 	value: '8',
+					// 	name: '主任排名',
+					// 	type: 'zhuren'
+					// },
+					// {
+					// 	value: '9',
+					// 	name: '部长排名',
+					// 	type: 'buzhan'
+					// },
 					{
 						value: '10',
 						name: '小组排名',

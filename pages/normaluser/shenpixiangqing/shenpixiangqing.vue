@@ -18,7 +18,7 @@
 				<view class="toptext-two">初审状态：{{chushenstatus}} </view>
 				<view class="toptext-two">终审状态：{{zhongshenstatus}} </view>
 				<view class="toptext-two">管理员审核状态：{{guanliyuanstatus}} </view>
-				<view class="toptext-two" style="color: #DD524D;" v-if="refuseReason!=null">拒绝原因：{{refuseReason}} </view>
+				<view class="toptext-two" style="color: #DD524D;" v-if="!refuseReason==null">拒绝原因：{{refuseReason}} </view>
 				<view style="display: flex;margin-top: 15upx;">
 					<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 				</view>
