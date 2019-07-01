@@ -457,7 +457,6 @@
 						deviceType:'android'
 					},
 					complete: (e) => {
-						console.error(JSON.stringify(e.data))
 						uni.hideLoading()
 						if(e.data.code!=1){
 							_self.toast(e.data.msg)
@@ -529,7 +528,7 @@
 				//选择人员点击完成按钮
 				this.choiseduserName=''
 				this.allid=[]
-				console.error('1')
+				
 				for(let la of this.alluser){
 					if(la.member==null){
 						continue
@@ -541,18 +540,18 @@
 						}
 					}
 				}
-				console.error('2')
+				
 				if(this.allid.length==0){
 					this.toast('未选择人员')
 					return
 				}
-				console.error('3')
+				
 				if(this.choiseduserName.length>0){
 					this.showalluser=true
 				}else{
 					this.showalluser=false
 				}
-					console.error('4')
+					
 				this.choiseduserid=this.allid.join(',')
 				this.showLeft=false
 				this.showlist=true
