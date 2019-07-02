@@ -18,7 +18,7 @@
 				<view class="toptext-two">初审状态：{{chushenstatus}} </view>
 				<view class="toptext-two">终审状态：{{zhongshenstatus}} </view>
 				<view class="toptext-two">管理员审核状态：{{guanliyuanstatus}} </view>
-				<view class="toptext-two" style="color: #DD524D;" v-if="!refuseReason==null">拒绝原因：{{refuseReason}} </view>
+				<view class="toptext-two" style="color: #DD524D;" v-if="refuseReason!=null" >拒绝原因：{{refuseReason}} </view>
 				<view style="display: flex;margin-top: 15upx;">
 					<view class="shenpistyle-one">申请时间: {{item.apply_time}}&nbsp;&nbsp;&nbsp; &nbsp;申请人:{{item.apply_user_name}}</view>
 				</view>
@@ -38,7 +38,7 @@
 				chushenstatus: '',
 				zhongshenstatus: '',
 				guanliyuanstatus: '',
-				refuseReason:''
+				refuseReason:null
 			}
 		},
 		onLoad: function(e) {
@@ -49,47 +49,55 @@
 			} catch (error) {
 				this.item = JSON.parse(e.itemdata)
 			}
+			 console.error(JSON.stringify(this.item))
+			this.chushenstatus = '审核中'
+			this.zhongshenstatus = '审核中'
+			this.guanliyuanstatus = '审核中'
+			
 			if (this.item.pass_status1 == 0) {
 				this.chushenstatus = '审核中'
 			} else if (this.item.pass_status1 == 1) {
 				this.chushenstatus = '已通过'
+				if (this.item.pass_status2 == 0) {
+					this.zhongshenstatus = '审核中'
+				} else if (this.item.pass_status2 == 1) {
+					this.zhongshenstatus = '已通过'
+					if (this.item.status == 0) {
+						this.guanliyuanstatus = '审核中'
+					} else if (this.item.status == 1) {
+						this.guanliyuanstatus = '已通过'
+					} else {
+						this.guanliyuanstatus = '已拒绝'
+						this.refuseReason=this.item.refuse_reason
+					}	
+				} else {
+					this.zhongshenstatus = '已拒绝'
+					this.refuseReason=this.item.refuse_reason2
+				}
+				
 			} else {
 				this.chushenstatus = '已拒绝'
-			}
-
-			if (this.item.pass_status2 == 0) {
-				this.zhongshenstatus = '审核中'
-			} else if (this.item.pass_status2 == 1) {
-				this.zhongshenstatus = '已通过'
-			} else {
-				this.zhongshenstatus = '已拒绝'
-			}
-
-			if (this.item.status == 0) {
-				this.guanliyuanstatus = '审核中'
-			} else if (this.item.status == 1) {
-				this.guanliyuanstatus = '已通过'
-			} else {
-				this.guanliyuanstatus = '已拒绝'
-			}
-			if(this.item.refuse_reason1!=null){
 				this.refuseReason=this.item.refuse_reason1
-			}else if(this.item.refuse_reason2!=null){
-				this.refuseReason=this.item.refuse_reason2
-			}else if(this.item.refuse_reason!=null){
-				this.refuseReason=this.item.refuse_reason
-			}else{
-				this.refuseReason=null
 			}
-			
-			if (this.item.status == 0) {
-				this.guanliyuanstatus = '审核中'
-			} else if (this.item.status == 1) {
-				this.guanliyuanstatus = '已通过'
-				this.refuseReason=null
-			} else {
-				this.guanliyuanstatus = '已拒绝'
-			}
+
+			// if(this.item.refuse_reason1!=null){
+			// 	this.refuseReason=this.item.refuse_reason1
+			// }else if(this.item.refuse_reason2!=null){
+			// 	this.refuseReason=this.item.refuse_reason2
+			// }else if(this.item.refuse_reason!=null){
+			// 	this.refuseReason=this.item.refuse_reason
+			// }else{
+			// 	this.refuseReason=null
+			// }
+			// 
+			// if (this.item.status == 0) {
+			// 	this.guanliyuanstatus = '审核中'
+			// } else if (this.item.status == 1) {
+			// 	this.guanliyuanstatus = '已通过'
+			// 	this.refuseReason=null
+			// } else {
+			// 	this.guanliyuanstatus = '已拒绝'
+			// }
 
 
 		},

@@ -63,7 +63,7 @@
 			<image style="width: 140upx;height: 70upx;" src="../../static/gonggao2.png"></image>
 		</view> -->
 		<!-- 公告栏 -->
-		
+
 		<view class="gonggao uni-swiper-msg" @click="togonggao">
 			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
@@ -96,65 +96,65 @@
 	var canvaLineA = null;
 	var canvaLineB = null;
 	var canvaArea = null;
-// 	var Data = {
-// 		LineA: {
-// 			categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18',
-// 				'19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'
-// 			],
-// 			series: [{
-// 				name: '奖分',
-// 				data: [35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4,
-// 					5
-// 				]
-// 			}, {
-// 				name: '扣分',
-// 				data: [70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3,
-// 					4, 5
-// 				]
-// 			}]
-// 		},
-// 
-// 		Pie: {
-// 			series: [{
-// 					name: '加班类',
-// 					data: 56
-// 				}, {
-// 					name: '值班类',
-// 					data: 30
-// 				}, {
-// 					name: '客户表扬',
-// 					data: 20
-// 				}, {
-// 					name: '节能增效类',
-// 					data: 18
-// 				}, {
-// 					name: '建议类',
-// 					data: 8
-// 				}, {
-// 					name: '效率提升',
-// 					data: 8
-// 				}, {
-// 					name: '质量管理类',
-// 					data: 80
-// 				}, {
-// 					name: '安全管理类',
-// 					data: 8
-// 				}, {
-// 					name: '设备管理类',
-// 					data: 8
-// 				}, {
-// 					name: '其他类',
-// 					data: 8
-// 				}, {
-// 					name: '积极主动类',
-// 					data: 8
-// 				},
-// 				{
-// 					name: '好人好事类',
-// 					data: 8
-// 				}
-// 			]
-		// }
+	// 	var Data = {
+	// 		LineA: {
+	// 			categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18',
+	// 				'19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'
+	// 			],
+	// 			series: [{
+	// 				name: '奖分',
+	// 				data: [35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4, 5, 35, 20, 25, 37, 4, 20, 10, 2, 4,
+	// 					5
+	// 				]
+	// 			}, {
+	// 				name: '扣分',
+	// 				data: [70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3, 4, 5, 70, 40, 65, 90, 44, 68, 20, 3,
+	// 					4, 5
+	// 				]
+	// 			}]
+	// 		},
+	// 
+	// 		Pie: {
+	// 			series: [{
+	// 					name: '加班类',
+	// 					data: 56
+	// 				}, {
+	// 					name: '值班类',
+	// 					data: 30
+	// 				}, {
+	// 					name: '客户表扬',
+	// 					data: 20
+	// 				}, {
+	// 					name: '节能增效类',
+	// 					data: 18
+	// 				}, {
+	// 					name: '建议类',
+	// 					data: 8
+	// 				}, {
+	// 					name: '效率提升',
+	// 					data: 8
+	// 				}, {
+	// 					name: '质量管理类',
+	// 					data: 80
+	// 				}, {
+	// 					name: '安全管理类',
+	// 					data: 8
+	// 				}, {
+	// 					name: '设备管理类',
+	// 					data: 8
+	// 				}, {
+	// 					name: '其他类',
+	// 					data: 8
+	// 				}, {
+	// 					name: '积极主动类',
+	// 					data: 8
+	// 				},
+	// 				{
+	// 					name: '好人好事类',
+	// 					data: 8
+	// 				}
+	// 			]
+	// }
 	// }
 	export default {
 		components: {
@@ -168,18 +168,18 @@
 				pixelRatio: 1,
 				isnormal: true, //是否是普通员工
 				msg: [
-					 
+
 				],
 				usermsg: {},
 				username: '',
 				userjob: '',
 				token: '',
-				todayscore:'0',
-				weekscore:'0',
-				mothscore:'0',
-				allscore:'0',
-				yearScore:'',
-				
+				todayscore: '0',
+				weekscore: '0',
+				mothscore: '0',
+				allscore: '0',
+				yearScore: '',
+
 				Column: {
 					categories: [],
 					series: [{
@@ -194,15 +194,15 @@
 				},
 				Pie: {
 					series: [
-// 						{
-// 						name: '加分',
-// 						data: 0,
-// 						color: "#3CB371"
-// 					}, {
-// 						name: '扣分',
-// 						data: 0,
-// 						color: "#CD6839"
-// 					},
+						// 						{
+						// 						name: '加分',
+						// 						data: 0,
+						// 						color: "#3CB371"
+						// 					}, {
+						// 						name: '扣分',
+						// 						data: 0,
+						// 						color: "#CD6839"
+						// 					},
 					]
 				}
 			}
@@ -378,11 +378,11 @@
 						uni.hideLoading()
 						if (e.data.code == 1) {
 
-							_self.todayscore=e.data.data.scoreInfo.today
-							_self.weekscore=e.data.data.scoreInfo.week//临时数据
-							_self.mothscore=e.data.data.scoreInfo.month
-							_self.allscore=e.data.data.scoreInfo.all+''
-							_self.yearScore=e.data.data.scoreInfo.year
+							_self.todayscore = e.data.data.scoreInfo.today
+							_self.weekscore = e.data.data.scoreInfo.week //临时数据
+							_self.mothscore = e.data.data.scoreInfo.month
+							_self.allscore = e.data.data.scoreInfo.all + ''
+							_self.yearScore = e.data.data.scoreInfo.year
 
 						} else {
 							_self.toast(e.data.msg)
@@ -402,22 +402,22 @@
 						deviceType: 'android'
 					},
 					complete: function(e) {
-						 
+
 						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
-							let addscore=e.data.data.scorePlus
-							let scoreMinus=e.data.data.scoreMinus
-							for(let ad of addscore){
+							let addscore = e.data.data.scorePlus
+							let scoreMinus = e.data.data.scoreMinus
+							for (let ad of addscore) {
 								_self.Column.categories.push(ad.day)
 								_self.Column.series[0].data.push(ad.score)
 							}
-							for(let am of scoreMinus){
+							for (let am of scoreMinus) {
 								_self.Column.series[1].data.push(am.score)
 							}
 							_self.showLineA("canvasLineA", _self.Column);
-							
-							
+
+
 						} else {
 							_self.toast(e.data.msg)
 						}
@@ -440,14 +440,15 @@
 						uni.stopPullDownRefresh()
 						uni.hideLoading()
 						if (e.data.code == 1) {
-							let pid=e.data.data.pie
-							if(pid.length==0){
+							let pid = e.data.data.pie
+							if (pid.length == 0) {
 								return
 							}
-							for(let o of pid){
-								let oo={}
-								oo.name=o.cate_name
-								oo.data=o.count
+							for (let o of pid) {
+								let oo = {}
+								oo.name = o.cate_name
+								oo.data = o.count
+								oo.color=_self.getRandomColor()
 								_self.Pie.series.push(oo)
 							}
 							_self.showPie("canvasPie", _self.Pie);
@@ -463,6 +464,9 @@
 
 				})
 			},
+			 getRandomColor:function() {
+                  return '#'+(Math.random()*0xffffff<<0).toString(16); 
+			},
 			toast: function(msg) {
 				// #ifdef APP-PLUS
 				plus.nativeUI.toast(msg);
@@ -476,29 +480,29 @@
 				})
 				// #endif	
 			},
-			getlist:function(){
+			getlist: function() {
 				uni.request({
-					url:URL.getnotice,
-					data:{
-						token:_self.token,
-						deviceType:'android'
+					url: URL.getnotice,
+					data: {
+						token: _self.token,
+						deviceType: 'android'
 					},
-					complete:function(e){
-						 
+					complete: function(e) {
+
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
-						if(e.data.code==1){
+						if (e.data.code == 1) {
 							// let list=e.data.data.notice
-						  _self.msg=e.data.data.notice
-						}else{
+							_self.msg = e.data.data.notice
+						} else {
 							_self.toast(e.data.msg)
 						}
 					},
-					fail:function(e){
+					fail: function(e) {
 						_self.toast('网络错误')
 					}
 				})
-				
+
 			}
 
 		},
