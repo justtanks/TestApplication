@@ -49,7 +49,7 @@
 			} catch (error) {
 				this.item = JSON.parse(e.itemdata)
 			}
-			 console.error(JSON.stringify(this.item))
+			 // console.error(JSON.stringify(this.item))
 			this.chushenstatus = '审核中'
 			this.zhongshenstatus = '审核中'
 			this.guanliyuanstatus = '审核中'

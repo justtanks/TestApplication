@@ -29,11 +29,19 @@
 				<view class="timechoise uni-list-cell-navigate " v-if="!haverull" >
 					<view style="font-size: 35upx;">初审人</view>
 					<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{itemdata.pass_user_name1}}</view>
+					<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{chushenstatus}}</view>
 				</view>
 				<view class="timechoise uni-list-cell-navigate " v-if="!haverull" >
 					<view style="font-size: 35upx;">终审人</view>
 					<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{itemdata.pass_user_name2}}</view>
+					<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{zhongshenstatus}}</view>
 				</view>
+				<view class="timechoise uni-list-cell-navigate " v-if="!haverull" >
+					<view style="font-size: 35upx;">管理员审核</view>
+					
+					<view style="font-size: 30upx;margin-right: 50upx; color:#555555;">{{guanliyuanstatus}}</view>
+				</view>
+				
 				<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 					<view style="font-size: 35upx;">积分</view>
 					<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分" type="number" placeholder-style="color:#CCCCCC"
@@ -41,7 +49,7 @@
 				</view>
 				<view class="timechoise uni-list-cell-navigate" style="flex-direction: column;align-items: flex-start;">
 					<view style="font-size: 35upx;">申请原因：</view>
-					<view style="margin-top: 20upx; margin-left: 50upx; font-size: 25upx;  color:#555555;">
+					<view style="margin-top: 20upx; margin-left: 50upx; font-size: 35upx;  color:#555555;">
 						{{itemdata.reason}}
 					</view>
 				</view>
@@ -88,7 +96,10 @@
 				agreetext:'同意',
 				token:'',
 				refusereason:'',
-				length:0
+				length:0,
+				chushenstatus:'',
+				zhongshenstatus:'',
+				guanliyuanstatus:''
 			};
 		},
 		onReady(){
@@ -99,14 +110,39 @@
 					  this.token = uni.getStorageSync('token')
 				  try{
 				  	this.itemdata=JSON.parse(decodeURIComponent(e.itemList))
+					console.error(decodeURIComponent(e.itemList))
 				   }catch(error){
 				  this.itemdata=JSON.parse(e.itemList)
 	             }
 				 this.score=this.itemdata.score
+				 this.getstatus()
                  this.getxiangqing()
                   
 		},
 		methods:{
+			getstatus:function(){
+				if(this.itemdata.pass_status1===0){
+					this.chushenstatus='待审批'
+				}else if(this.itemdata.pass_status1===1){
+					this.chushenstatus='已通过'
+				}else{
+					this.chushenstatus='已拒绝'
+				}
+				if(this.itemdata.pass_status2===0){
+					this.zhongshenstatus='待审批'
+				}else if(this.itemdata.pass_status2===1){
+					this.zhongshenstatus='已通过'
+				}else{
+					this.zhongshenstatus='已拒绝'
+				}
+				if(this.itemdata.status===0){
+					this.guanliyuanstatus='待审批'
+				}else if(this.itemdata.status===1){
+					this.guanliyuanstatus='已通过'
+				}else{
+					this.guanliyuanstatus='已拒绝'
+				}
+			},
 			inputholder2:function(e){
 				let length=this.refusereason.length;
 				this.beizhunum=length+'/'+'100'

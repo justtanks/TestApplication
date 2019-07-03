@@ -8,7 +8,6 @@
 					<view style="flex: 1;" class="topstle" :class="{border2text:isfirstbottom}" @click="firstclick">全部</view>
 					<view style="flex: 1;" class="topstle" :class="{border2text:issecondbottom}" @click="secondlick">待审批</view>
 					<view style="flex: 1;" class="topstle" :class="{border2text:isthirdbottom}" @click="thirdclick">已审批</view>
-					<!-- <view style="flex: 1;" class="topstle" :class="{border2text:isfourbottom}" @click="fourclick">未通过</view> -->
 				</view>
 				<!-- <mSearch :show='false' @search="search1($event,0)"></mSearch> -->
 			</view>
@@ -134,6 +133,11 @@
 						<view class="thingstyle">
 							<view class="shenpistyle-one ">积分对象：{{item.benefit_user_name}}</view>
 							<view class="shenpistyle-one" style="margin-right: 20upx;">操作人：{{item.apply_user_name}}</view>
+						</view>
+						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;margin-bottom: 10upx;">
+							<view v-if="item.in==0" class="shenpistyle-one " style="color: #666666;">审批状态:{{item.info}}</view>
+							<view v-else-if="item.in==1" class="shenpistyle-one " style="color: #09BB07;">审批状态:{{item.info}}</view>
+							<view v-else="" class="shenpistyle-one " style="color: #CD0000;">审批状态:{{item.info}}</view>
 						</view>
 					</view>
 					<uni-load-more :status="status" :contentText="contentText"></uni-load-more>
@@ -552,7 +556,39 @@
 								_self.status = 'nomore'
 								return
 							}
-							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
+							let datalist=e.data.data.scoreList
+								for(let da of datalist){
+									if(da.pass_status1==0){
+										da.info='初审审核中'
+										da.in=0
+									}else if(da.pass_status1==1){
+										if(da.pass_status2==0){
+											da.info='初审通过，终审审核中'
+											da.in=0
+										}else if(da.pass_status2==1){
+											
+											if(status==0){
+												da.info='终审通过，管理员审核中'
+												da.in=0
+											}else if(status==1){
+												da.info='管理员审核通过，积分录入成功'
+												da.in=1
+											}else{
+												da.info='管理员审核未通过'
+												da.in=2
+											}
+											
+										}else{
+											da.info='终审未通过'
+											da.in=2
+										}
+										
+									}else{
+										da.info='初审未通过'
+										da.in=2
+									}
+								}
+								_self.jifenlist = _self.jifenlist.concat(datalist)
 						} else {
 							_self.toast(e.data.msg)
 							
@@ -596,7 +632,40 @@
 								_self.status = 'nomore'
 								return
 							}
-							_self.jifenlist = _self.jifenlist.concat(e.data.data.scoreList)
+							let datalist=e.data.data.scoreList
+								for(let da of datalist){
+									if(da.pass_status1==0){
+										da.info='初审审核中'
+										da.in=0
+									}else if(da.pass_status1==1){
+										if(da.pass_status2==0){
+											da.info='初审通过，终审审核中'
+											da.in=0
+										}else if(da.pass_status2==1){
+											
+											if(status==0){
+												da.info='终审通过，管理员审核中'
+												da.in=0
+											}else if(status==1){
+												da.info='管理员审核通过，积分录入成功'
+												da.in=1
+											}else{
+												da.info='管理员审核未通过'
+												da.in=2
+											}
+											
+										}else{
+											da.info='终审未通过'
+											da.in=2
+										}
+										
+									}else{
+										da.info='初审未通过'
+										da.in=2
+									}
+								}
+								_self.jifenlist = _self.jifenlist.concat(datalist)
+							
 						} else {
 							_self.toast(e.data.msg)
 						}
