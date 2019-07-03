@@ -42,7 +42,7 @@
 				<view class="timechoise uni-list-cell-navigate uni-navigate-right">
 					<view style="font-size: 35upx;">积分</view>
 					<input style="line-height: 1; font-size: 35upx;" placeholder="请输入积分" type="number" placeholder-style="color:#CCCCCC"
-					 maxlength="8" :value="score" />
+					 maxlength="8" v-model="score"  />
 				</view>
 				<view class="timechoise uni-list-cell-navigate" style="flex-direction: column;align-items: flex-start;">
 					<view style="font-size: 35upx;">申请原因：</view>

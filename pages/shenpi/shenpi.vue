@@ -332,7 +332,7 @@
 			},
 			search1(e, val) {
 				// 搜索的方法
-				console.log(e, val);
+				
 			},
 			search2(e, val) {
 				// 搜索的方法
@@ -623,7 +623,6 @@
 					},
 
 					complete: (e) => {
-						console.error(e.data)
 						_self.status = 'more'
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
