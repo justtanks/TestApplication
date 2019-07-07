@@ -79,7 +79,7 @@
 				this.chushenstatus = '已拒绝'
 				this.refuseReason=this.item.refuse_reason1
 			}
-
+             this.getxiangqing()
 			// if(this.item.refuse_reason1!=null){
 			// 	this.refuseReason=this.item.refuse_reason1
 			// }else if(this.item.refuse_reason2!=null){
@@ -102,7 +102,52 @@
 
 		},
 		methods: {
-
+			toast:function(msg){
+				// #ifdef APP-PLUS
+				plus.nativeUI.toast(msg);
+				// #endif
+				//#ifdef MP-WEIXIN
+				uni.showToast({
+					title: msg,
+					duration: 1000,
+					icon: 'none',
+					position: 'bottom'
+				})
+				// #endif
+				
+			},
+			getxiangqing:function(e){
+				uni.showLoading({
+					title:'获取信息中。。'
+				})
+				uni.request({
+					url:URL.getshenpixiangqing,
+					data:{
+						 token:that.token,
+						deviceType:'android',
+						team:that.item.team
+					},
+					complete:function(e){
+						uni.hideLoading()
+                        // console.error(JSON.stringify(e.data))				
+						// that.itemdata.benefit_user_name=e.data.data.
+						that.toast(e.data.msg)
+						if(e.data.code==1){
+							let users=e.data.data.applyList
+							let userStr=[]
+							for(let us of users){
+								userStr.push(us.benefit_user_name)
+							}
+							that.item.benefit_user_name=userStr.join(',')
+						}
+						
+						
+					},
+					fail:function(e){
+						that.toast('网络错误')
+					}
+				})
+			}
 		}
 	}
 </script>

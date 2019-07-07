@@ -68,7 +68,7 @@
 			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
 				<swiper-item v-for="(item, index) in msg" :key="index">
-					<navigator style="color: #666666;">{{item.post_content}}</navigator>
+					<navigator style="color: #666666;">{{item.post_title}}</navigator>
 				</swiper-item>
 			</swiper>
 			<image class="tonextstyle" src="../../static/tonext.png"></image>

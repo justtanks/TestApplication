@@ -7,9 +7,9 @@
 		<!-- <view style="height:100upx ;"></view> -->
 		<view>
 			<view style="width: 100%;" >
-				<view class="cadlist_1" v-for="(item,index) in msglist" :key="index">
+				<view class="cadlist_1 uni-list-cell-navigate <uni-navigate-right></uni-navigate-right>" v-for="(item,index) in msglist" :key="index" @click="toweb(item.url)">
 					<view class="toptext-one">{{item.post_title}}</view>
-					<view class="toptext-two">{{item.post_content }}</view>
+					<!-- <view class="toptext-two">{{item.post_content }}</view> -->
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 发布时间:{{item.published_time}}</view>
 					</view>
@@ -101,6 +101,11 @@
 				})
 				
 			},
+			toweb:function(e){
+				uni.navigateTo({
+					url:'../gonggaoxiangqing/gonggaoxiangqing?web='+e
+				})
+			},
 			toast:function(msg){
 				// #ifdef APP-PLUS
 				plus.nativeUI.toast(msg);
@@ -137,6 +142,9 @@
 		margin-bottom: 10upx;
 		padding-left: 25upx;
 		padding-right: 25upx;
+	}
+	.cadlist_1:active{
+		background-color: #CCCCCC;
 	}
 
 	.toptext {
