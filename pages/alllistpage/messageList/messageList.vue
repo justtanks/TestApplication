@@ -9,7 +9,7 @@
 			<view style="width: 100%;" >
 				<view class="cadlist_1 uni-list-cell-navigate <uni-navigate-right></uni-navigate-right>" v-for="(item,index) in msglist" :key="index" @click="toweb(item.url)">
 					<view class="toptext-one">{{item.post_title}}</view>
-					<!-- <view class="toptext-two">{{item.post_content }}</view> -->
+					<view class="toptext-two">{{item.post_content }}</view>
 					<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;">
 						<view class="shenpistyle-one "> 发布时间:{{item.published_time}}</view>
 					</view>

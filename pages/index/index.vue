@@ -64,14 +64,16 @@
 		</view> -->
 		<!-- 公告栏 -->
 
-		<view class="gonggao uni-swiper-msg" @click="togonggao">
-			<image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
+		<view  @click="togonggao">
+			<uni-notice-bar show-icon="true"  more-text="查看更多"  scrollable="true" single="true" :text="text">
+			</uni-notice-bar>
+			<!-- <image style="width: 120upx;height: 60upx;" src="../../static/gonggao2.png"></image>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000" style="margin-left: 10upx;margin-right: 10upx;">
 				<swiper-item v-for="(item, index) in msg" :key="index">
-					<navigator style="color: #666666;">{{item.post_title}}</navigator>
+					<navigator style="color: #666666;">{{item.post_content}}</navigator>
 				</swiper-item>
 			</swiper>
-			<image class="tonextstyle" src="../../static/tonext.png"></image>
+			<image class="tonextstyle" src="../../static/tonext.png"></image> -->
 		</view>
 		<view class="qiun-charts">
 			<!--#ifdef H5-->
@@ -91,6 +93,7 @@
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 	import wxCharts from '../../components/wx-charts/wxcharts.js'
 	import URL from '../../common/url.js'
+	import uniNoticeBar from "../../components/uni-notice-bar/uni-notice-bar.vue"
 	var _self;
 	var canvaColumn = null;
 	var canvaLineA = null;
@@ -159,7 +162,8 @@
 	export default {
 		components: {
 			uniLoadMore,
-			wxCharts
+			wxCharts,
+			uniNoticeBar
 		},
 		data() {
 			return {
@@ -204,7 +208,8 @@
 						// 						color: "#CD6839"
 						// 					},
 					]
-				}
+				},
+				text: '暂无公告'
 			}
 		},
 		onLoad() {
@@ -448,7 +453,7 @@
 								let oo = {}
 								oo.name = o.cate_name
 								oo.data = o.count
-								oo.color=_self.getRandomColor()
+								oo.color = _self.getRandomColor()
 								_self.Pie.series.push(oo)
 							}
 							_self.showPie("canvasPie", _self.Pie);
@@ -464,8 +469,8 @@
 
 				})
 			},
-			 getRandomColor:function() {
-                  return '#'+(Math.random()*0xffffff<<0).toString(16); 
+			getRandomColor: function() {
+				return '#' + (Math.random() * 0xffffff << 0).toString(16);
 			},
 			toast: function(msg) {
 				// #ifdef APP-PLUS
@@ -494,6 +499,15 @@
 						if (e.data.code == 1) {
 							// let list=e.data.data.notice
 							_self.msg = e.data.data.notice
+							if(_self.msg[0]!=null){
+								_self.text=_self.msg[0].post_content
+							}
+							if(_self.msg[1]!=null){
+								_self.text+=";&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;"+self.msg[1].post_content
+							}
+							if(_self.msg[2]!=null){
+								_self.text+=";&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  "+self.msg[2].post_content
+							}
 						} else {
 							_self.toast(e.data.msg)
 						}
@@ -568,13 +582,13 @@
 
 	.gonggao {
 		width: auto;
-		margin: 10upx 25upx 10upx 25upx;
+		/* margin: 10upx 25upx 10upx 25upx; */
 		border-top: #EBEBEB solid 1upx;
 		border-bottom: #EBEBEB solid 1upx;
 		display: flex;
-		height: 90upx;
+		/* height: 90upx; */
 		flex-direction: row;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 	}
 
