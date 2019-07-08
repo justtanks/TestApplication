@@ -12,10 +12,10 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": true,
+				"enablePullDownRefresh": false,
 				"app-plus":{
 					"pullToRefresh":{
-						"support":true,
+						"support":false,
 						"scrollIndicator":"none",
 						"height":"10%",
 						"range":"10%",
