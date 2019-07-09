@@ -567,10 +567,10 @@
 											da.in=0
 										}else if(da.pass_status2==1){
 											
-											if(status==0){
+											if(da.status==0){
 												da.info='终审通过，管理员审核中'
 												da.in=0
-											}else if(status==1){
+											}else if(da.status==1){
 												da.info='管理员审核通过，积分录入成功'
 												da.in=1
 											}else{
