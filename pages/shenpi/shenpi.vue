@@ -139,6 +139,9 @@
 							<view v-else-if="item.in==1" class="shenpistyle-one " style="color: #09BB07;">审批状态:{{item.info}}</view>
 							<view v-else="" class="shenpistyle-one " style="color: #CD0000;">审批状态:{{item.info}}</view>
 						</view>
+						<view style="display: flex; flex-direction: row;align-items: center;margin-top:5upx;margin-bottom: 10upx;">
+							<view v-if="item.in==2" class="shenpistyle-one " style="color: #CD0000;">拒绝原因:{{item.refusereason}}</view>
+						</view>
 					</view>
 					<uni-load-more :status="status" :contentText="contentText"></uni-load-more>
 				</view>
@@ -556,6 +559,7 @@
 								_self.status = 'nomore'
 								return
 							}
+							console.error(JSON.toString(e.data.data.scoreList))
 							let datalist=e.data.data.scoreList
 								for(let da of datalist){
 									if(da.pass_status1==0){
@@ -576,16 +580,19 @@
 											}else{
 												da.info='管理员审核未通过'
 												da.in=2
+												da.refusereason=da.refuse_reason
 											}
 											
 										}else{
 											da.info='终审未通过'
-											da.in=2
+											da.in=22
+											da.refusereason=da.refuse_reason2
 										}
 										
 									}else{
 										da.info='初审未通过'
 										da.in=2
+										da.refusereason=da.refuse_reason1
 									}
 								}
 								_self.jifenlist = _self.jifenlist.concat(datalist)
@@ -651,16 +658,19 @@
 											}else{
 												da.info='管理员审核未通过'
 												da.in=2
+												da.refusereason=da.refuse_reason
 											}
 											
 										}else{
 											da.info='终审未通过'
 											da.in=2
+											da.refusereason=da.refuse_reason2
 										}
 										
 									}else{
 										da.info='初审未通过'
 										da.in=2
+										da.refusereason=da.refuse_reason1
 									}
 								}
 								_self.jifenlist = _self.jifenlist.concat(datalist)

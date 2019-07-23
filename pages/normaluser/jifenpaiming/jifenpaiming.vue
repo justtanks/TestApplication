@@ -123,7 +123,13 @@
 						type: 'group'
 					}
 				],
-				pickerSingleArray: [{
+				pickerSingleArray: [
+					{
+						label: '小组内排名',
+						key: 'group',
+						value:'group'
+					},
+					{
 						label: '机长',
 						key: 'jizhang',
 						value:'jizhang'
