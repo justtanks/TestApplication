@@ -4,7 +4,7 @@
 
 		<view style="background-color: #FFFFFF;">
 			<textarea class="uni-input inputclass" placeholder-class="placeholdderclass" style="font-size: 35upx;line-height: 1;"
-			 show-confirm-bar="true" auto-height="true" placeholder="请填写加减分理由" maxlength="30" v-model="inputresean" @input="inputholder" />
+			 show-confirm-bar="true" auto-height="true" placeholder="请填写加减分理由" maxlength="100" v-model="inputresean" @input="inputholder" />
 			<view class="textnum">{{textnum}}</view>
 
 			<view class="timechoise uni-list-cell-navigate uni-navigate-right" @click="getalluser()">
@@ -214,7 +214,7 @@
 				time: '00:00:00',
 				value: '',
 				// 文字项
-				'textnum':'0/30',
+				'textnum':'0/100',
 				'inputresean':'',
 
 
@@ -286,7 +286,7 @@
 		methods: {
 			inputholder:function(e){
 				let length=this.inputresean.length;
-				this.textnum=length+'/'+'30'
+				this.textnum=length+'/'+'100'
 			},
 			show1() {
 				//展示第三个弹窗  选择人员
