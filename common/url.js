@@ -12,7 +12,7 @@ module.exports ={
    getzhongshen:"http://47.105.199.11"+'/api/app/user/getAllLeaderByScore',
    //获取所有用户列表
    getalluser:"http://47.105.199.11"+'/api/app/user/getAllUser',
-   //提交申请列表.
+   //提交申请列表. 提交积分的录入申请
    inputjifen:"http://47.105.199.11"+'/api/app/score/applyScore',
    //获取到积分分类
    getfenlei:"http://47.105.199.11"+'/api/app/score/getScoreCate',
@@ -41,6 +41,9 @@ module.exports ={
    //修改密码
    changepass:"http://47.105.199.11"+'/api/app/user/changePassword',
    //获取到审批的详情的界面
-   getshenpixiangqing: "http://47.105.199.11"+'/api/app/score/getTeamDetail'
-   
+   getshenpixiangqing: "http://47.105.199.11"+'/api/app/score/getTeamDetail',
+   // 获取到所有的积分规则
+   getjifenguize:"http://47.105.199.11"+"/api/app/score/getScoreRules",
+   //测试使用
+   ceshi:"http://47.105.199.11"+"/api/app/score/applyScoreTest"
 }

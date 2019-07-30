@@ -183,7 +183,6 @@
 	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
 	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
-	import mydata from "../../../common/mydata.js"
 	import url1 from '../../../common/url.js'
 	import popupLayer from '../../../components/popup-layer/popup-layer.vue';
 	 
@@ -220,7 +219,7 @@
 
 				// 模仿的数据
 				showLeft1:false,
-				formdata: mydata, //记录最初的数据
+				formdata: [], //记录最初的数据
 				itemdata: {},
 				huanchong: [], // 建立缓冲的一个规则数组，通过数组最后一个来实现返回
 				barlist: [], //建立一个导航条的文字的缓冲的数组
@@ -410,11 +409,6 @@
 				this.$refs.mpvuePicker.show()
 			},
 			getguali:function(e){
-				//获取到管理人员并且展示列表
-				// if(_self.guanli.length!=0){
-				// 	this.showpoplist( _self.guanli)
-				// 	return
-				// }
 				if(_self.guanlirenyuan.length!=0){
 					_self.showpup()
 					return
@@ -437,13 +431,6 @@
 							})
 							return
 						}
-						// var val=e.data.data.leaderList
-						// console.error(JSON.stringify(_self.guanlirenyuan))
-						// for(let ls of val){
-						// 	 var person={label:ls.user_nickname, value:ls.id};
-						// 	 _self.guanli.push(person)
-						// }
-						// this.showpoplist( _self.guanli)  
 							_self.guanlirenyuan=e.data.data.leaderList
 						_self.showpup()
 					}
@@ -473,12 +460,6 @@
 							_self.toast(e.data.msg)
 							return
 						}
-						// var val=e.data.data.leaderList
-						// for(let ls of val){
-						// 	 var person={label:ls.user_nickname, value:ls.id};
-						// 	 _self.zhongshenlist.push(person)
-						// }
-						// this.showpoplist( _self.zhongshenlist)
 						_self.zhongshenrenyuan=e.data.data.leaderList
 						_self.showpup1()
 						
@@ -632,7 +613,6 @@
 			
             },
 			addshenqing:function(e){
-				console.error(isNaN(this.score))
 				//添加申请
 				if(this.fenleiid==0){
 					_self.toast('选择分类')
@@ -660,10 +640,6 @@
 					return
 				}
 				
-// 				if(this.rulltext==''){
-// 						_self.toast('请选择规则')
-// 					return
-// 				}
 				if(this.inputresean==''){
 					_self.toast('请填写加减分原因')
 					return
@@ -756,6 +732,20 @@
 				_self.zhongshen=str[1]
 				_self.popudown1()
 			},
+			getguize:function(){
+				uni.request({
+					url:url1.getjifenguize,
+					complete:function(e){
+						uni.hideLoading()
+						if(e.data.code!=1){
+							_self.toast(e.data.msg)
+							return
+						}
+						_self.formdata=e.data.data.scoreRules
+						_self.huanchong.push(_self.formdata)
+					}
+				})
+			},
 			toast:function(msg){
 				// #ifdef APP-PLUS
 				plus.nativeUI.toast(msg);
@@ -817,8 +807,12 @@
 		},
 		onShow:function(){
 			// 初始将缓冲的规则里面添加最初的一个
-			this.huanchong.push(this.formdata)
+			uni.showLoading({
+				
+			})
+			// this.huanchong.push(this.formdata)
 			this.barlist.push('全部规则')
+			this.getguize()
 		}
 	}
 </script>

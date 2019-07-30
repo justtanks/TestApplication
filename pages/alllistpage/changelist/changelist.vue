@@ -30,7 +30,8 @@
 	var _self;
 	import mSearch from '../../../components/mehaotian-search/mehaotian-search.vue'
 	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
-	import mydata from "../../../common/mydata.js"
+	// import mydata from "../../../common/mydata.js"
+	import url1 from '../../../common/url.js'
 	export default {
 		components: {
 			mSearch,
@@ -50,18 +51,23 @@
 				listitemstyle: "uni-navigate-right",
 
 				// 模仿的数据
-				formdata: mydata, //记录最初的数据
+				formdata: [], //记录最初的数据
 				itemdata: {},
 
 				huanchong: [], // 建立缓冲的一个规则数组，通过数组最后一个来实现返回
 				barlist: [], //建立一个导航条的文字的缓冲的数组
+				
 			};
 		},
 		onLoad: function() {
 			_self = this;
 			// 初始将缓冲的规则里面添加最初的一个
-			this.huanchong.push(this.formdata)
+			uni.showLoading({
+				
+			})
+			// this.huanchong.push(this.formdata)
 			this.barlist.push('全部规则')
+			this.getguize()
 		},
 		onPullDownRefresh: function() {
 			// 执行下拉刷新的方法
@@ -92,6 +98,20 @@
 			baritemclick: function(e) {
 				//点击导航条之后跳转到相应的目录
 			},
+			getguize:function(){
+				uni.request({
+					url:url1.getjifenguize,
+					complete:function(e){
+						uni.hideLoading()
+						if(e.data.code!=1){
+							_self.toast(e.data.msg)
+							return
+						}
+						_self.formdata=e.data.data.scoreRules
+						_self.huanchong.push(_self.formdata)
+					}
+				})
+			}
 
 		},
 		onBackPress: function(options) {
