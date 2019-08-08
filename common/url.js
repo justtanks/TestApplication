@@ -45,5 +45,7 @@ module.exports ={
    // 获取到所有的积分规则
    getjifenguize:"http://47.105.199.11"+"/api/app/score/getScoreRules",
    //测试使用
-   ceshi:"http://47.105.199.11"+"/api/app/score/applyScoreTest"
+   ceshi:"http://47.105.199.11"+"/api/app/score/applyScoreTest",
+   //获取月份列表
+   getmonthtime:"http://47.105.199.11"+"/api/app/score/getMonthList"
 }

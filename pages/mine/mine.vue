@@ -11,8 +11,15 @@
 			</view>
 			<image src="../../static/tonext.png" class="tonextstyle" style="margin-right: 30upx;"></image>
 		</view>
-		<view class="mine_list" style="margin-top: 20upx;" @click="changename">
-			<view class="mine_textstyle">{{username}}</view>
+		<view class="mine_list" style="margin-top: 20upx;" @click="tolishi" v-if="false">
+			<view class="mine_textstyle">历史积分记录</view>
+			<view class="leftstyle">
+				<view style="margin-right: 20upx;color: #555555;"></view>
+				<image src="../../static/tonext.png" class="tonextstyle" ></image>
+			</view>
+		</view>
+		<view class="mine_list" @click="changename">
+			<view class="mine_textstyle">姓名</view>
 			<view class="leftstyle">
 				<view style="margin-right: 20upx;color: #555555;">{{username}}</view>
 				<image src="../../static/tonext.png" class="tonextstyle" style="visibility: hidden;"></image>
@@ -94,6 +101,11 @@
 				//修改密码
 				uni.navigateTo({
 					url: "../normaluser/changepassword/changepassword"
+				})
+			},
+			tolishi:function(){
+				uni.navigateTo({
+					url: "../alllistpage/lishijifen/lishijifen"
 				})
 			},
 			quit: function() {

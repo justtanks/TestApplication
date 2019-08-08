@@ -9,6 +9,7 @@
 		<!-- 中间空出的地方占位 -->
 		<view style="height: 100upx;"></view>
 		<button type="default" size="mini" style="margin-left: 20upx;" @click="choisezhiwei()" v-if="showzhiwei">{{zhiwei}}</button>
+		<button type="default" size="mini" style="margin-left: 20upx;" @click="choisetime()" v-if="showtime">{{paimingtime}}</button>
 		<!-- 列表 -->
 		<view class="listitem" v-for="(item,index) in rankList" :key='index'>
 			<view class="paimingcontain">
@@ -92,47 +93,21 @@
 						name: '累计积分排名',
 						type: 'all'
 					},
-					// {
-					// 	value: '5',
-					// 	name: '副总排名',
-					// 	type: 'fuzong'
-					// },
-					// {
-					// 	value: '6',
-					// 	name: '机长排名',
-					// 	type: 'jizhang'
-					// },
-					// {
-					// 	value: '7',
-					// 	name: '班长排名',
-					// 	type: 'banzhang'
-					// },
-					// {
-					// 	value: '8',
-					// 	name: '主任排名',
-					// 	type: 'zhuren'
-					// },
-					// {
-					// 	value: '9',
-					// 	name: '部长排名',
-					// 	type: 'buzhan'
-					// },
 					{
 						value: '10',
 						name: '小组排名',
 						type: 'group'
 					}
 				],
-				pickerSingleArray: [
-					{
+				pickerSingleArray: [{
 						label: '小组内排名',
 						key: 'group',
-						value:'group'
+						value: 'group'
 					},
 					{
 						label: '机长',
 						key: 'jizhang',
-						value:'jizhang'
+						value: 'jizhang'
 					},
 					{
 						label: '班长',
@@ -142,7 +117,7 @@
 					{
 						label: '主任',
 						key: 'zhuren',
-						value:'zhuren'
+						value: 'zhuren'
 					},
 					{
 						label: '部长',
@@ -160,6 +135,7 @@
 						value: 'yuangong'
 					}
 				],
+				timelist: [],
 				targetpaiming: '月度积分排名',
 				current: 0,
 				token: '',
@@ -167,6 +143,8 @@
 				rankList: [],
 				zhiwei: '全部',
 				showzhiwei: true,
+				showtime: true,
+				paimingtime: '本月',
 				job: '',
 				themeColor: '#007AFF',
 				pickerText: '',
@@ -174,12 +152,15 @@
 				deepLength: 1,
 				pickerValueDefault: [0],
 				pickerValueArray: [],
+				iszhiwei:true,
+				nowTime:''//当前的月份
 
 			};
 		},
 		onLoad() {
 			_self = this
 			this.token = uni.getStorageSync('token')
+			this.getmonthtime()
 			this.getPaiming()
 		},
 		onReady() {
@@ -208,16 +189,17 @@
 						} else {
 							this.showzhiwei = false
 						}
+						if (this.type == 'month') {
+							this.showtime = true
+						} else {
+							this.showtime = false
+						}
 						this.$refs.popup.close()
 						this.showpop = false
 						this.getPaiming()
 						this.job = ''
 						this.zhiwei = '全部'
-						// if (this.showzhiwei == true && this.job == '') {
-						// 	this.getPaiming()
-						// } else {
-						// 	this.getPaimingbyjob()
-						// }
+						this.paimingtime=this.nowTime
 
 						break;
 					}
@@ -257,7 +239,8 @@
 						token: _self.token,
 						deviceType: 'android',
 						type: _self.type,
-						job: _self.job
+						job: _self.job,
+						month:_self.paimingtime
 
 					},
 					complete: function(e) {
@@ -272,21 +255,72 @@
 					}
 				})
 			},
-			choisezhiwei:function(){
-				// 选择审批人
+			getmonthtime: function() {
+				//获取月份的信息
+				uni.showLoading({
+					
+				})
+				uni.request({
+					url: URL.getmonthtime,
+					data: {
+						token: _self.token,
+						deviceType: 'android'
+					},
+					complete: function(e) {
+						uni.hideLoading()
+						if (e.data.code != 1) {
+							_self.toast(e.data.msg)
+							return
+						}
+						
+						let times = e.data.data.monthList
+						_self.paimingtime=times[times.length-1].month
+						_self.nowTime=times[times.length-1].month
+						for (var s of times) {
+							var s1 = {}
+							s1.label = s.month
+							s1.key = s.month
+							s1.value = s.month
+							_self.timelist.push(s1)
+							 
+						}
+						
+					}
+
+				})
+			},
+			 
+			choisezhiwei: function() {
+				// 选择职位
+				_self.iszhiwei=true
 				this.pickerValueArray = this.pickerSingleArray
 				this.mode = 'selector'
 				this.deepLength = 1
 				this.pickerValueDefault = [0]
 				this.$refs.mpvuePicker.show()
-				
+
+			},
+			choisetime: function() {
+				// 选择时间
+				_self.iszhiwei=false
+				this.pickerValueArray = this.timelist
+				this.mode = 'selector'
+				this.deepLength = 1
+				this.pickerValueDefault = [0]
+				this.$refs.mpvuePicker.show()
+			
 			},
 			onCancel(e) {
 				console.log(e)
 			},
 			onConfirm(e) {
-				this.job = e.value[0];
-				this.zhiwei = e.label
+				if(_self.iszhiwei){
+					this.job = e.value[0];
+					this.zhiwei = e.label
+					
+				}else{
+					this.paimingtime=e.label
+				}
 				this.getPaimingbyjob()
 			},
 
